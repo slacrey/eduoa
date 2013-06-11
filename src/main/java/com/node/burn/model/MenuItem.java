@@ -15,7 +15,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
-@Table(name="menu_item",catalog="eduoa")
+@Table(name="sys_menu_item",catalog="eduoa")
 @Indexed
 @XmlRootElement
 public class MenuItem extends BaseObject implements Serializable {

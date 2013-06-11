@@ -6,7 +6,7 @@
     <artifactId>eduoa</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>AppFuse Struts 2 Application</name>
+    <name>eduoa-webapp</name>
     <url>http://www.mycompany.com</url>
 
     <prerequisites>
@@ -1036,6 +1036,7 @@
         <struts.menu.version>2.4.3</struts.menu.version>
         <urlrewrite.version>3.1.0</urlrewrite.version>
         <velocity.version>1.4</velocity.version>
+        <skipTests>true</skipTests>
 
     </properties>
 </project>
