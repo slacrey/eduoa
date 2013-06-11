@@ -7,24 +7,20 @@ import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Table(name="menu_item",catalog="eduoa")
 @Indexed
 @XmlRootElement
 public class MenuItem extends BaseObject implements Serializable {
-    private Long id;
+    private Long menuId;
+    private Long parentMenuId;
     private String parentName;
     private String name;
     private String title;
@@ -44,15 +40,27 @@ public class MenuItem extends BaseObject implements Serializable {
     private String forward;
     private String action;
 
-    @Id  @DocumentId    
-    public Long getId() {
-        return this.id;
+    @Id
+    @Column(name="menu_id")
+    @DocumentId
+    public Long getMenuId() {
+        return menuId;
     }
-    
-    public void setId(Long id) {
-        this.id = id;
+
+    public void setMenuId(Long menuId) {
+        this.menuId = menuId;
     }
-    
+
+    @Column(name="parent_menu_id")
+    @Field
+    public Long getParentMenuId() {
+        return parentMenuId;
+    }
+
+    public void setParentMenuId(Long parentMenuId) {
+        this.parentMenuId = parentMenuId;
+    }
+
     @Column(name="parent_name", length=30)
     @Field
     public String getParentName() {
@@ -289,7 +297,7 @@ public class MenuItem extends BaseObject implements Serializable {
         StringBuffer sb = new StringBuffer(getClass().getSimpleName());
 
         sb.append(" [");
-        sb.append("id").append("='").append(getId()).append("', ");
+        sb.append("menuId").append("='").append(getMenuId()).append("', ");
         sb.append("parentName").append("='").append(getParentName()).append("', ");
         sb.append("name").append("='").append(getName()).append("', ");
         sb.append("title").append("='").append(getTitle()).append("', ");
@@ -311,6 +319,29 @@ public class MenuItem extends BaseObject implements Serializable {
         sb.append("]");
       
         return sb.toString();
+    }
+
+    private MenuItem parentMenuItem;
+
+    @ManyToOne
+    @javax.persistence.JoinColumn(name = "parent_menu_id", referencedColumnName = "menu_id")
+    public MenuItem getParentMenuItem() {
+        return parentMenuItem;
+    }
+
+    public void setParentMenuItem(MenuItem parentMenuItem) {
+        this.parentMenuItem = parentMenuItem;
+    }
+
+    private Collection<MenuItem> childeanMenuItem;
+
+    @OneToMany(mappedBy = "parentMenuItem")
+    public Collection<MenuItem> getChildeanMenuItem() {
+        return childeanMenuItem;
+    }
+
+    public void setChildeanMenuItem(Collection<MenuItem> childeanMenuItem) {
+        this.childeanMenuItem = childeanMenuItem;
     }
 
 }
