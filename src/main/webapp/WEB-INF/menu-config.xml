@@ -5,21 +5,21 @@
         <Displayer name="ListMenu" type="net.sf.navigator.displayer.ListMenuDisplayer"/>
     </Displayers>
     <Menus>
-        <Menu name="MainMenu" title="mainMenu.title" page="/mainMenu" roles="ROLE_ADMIN,ROLE_USER"/>
-        <Menu name="UserMenu" title="menu.user" description="User Menu" page="/editProfile" roles="ROLE_ADMIN,ROLE_USER"/>
-        <Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="ROLE_ADMIN" page="/admin/users">
-            <Item name="ViewUsers" title="menu.admin.users" page="/admin/users"/>
-            <Item name="ActiveUsers" title="mainMenu.activeUsers" page="/admin/activeUsers"/>
-            <Item name="ReloadContext" title="menu.admin.reload" page="/admin/reload"/>
-            <Item name="FileUpload" title="menu.selectFile" page="/uploadFile"/>
-        </Menu>
-        <Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>
-        <!--Emp-START-->
-        <Menu name="EmpMenu" title="empList.title" page="/emps"/>
-        <!--Emp-END-->
-        <!--MenuItem-START-->
-        <Menu name="MenuItemMenu" title="menuItemList.title" page="/menuItems"/>
-        <!--MenuItem-END-->
+        <!--<Menu name="MainMenu" title="mainMenu.title" page="/mainMenu" roles="ROLE_ADMIN,ROLE_USER"/>-->
+        <!--<Menu name="UserMenu" title="menu.user" description="User Menu" page="/editProfile" roles="ROLE_ADMIN,ROLE_USER"/>-->
+        <!--<Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="ROLE_ADMIN" page="/admin/users">-->
+            <!--<Item name="ViewUsers" title="menu.admin.users" page="/admin/users"/>-->
+            <!--<Item name="ActiveUsers" title="mainMenu.activeUsers" page="/admin/activeUsers"/>-->
+            <!--<Item name="ReloadContext" title="menu.admin.reload" page="/admin/reload"/>-->
+            <!--<Item name="FileUpload" title="menu.selectFile" page="/uploadFile"/>-->
+        <!--</Menu>-->
+        <!--<Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>-->
+        <!--&lt;!&ndash;Emp-START&ndash;&gt;-->
+        <!--<Menu name="EmpMenu" title="empList.title" page="/emps"/>-->
+        <!--&lt;!&ndash;Emp-END&ndash;&gt;-->
+        <!--&lt;!&ndash;MenuItem-START&ndash;&gt;-->
+        <!--<Menu name="MenuItemMenu" title="menuItemList.title" page="/menuItems"/>-->
+        <!--&lt;!&ndash;MenuItem-END&ndash;&gt;-->
     </Menus>
 
 

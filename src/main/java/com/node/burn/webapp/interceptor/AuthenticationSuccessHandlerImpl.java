@@ -76,7 +76,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
                 menuComponent.setPage(menuItem.getPage());
                 repository.addMenu(menuComponent);
             }
-            request.getSession().setAttribute("repository", repository);
+            request.getSession().setAttribute(MenuRepository.MENU_REPOSITORY_KEY, repository);
             return true;
         } else {
             return false;

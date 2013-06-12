@@ -16,7 +16,7 @@
     <menu:displayMenu name="EmpMenu"/>
     <!--Emp-END-->
     <!--MenuItem-START-->
-    <menu:displayMenu name="MenuItemMenu"/>
+    <%--<menu:displayMenu name="MenuItemMenu"/>--%>
     <!--MenuItem-END-->
 </ul>
 </div>

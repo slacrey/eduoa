@@ -55,17 +55,6 @@
                 </div>
             </c:if>
 
-            <%--<div class="span2">--%>
-                <%--<menu:useMenuDisplayer name="Velocity" config="navlistMenu.vm" permissions="rolesAdapter">--%>
-                    <%--<menu:displayMenu name="AdminMenu"/>--%>
-                <%--</menu:useMenuDisplayer>--%>
-                <%--<menu:useMenuDisplayer name="ListMenu" repository="repository">--%>
-                    <%--<menu:displayMenu name="AdminMenu"/>--%>
-                <%--</menu:useMenuDisplayer>--%>
-            <%--</div>--%>
-            <%--<menu:useMenuDisplayer name="ListMenu"  repository="${menuRepository}">--%>
-                <%--<menu:displayMenu name="AdminMenu"/>--%>
-            <%--</menu:useMenuDisplayer>--%>
         </div>
     </div>
 
