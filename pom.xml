@@ -858,6 +858,7 @@
                         <artifactId>dbunit-maven-plugin</artifactId>
                         <configuration>
                             <src>src/main/resources/default-data.xml</src>
+                            <url/>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -967,7 +968,7 @@
         <copyright.year>2012</copyright.year>
         <dao.framework>hibernate</dao.framework>
         <web.framework>struts</web.framework>
-        <amp.genericCore>true</amp.genericCore>
+        <amp.genericCore>false</amp.genericCore>
         <amp.fullSource>true</amp.fullSource>
         <db.name>eduoa</db.name>
 
@@ -1036,7 +1037,7 @@
         <struts.menu.version>2.4.3</struts.menu.version>
         <urlrewrite.version>3.1.0</urlrewrite.version>
         <velocity.version>1.4</velocity.version>
-        <skipTests>true</skipTests>
+        <!--<skipTests>true</skipTests>-->
 
     </properties>
 </project>
