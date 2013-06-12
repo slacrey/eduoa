@@ -1,6 +1,4 @@
-<!-- NOTE: If you're working offline, you might have to change the DOCTYPE to the following:
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">-->
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
@@ -8,5 +6,7 @@
     <session-factory>
         <mapping class="com.node.burn.model.User"/>
         <mapping class="com.node.burn.model.Role"/>
+        <mapping class="com.node.burn.model.MenuItem"/>
+        <mapping class="com.node.burn.model.Emp"/>
     </session-factory>
 </hibernate-configuration>

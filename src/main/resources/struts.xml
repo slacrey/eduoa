@@ -69,7 +69,7 @@
             <exception-mapping exception="org.springframework.dao.DataAccessException" result="dataAccessFailure"/>
         </global-exception-mappings>
 
-        <action name="mainMenu">
+        <action name="mainMenu" method="init" class="com.node.burn.webapp.action.MainMenuAction">
             <result name="success">/WEB-INF/pages/mainMenu.jsp</result>
         </action>
 
@@ -111,6 +111,42 @@
             <result name="input">/</result>
             <result name="success">/</result>
         </action>
+
+        <!--EmpAction-START-->
+        <action name="emps" class="com.node.burn.webapp.action.EmpAction" method="list">
+            <result>/WEB-INF/pages/empList.jsp</result>
+        </action>
+
+        <action name="editEmp" class="com.node.burn.webapp.action.EmpAction" method="edit">
+            <result>/WEB-INF/pages/empForm.jsp</result>
+            <result name="error">/WEB-INF/pages/empList.jsp</result>
+        </action>
+
+        <action name="saveEmp" class="com.node.burn.webapp.action.EmpAction" method="save">
+            <result name="input">/WEB-INF/pages/empForm.jsp</result>
+            <result name="cancel" type="redirectAction">emps</result>
+            <result name="delete" type="redirectAction">emps</result>
+            <result name="success" type="redirectAction">emps</result>
+        </action>
+        <!--EmpAction-END-->
+
+        <!--MenuItemAction-START-->
+        <action name="menuItems" class="com.node.burn.webapp.action.MenuItemAction" method="list">
+            <result>/WEB-INF/pages/menuItemList.jsp</result>
+        </action>
+
+        <action name="editMenuItem" class="com.node.burn.webapp.action.MenuItemAction" method="edit">
+            <result>/WEB-INF/pages/menuItemForm.jsp</result>
+            <result name="error">/WEB-INF/pages/menuItemList.jsp</result>
+        </action>
+
+        <action name="saveMenuItem" class="com.node.burn.webapp.action.MenuItemAction" method="save">
+            <result name="input">/WEB-INF/pages/menuItemForm.jsp</result>
+            <result name="cancel" type="redirectAction">menuItems</result>
+            <result name="delete" type="redirectAction">menuItems</result>
+            <result name="success" type="redirectAction">menuItems</result>
+        </action>
+        <!--MenuItemAction-END-->
 
         <!-- Add additional actions here -->
     </package>

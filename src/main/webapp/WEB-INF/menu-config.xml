@@ -2,6 +2,7 @@
 <MenuConfig>
     <Displayers>
         <Displayer name="Velocity" type="net.sf.navigator.displayer.VelocityMenuDisplayer"/>
+        <Displayer name="ListMenu" type="net.sf.navigator.displayer.ListMenuDisplayer"/>
     </Displayers>
     <Menus>
         <Menu name="MainMenu" title="mainMenu.title" page="/mainMenu" roles="ROLE_ADMIN,ROLE_USER"/>
@@ -13,5 +14,13 @@
             <Item name="FileUpload" title="menu.selectFile" page="/uploadFile"/>
         </Menu>
         <Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>
+        <!--Emp-START-->
+        <Menu name="EmpMenu" title="empList.title" page="/emps"/>
+        <!--Emp-END-->
+        <!--MenuItem-START-->
+        <Menu name="MenuItemMenu" title="menuItemList.title" page="/menuItems"/>
+        <!--MenuItem-END-->
     </Menus>
+
+
 </MenuConfig>

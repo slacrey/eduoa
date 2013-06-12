@@ -13,7 +13,7 @@
 
     <!-- runs all targets -->
     <target name="run-all-tests" 
-        depends="Login,Logout,PasswordHint,Signup,UserTests,StaticPages,WebServices,DWR,FileUpload"
+        depends="Login,Logout,PasswordHint,Signup,UserTests,StaticPages,WebServices,DWR,FileUpload,MenuItemTests,EmpTests"
         description="Call and executes all test cases (targets)"/>
     
     <!-- runs user-related tests -->
@@ -247,4 +247,99 @@
             </steps>
         </webtest>
     </target>
+    <!--Emp-START-->
+    <!-- runs emp-related tests -->
+    <target name="EmpTests" depends="SearchEmps,EditEmp,SaveEmp,AddEmp,DeleteEmp"
+            description="Call and executes all emp test cases (targets)">
+        <echo>Successfully ran all Emp UI tests!</echo>
+    </target>
+
+    <!-- Verify the emps list screen displays without errors -->
+    <target name="SearchEmps" description="Tests search for and displaying all emps">
+        <webtest name="searchEmps">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click View Emp link" url="/emps"/>
+                <verifytitle description="we should see the empList title"
+                             text=".*${empList.title}.*" regex="true"/>
+                <setinputfield description="set search term" name="q" value="*"/>
+                <clickbutton label="${button.search}" description="Click Search"/>
+                <verifytitle description="we should see the empList title"
+                             text=".*${empList.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Verify the edit emp screen displays without errors -->
+    <target name="EditEmp" description="Tests editing an existing Emp's information">
+        <webtest name="editEmp">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit Emp link" url="/editEmp?eid=-1"/>
+                <verifytitle description="we should see the empDetail title"
+                             text=".*${empDetail.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Edit a emp and then save -->
+    <target name="SaveEmp" description="Tests editing and saving a emp">
+        <webtest name="saveEmp">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit Emp link" url="/editEmp?eid=-1"/>
+                <verifytitle description="we should see the empDetail title"
+                             text=".*${empDetail.title}.*" regex="true"/>
+
+                <!-- update some of the required fields -->
+
+                <clickbutton label="${button.save}" description="Click Save"/>
+                <verifytitle description="Page re-appears if save successful"
+                             text=".*${empDetail.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${emp.updated}"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Add a new Emp -->
+    <target name="AddEmp" description="Adds a new Emp">
+        <webtest name="addEmp">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Add Button" url="/editEmp"/>
+                <verifytitle description="we should see the empDetail title"
+                             text=".*${empDetail.title}.*" regex="true"/>
+
+                <!-- enter required fields -->
+
+                <clickbutton label="${button.save}" description="Click button 'Save'"/>
+                <verifytitle description="Emp List appears if save successful"
+                             text=".*${empList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${emp.added}"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Delete existing emp -->
+    <target name="DeleteEmp" description="Deletes existing Emp">
+        <webtest name="deleteEmp">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit Emp link" url="/editEmp?eid=-1"/>
+                <prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/>
+                <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
+                <verifyNoDialogResponses/>
+                <verifytitle description="display Emp List" text=".*${empList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${emp.deleted}"/>
+            </steps>
+        </webtest>
+    </target>
+    <!--Emp-END-->
 </project>
+
+

@@ -1,6 +1,6 @@
 <%@ include file="/common/taglibs.jsp"%>
 
-<menu:useMenuDisplayer name="Velocity" config="navbarMenu.vm" permissions="rolesAdapter">
+<menu:useMenuDisplayer permissions="rolesAdapter" name="Velocity" config="navbarMenu.vm" >
 <div class="nav-collapse collapse">
 <ul class="nav">
     <c:if test="${empty pageContext.request.remoteUser}">
@@ -12,6 +12,12 @@
     <menu:displayMenu name="UserMenu"/>
     <menu:displayMenu name="AdminMenu"/>
     <menu:displayMenu name="Logout"/>
+    <!--Emp-START-->
+    <menu:displayMenu name="EmpMenu"/>
+    <!--Emp-END-->
+    <!--MenuItem-START-->
+    <menu:displayMenu name="MenuItemMenu"/>
+    <!--MenuItem-END-->
 </ul>
 </div>
 </menu:useMenuDisplayer>

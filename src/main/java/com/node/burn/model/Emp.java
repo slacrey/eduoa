@@ -31,7 +31,9 @@ public class Emp extends BaseObject implements Serializable {
     private String ename;
     private Long estate;
 
-    @Id @GeneratedValue(strategy=IDENTITY) @DocumentId    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getEid() {
         return this.eid;
     }

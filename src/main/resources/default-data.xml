@@ -90,4 +90,93 @@
             <value description="role_id">1</value>
         </row>
     </table>
+    <table name="sys_menu_item">
+        <column>id</column>
+        <column>name</column>
+        <column>title</column>
+        <column>page</column>
+        <column>roles</column>
+        <column>parent_id</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">MainMenu</value>
+            <value description="title">mainMenu.title</value>
+            <value description="page">/mainMenu</value>
+            <value description="roles">ROLE_ADMIN,ROLE_USER</value>
+            <value description="parent_id"></value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="name">UserMenu</value>
+            <value description="title">menu.user</value>
+            <value description="page">/editProfile</value>
+            <value description="roles">ROLE_ADMIN,ROLE_USER</value>
+            <value description="parent_id"></value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="name">AdminMenu</value>
+            <value description="title">menu.admin</value>
+            <value description="page">/admin/users</value>
+            <value description="roles">ROLE_ADMIN</value>
+            <value description="parent_id"></value>
+        </row>
+        <row>
+            <value description="id">4</value>
+            <value description="name">AdminMenu</value>
+            <value description="title">menu.user</value>
+            <value description="page">/editProfile</value>
+            <value description="roles">ROLE_ADMIN,ROLE_USER</value>
+            <value description="parent_id"></value>
+        </row>
+        <row>
+            <value description="id">5</value>
+            <value description="name">ViewUsers</value>
+            <value description="title">menu.admin.users</value>
+            <value description="page">/admin/users</value>
+            <value description="roles"></value>
+            <value description="parent_id">4</value>
+        </row>
+        <row>
+            <value description="id">5</value>
+            <value description="name">ActiveUsers</value>
+            <value description="title">mainMenu.activeUsers</value>
+            <value description="page">/admin/activeUsers</value>
+            <value description="roles"></value>
+            <value description="parent_id">4</value>
+        </row>
+        <row>
+            <value description="id">6</value>
+            <value description="name">ReloadContext</value>
+            <value description="title">menu.admin.reload</value>
+            <value description="page">/admin/reload</value>
+            <value description="roles"></value>
+            <value description="parent_id">4</value>
+        </row>
+        <row>
+            <value description="id">7</value>
+            <value description="name">FileUpload</value>
+            <value description="title">menu.selectFile</value>
+            <value description="page">/uploadFile</value>
+            <value description="roles"></value>
+            <value description="parent_id">4</value>
+        </row>
+        <row>
+            <value description="id">8</value>
+            <value description="name">Logout</value>
+            <value description="title">user.logout</value>
+            <value description="page">/logout</value>
+            <value description="roles">ROLE_ADMIN,ROLE_USER</value>
+            <value description="parent_id"></value>
+        </row>
+        <row>
+            <value description="id">9</value>
+            <value description="name">EmpMenu</value>
+            <value description="title">empList.title</value>
+            <value description="page">/emps</value>
+            <value description="roles"></value>
+            <value description="parent_id"></value>
+        </row>
+    </table>
+
 </dataset>
