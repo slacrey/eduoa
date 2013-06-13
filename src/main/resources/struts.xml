@@ -112,23 +112,7 @@
             <result name="success">/</result>
         </action>
 
-        <!--EmpAction-START-->
-        <action name="emps" class="com.node.burn.webapp.action.EmpAction" method="list">
-            <result>/WEB-INF/pages/empList.jsp</result>
-        </action>
 
-        <action name="editEmp" class="com.node.burn.webapp.action.EmpAction" method="edit">
-            <result>/WEB-INF/pages/empForm.jsp</result>
-            <result name="error">/WEB-INF/pages/empList.jsp</result>
-        </action>
-
-        <action name="saveEmp" class="com.node.burn.webapp.action.EmpAction" method="save">
-            <result name="input">/WEB-INF/pages/empForm.jsp</result>
-            <result name="cancel" type="redirectAction">emps</result>
-            <result name="delete" type="redirectAction">emps</result>
-            <result name="success" type="redirectAction">emps</result>
-        </action>
-        <!--EmpAction-END-->
 
         <!--MenuItemAction-START-->
         <action name="menuItems" class="com.node.burn.webapp.action.MenuItemAction" method="list">
@@ -147,6 +131,24 @@
             <result name="success" type="redirectAction">menuItems</result>
         </action>
         <!--MenuItemAction-END-->
+
+        <!--EmpAction-START-->
+        <action name="emps" class="com.node.burn.webapp.action.EmpAction" method="list">
+            <result>/WEB-INF/pages/empList.jsp</result>
+        </action>
+
+        <action name="editEmp" class="com.node.burn.webapp.action.EmpAction" method="edit">
+            <result>/WEB-INF/pages/empForm.jsp</result>
+            <result name="error">/WEB-INF/pages/empList.jsp</result>
+        </action>
+
+        <action name="saveEmp" class="com.node.burn.webapp.action.EmpAction" method="save">
+            <result name="input">/WEB-INF/pages/empForm.jsp</result>
+            <result name="cancel" type="redirectAction">emps</result>
+            <result name="delete" type="redirectAction">emps</result>
+            <result name="success" type="redirectAction">emps</result>
+        </action>
+        <!--EmpAction-END-->
 
         <!-- Add additional actions here -->
     </package>

@@ -13,7 +13,7 @@
 
     <!-- runs all targets -->
     <target name="run-all-tests" 
-        depends="Login,Logout,PasswordHint,Signup,UserTests,StaticPages,WebServices,DWR,FileUpload,MenuItemTests,EmpTests"
+        depends="Login,Logout,PasswordHint,Signup,UserTests,StaticPages,WebServices,DWR,FileUpload,EmpTests,MenuItemTests,MenuItemTests,EmpTests"
         description="Call and executes all test cases (targets)"/>
     
     <!-- runs user-related tests -->
@@ -247,6 +247,100 @@
             </steps>
         </webtest>
     </target>
+    
+    <!--MenuItem-START-->
+    <!-- runs menuItem-related tests -->
+    <target name="MenuItemTests" depends="SearchMenuItems,EditMenuItem,SaveMenuItem,AddMenuItem,DeleteMenuItem"
+            description="Call and executes all menuItem test cases (targets)">
+        <echo>Successfully ran all MenuItem UI tests!</echo>
+    </target>
+
+    <!-- Verify the menuItems list screen displays without errors -->
+    <target name="SearchMenuItems" description="Tests search for and displaying all menuItems">
+        <webtest name="searchMenuItems">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click View MenuItem link" url="/menuItems"/>
+                <verifytitle description="we should see the menuItemList title"
+                             text=".*${menuItemList.title}.*" regex="true"/>
+                <setinputfield description="set search term" name="q" value="*"/>
+                <clickbutton label="${button.search}" description="Click Search"/>
+                <verifytitle description="we should see the menuItemList title"
+                             text=".*${menuItemList.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Verify the edit menuItem screen displays without errors -->
+    <target name="EditMenuItem" description="Tests editing an existing MenuItem's information">
+        <webtest name="editMenuItem">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit MenuItem link" url="/editMenuItem?id=-1"/>
+                <verifytitle description="we should see the menuItemDetail title"
+                             text=".*${menuItemDetail.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Edit a menuItem and then save -->
+    <target name="SaveMenuItem" description="Tests editing and saving a menuItem">
+        <webtest name="saveMenuItem">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit MenuItem link" url="/editMenuItem?id=-1"/>
+                <verifytitle description="we should see the menuItemDetail title"
+                             text=".*${menuItemDetail.title}.*" regex="true"/>
+
+                <!-- update some of the required fields -->
+
+                <clickbutton label="${button.save}" description="Click Save"/>
+                <verifytitle description="Page re-appears if save successful"
+                             text=".*${menuItemDetail.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${menuItem.updated}"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Add a new MenuItem -->
+    <target name="AddMenuItem" description="Adds a new MenuItem">
+        <webtest name="addMenuItem">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Add Button" url="/editMenuItem"/>
+                <verifytitle description="we should see the menuItemDetail title"
+                             text=".*${menuItemDetail.title}.*" regex="true"/>
+
+                <!-- enter required fields -->
+
+                <clickbutton label="${button.save}" description="Click button 'Save'"/>
+                <verifytitle description="MenuItem List appears if save successful"
+                             text=".*${menuItemList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${menuItem.added}"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Delete existing menuItem -->
+    <target name="DeleteMenuItem" description="Deletes existing MenuItem">
+        <webtest name="deleteMenuItem">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit MenuItem link" url="/editMenuItem?id=-1"/>
+                <prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/>
+                <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
+                <verifyNoDialogResponses/>
+                <verifytitle description="display MenuItem List" text=".*${menuItemList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${menuItem.deleted}"/>
+            </steps>
+        </webtest>
+    </target>
+    <!--MenuItem-END-->
     <!--Emp-START-->
     <!-- runs emp-related tests -->
     <target name="EmpTests" depends="SearchEmps,EditEmp,SaveEmp,AddEmp,DeleteEmp"
@@ -341,5 +435,7 @@
     </target>
     <!--Emp-END-->
 </project>
+
+
 
 

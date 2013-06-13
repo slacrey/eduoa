@@ -197,7 +197,7 @@
         <listener-class>com.node.burn.webapp.jsp.EscapeXmlELResolverListener</listener-class>
     </listener>
     <listener>
-        <listener-class>net.sf.navigator.menu.MenuContextListener</listener-class>
+        <listener-class>com.node.burn.webapp.listener.LoadMenuContextListener</listener-class>
     </listener>
 
     <servlet>

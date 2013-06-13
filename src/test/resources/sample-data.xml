@@ -90,34 +90,8 @@
             <value description="role_id">-1</value>
         </row>
     </table>
-    <!--Emp-START-->
-    <table name="emp">
-        <column>eid</column>
-        <column>eage</column>
-        <column>ename</column>
-        <column>estate</column>
-    <row>
-        <value description="eid">-1</value>
-        <value description="eage">8789089254541371392</value>
-        <value description="ename">QoFeFeZiRkHzMkHcVnKhJgXaLbLpKeEiVtCkItVsZyUrSuMqLq</value>
-        <value description="estate">1960103231924548608</value>
-    </row>
-    <row>
-        <value description="eid">-2</value>
-        <value description="eage">6307045592823057408</value>
-        <value description="ename">ZvLgUxDmCeEtOdUoWsMaMtEwRbPfQhIrTjVpFkWfNaHcJcZeRy</value>
-        <value description="estate">9195897185837731840</value>
-    </row>
-    <row>
-        <value description="eid">-3</value>
-        <value description="eage">2978875397178710016</value>
-        <value description="ename">DqDeBuEtTcHbYuXoXqZwLwXtIcLcZgReBfRvIrAbRcUbIvKxJc</value>
-        <value description="estate">4946314255072377856</value>
-    </row>
-    </table>
-    <!--Emp-END-->
 
-    <!--Menu Item-START-->
+    <!--MenuItem-START-->
     <table name="sys_menu_item">
         <column>id</column>
         <column>name</column>
@@ -148,53 +122,78 @@
         </row>
         <row>
             <value description="id">-4</value>
-            <value description="name">AdminMenu</value>
-            <value description="title">menu.user</value>
-            <value description="page">/editProfile</value>
-            <value description="roles">ROLE_ADMIN,ROLE_USER</value>
-        </row>
-        <row>
-            <value description="id">-5</value>
             <value description="name">ViewUsers</value>
             <value description="title">menu.admin.users</value>
             <value description="page">/admin/users</value>
-            <value description="parent_id">-4</value>
+            <value description="roles"></value>
+            <value description="parent_id">-3</value>
         </row>
         <row>
-            <value description="id">-6</value>
+            <value description="id">-5</value>
             <value description="name">ActiveUsers</value>
             <value description="title">mainMenu.activeUsers</value>
             <value description="page">/admin/activeUsers</value>
-            <value description="parent_id">-4</value>
+            <value description="roles"></value>
+            <value description="parent_id">-3</value>
         </row>
         <row>
-            <value description="id">-7</value>
+            <value description="id">-6</value>
             <value description="name">ReloadContext</value>
             <value description="title">menu.admin.reload</value>
             <value description="page">/admin/reload</value>
-            <value description="parent_id">-4</value>
+            <value description="roles"></value>
+            <value description="parent_id">-3</value>
         </row>
         <row>
-            <value description="id">-8</value>
+            <value description="id">-7</value>
             <value description="name">FileUpload</value>
             <value description="title">menu.selectFile</value>
             <value description="page">/uploadFile</value>
-            <value description="parent_id">-4</value>
+            <value description="roles"></value>
+            <value description="parent_id">-3</value>
         </row>
         <row>
-            <value description="id">-9</value>
+            <value description="id">-8</value>
             <value description="name">Logout</value>
             <value description="title">user.logout</value>
             <value description="page">/logout</value>
             <value description="roles">ROLE_ADMIN,ROLE_USER</value>
         </row>
         <row>
-            <value description="id">-10</value>
+            <value description="id">-9</value>
             <value description="name">EmpMenu</value>
             <value description="title">empList.title</value>
             <value description="page">/emps</value>
         </row>
     </table>
-    <!--Menu Item-END-->
+    <!--MenuItem-END-->
+    <!--Emp-START-->
+    <table name="emp">
+        <column>eid</column>
+        <column>eage</column>
+        <column>ename</column>
+        <column>estate</column>
+        <row>
+            <value description="eid">-1</value>
+            <value description="eage">7744026202364690432</value>
+            <value description="ename">VgWyKeHwCrWhYaQhYgCxAlCqYzVmOgUtWtTbJqUjPeAuNyGxPz</value>
+            <value description="estate">7384031023756826624</value>
+        </row>
+        <row>
+            <value description="eid">-2</value>
+            <value description="eage">2002554165256981504</value>
+            <value description="ename">YdCgQuHqHzSsXlHiLiQyBvXcBdOvJbUrVgAcHdBlLrGgGkZqNh</value>
+            <value description="estate">6744456507711263744</value>
+        </row>
+        <row>
+            <value description="eid">-3</value>
+            <value description="eage">5318800185363330048</value>
+            <value description="ename">EsRhFeElDgVlJoAvGpBzNoPaQiBqQfYxZgEbDbBbLcYfApGsBo</value>
+            <value description="estate">3645437963912275968</value>
+        </row>
+    </table>
+    <!--Emp-END-->
 </dataset>
+
+
 

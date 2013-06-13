@@ -2,7 +2,6 @@ package com.node.burn.webapp.interceptor;
 
 import com.node.burn.model.MenuItem;
 import com.node.burn.service.MenuItemManager;
-import com.node.burn.service.impl.MenuItemManagerImpl;
 import net.sf.navigator.menu.MenuComponent;
 import net.sf.navigator.menu.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ import java.util.List;
  * Time: 下午12:17
  * To change this template use File | Settings | File Templates.
  */
-public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
+public class LoadMenuAndPermissionHandler implements AuthenticationSuccessHandler {
 
 
     @Qualifier("menuItemManager")
@@ -48,9 +49,30 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
         }
     }
 
+    private MenuComponent[] initChildrenMenu(MenuComponent parentMenuItem, Collection<MenuItem> menuItems) {
+        MenuComponent[] menuComponents = new MenuComponent[menuItems.size()];
+        List<MenuComponent> menuComponentList = new ArrayList<MenuComponent>();
+        for (MenuItem menuItem: menuItems) {
+            MenuComponent menuComponent = new MenuComponent();
+            menuComponent.setName(menuItem.getName());
+            menuComponent.setParent(parentMenuItem);
+            Collection<MenuItem> childeanMenuItem = menuItem.getChildeanMenuItem();
+            if (childeanMenuItem != null && !childeanMenuItem.isEmpty()) {
+//                menuComponent.setMenuComponents();
+                initChildrenMenu(menuComponent, childeanMenuItem);
+            }
+            menuComponent.setTitle(menuItem.getTitle());
+            menuComponent.setLocation(menuItem.getLocation());
+            menuComponent.setRoles(menuItem.getRoles());
+            menuComponent.setPage(menuItem.getPage());
+            menuComponentList.add(menuComponent);
+        }
+        return menuComponentList.toArray(menuComponents);
+    }
+
     private Boolean initMenuItem(HttpServletRequest request) {
 
-        List<MenuItem> menuItems = menuItemManager.getAll();
+        List<MenuItem> menuItems = menuItemManager.findTopMenuItems();
         if (menuItems != null && !menuItems.isEmpty()) {
             MenuRepository repository = new MenuRepository();
             HttpSession httpSession = (HttpSession) request.getSession();
@@ -60,19 +82,30 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
             for (MenuItem menuItem: menuItems) {
                 MenuComponent menuComponent = new MenuComponent();
                 menuComponent.setName(menuItem.getName());
-                MenuItem parent = menuItem.getParentMenuItem();
-                if (parent != null) {
-                    MenuComponent parentMenu = repository.getMenu(parent.getName());
-                    if (parentMenu == null) {
-                        parentMenu = new MenuComponent();
-                        parentMenu.setName(parent.getName());
-                        repository.addMenu(parentMenu);
-                    }
-                    menuComponent.setParent(parentMenu);
+                Collection<MenuItem> childeanMenuItem = menuItem.getChildeanMenuItem();
+                if (childeanMenuItem != null && !childeanMenuItem.isEmpty()) {
+//                    menuComponent.setMenuComponents();
+                    initChildrenMenu(menuComponent, childeanMenuItem);
                 }
-                menuComponent.setTitle(menuItem.getTitle());
-                menuComponent.setLocation(menuItem.getLocation());
-                menuComponent.setRoles(menuItem.getRoles());
+                String title = menuItem.getTitle();
+                if (title == null || "".equals(title)) {
+                    title = null;
+                }
+                menuComponent.setTitle(title);
+                String location = menuItem.getLocation();
+                if (location == null || "".equals(location)) {
+                    location = null;
+                }
+                menuComponent.setLocation(location);
+                String roles = menuItem.getRoles();
+                if (roles == null || "".equals(roles)) {
+                    roles = null;
+                }
+                menuComponent.setRoles(roles);
+                String page = menuItem.getPage();
+                if (page == null || "".equals(page)) {
+                    page = null;
+                }
                 menuComponent.setPage(menuItem.getPage());
                 repository.addMenu(menuComponent);
             }

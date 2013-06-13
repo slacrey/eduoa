@@ -2,6 +2,8 @@ package com.node.burn.model;
 
 import com.node.burn.model.BaseObject;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.OrderBy;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
@@ -9,6 +11,10 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 
 import javax.persistence.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
@@ -17,10 +23,16 @@ import java.util.Collection;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "sys_menu_item", catalog = "eduoa")
+@Table(name = "sys_menu_item")
 @Indexed
 @XmlRootElement
-public class MenuItem extends BaseObject implements Serializable {
+@org.hibernate.annotations.NamedQueries({
+        @org.hibernate.annotations.NamedQuery(name = "menuItem.findAllMenuItem",
+                query = "SELECT u FROM MenuItem u ORDER BY u.order desc "),
+        @org.hibernate.annotations.NamedQuery(name = "menuItem.findTopMenuItem",
+                query = "SELECT u FROM MenuItem u WHERE (u.parentMenuItem is null OR u.parentMenuItem = '') ORDER BY u.order desc ")
+})
+public class MenuItem extends BaseObject implements Serializable, Comparable<MenuItem> {
     private Long id;
     private String name;
     private String title;
@@ -39,6 +51,7 @@ public class MenuItem extends BaseObject implements Serializable {
     private String height;
     private String forward;
     private String action;
+    private Integer order;
 
     @Id
     @Column(name = "id")
@@ -222,6 +235,16 @@ public class MenuItem extends BaseObject implements Serializable {
         this.action = action;
     }
 
+    @Column(name = "order", length = 11)
+    @Field
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -313,7 +336,7 @@ public class MenuItem extends BaseObject implements Serializable {
 
     private Collection<MenuItem> childeanMenuItem;
 
-    @OneToMany(mappedBy = "parentMenuItem")
+    @OneToMany(mappedBy = "parentMenuItem", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Collection<MenuItem> getChildeanMenuItem() {
         return childeanMenuItem;
     }
@@ -322,4 +345,12 @@ public class MenuItem extends BaseObject implements Serializable {
         this.childeanMenuItem = childeanMenuItem;
     }
 
+    @Override
+    public int compareTo(MenuItem o) {
+        if (this.getOrder() >= o.getOrder()) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
 }

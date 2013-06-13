@@ -12,12 +12,13 @@
     <menu:displayMenu name="UserMenu"/>
     <menu:displayMenu name="AdminMenu"/>
     <menu:displayMenu name="Logout"/>
+
+    <%--<!--MenuItem-START-->--%>
+    <%--<menu:displayMenu name="MenuItemMenu"/>--%>
+    <%--<!--MenuItem-END-->--%>
     <!--Emp-START-->
     <menu:displayMenu name="EmpMenu"/>
     <!--Emp-END-->
-    <!--MenuItem-START-->
-    <%--<menu:displayMenu name="MenuItemMenu"/>--%>
-    <!--MenuItem-END-->
 </ul>
 </div>
 </menu:useMenuDisplayer>
