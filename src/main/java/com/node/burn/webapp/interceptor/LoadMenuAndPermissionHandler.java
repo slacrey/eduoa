@@ -21,7 +21,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * User: Administrator
+ * User: linfeng
  * Date: 13-6-10
  * Time: 下午12:17
  * To change this template use File | Settings | File Templates.
@@ -38,13 +38,14 @@ public class LoadMenuAndPermissionHandler implements AuthenticationSuccessHandle
                                         Authentication authentication) throws IOException, ServletException {
         Object savedRequestObject = request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
         if (savedRequestObject != null) {
+            String referer = request.getHeader("Referer");
             String redirectUrl = ((SavedRequest) savedRequestObject).getRedirectUrl();
             String[] url = redirectUrl.split("\\.");
             if (initMenuItem(request)) {
                 request.getSession().removeAttribute("SPRING_SECURITY_SAVED_REQUEST");
                 response.sendRedirect(url[0]);
             } else {
-
+                response.sendRedirect(referer);
             }
         }
     }
@@ -58,7 +59,6 @@ public class LoadMenuAndPermissionHandler implements AuthenticationSuccessHandle
             menuComponent.setParent(parentMenuItem);
             Collection<MenuItem> childeanMenuItem = menuItem.getChildeanMenuItem();
             if (childeanMenuItem != null && !childeanMenuItem.isEmpty()) {
-//                menuComponent.setMenuComponents();
                 initChildrenMenu(menuComponent, childeanMenuItem);
             }
             menuComponent.setTitle(menuItem.getTitle());
@@ -84,7 +84,6 @@ public class LoadMenuAndPermissionHandler implements AuthenticationSuccessHandle
                 menuComponent.setName(menuItem.getName());
                 Collection<MenuItem> childeanMenuItem = menuItem.getChildeanMenuItem();
                 if (childeanMenuItem != null && !childeanMenuItem.isEmpty()) {
-//                    menuComponent.setMenuComponents();
                     initChildrenMenu(menuComponent, childeanMenuItem);
                 }
                 String title = menuItem.getTitle();
