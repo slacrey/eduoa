@@ -235,7 +235,7 @@ public class MenuItem extends BaseObject implements Serializable, Comparable<Men
         this.action = action;
     }
 
-    @Column(name = "order", length = 11)
+    @Column(name = "menu_order", length = 11)
     @Field
     public Integer getOrder() {
         return order;
