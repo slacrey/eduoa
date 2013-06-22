@@ -2,35 +2,18 @@ package com.node.burn.model;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.persistence.Version;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.IndexedEmbedded;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * This class represents the basic "user" object in AppFuse that allows for authentication
@@ -45,7 +28,7 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 @Table(name = "sys_user")
 @Indexed
 @XmlRootElement
-public class User extends BaseObject implements Serializable, UserDetails {
+public class SysUserEntity extends BaseObject implements Serializable, UserDetails {
     private static final long serialVersionUID = 3832626162173359411L;
 
     private Long id;
@@ -53,14 +36,14 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private String password;                    // required
     private String confirmPassword;
     private String passwordHint;
+    private String realName;
     private String firstName;                   // required
     private String lastName;                    // required
     private String email;                       // required; unique
     private String phoneNumber;
     private String website;
-    private Address address = new Address();
     private Integer version;
-    private Set<Role> roles = new HashSet<Role>();
+    private Set<SysRoleEntity> roles = new HashSet<SysRoleEntity>();
     private boolean enabled;
     private boolean accountExpired;
     private boolean accountLocked;
@@ -69,7 +52,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
     /**
      * Default constructor - creates a new instance with no values set.
      */
-    public User() {
+    public SysUserEntity() {
     }
 
     /**
@@ -77,7 +60,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
      *
      * @param username login name for user.
      */
-    public User(final String username) {
+    public SysUserEntity(final String username) {
         this.username = username;
     }
 
@@ -109,6 +92,16 @@ public class User extends BaseObject implements Serializable, UserDetails {
     @XmlTransient
     public String getPasswordHint() {
         return passwordHint;
+    }
+
+    @Column(name = "real_name", nullable = false, length = 50)
+    @Field
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     @Column(name = "first_name", nullable = false, length = 50)
@@ -150,19 +143,13 @@ public class User extends BaseObject implements Serializable, UserDetails {
         return firstName + ' ' + lastName;
     }
 
-    @Embedded
-    @IndexedEmbedded
-    public Address getAddress() {
-        return address;
-    }
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "sys_user_role",
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    public Set<Role> getRoles() {
+    public Set<SysRoleEntity> getRoles() {
         return roles;
     }
 
@@ -176,7 +163,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
         List<LabelValue> userRoles = new ArrayList<LabelValue>();
 
         if (this.roles != null) {
-            for (Role role : roles) {
+            for (SysRoleEntity role : roles) {
                 // convert the user's roles to LabelValue Objects
                 userRoles.add(new LabelValue(role.getName(), role.getName()));
             }
@@ -190,7 +177,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
      *
      * @param role the fully instantiated role
      */
-    public void addRole(Role role) {
+    public void addRole(SysRoleEntity role) {
         getRoles().add(role);
     }
 
@@ -297,11 +284,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
         this.website = website;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<SysRoleEntity> roles) {
         this.roles = roles;
     }
 
@@ -332,11 +315,11 @@ public class User extends BaseObject implements Serializable, UserDetails {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof User)) {
+        if (!(o instanceof SysUserEntity)) {
             return false;
         }
 
-        final User user = (User) o;
+        final SysUserEntity user = (SysUserEntity) o;
 
         return !(username != null ? !username.equals(user.getUsername()) : user.getUsername() != null);
 
@@ -364,7 +347,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
             sb.append("Granted Authorities: ");
 
             int i = 0;
-            for (Role role : roles) {
+            for (SysRoleEntity role : roles) {
                 if (i > 0) {
                     sb.append(", ");
                 }
@@ -376,4 +359,6 @@ public class User extends BaseObject implements Serializable, UserDetails {
         }
         return sb.toString();
     }
+
+
 }

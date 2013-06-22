@@ -3,15 +3,14 @@ package com.node.burn.webapp.action;
 import com.opensymphony.xwork2.Preparable;
 import com.node.burn.service.MenuItemManager;
 import com.node.burn.dao.SearchException;
-import com.node.burn.model.MenuItem;
-import com.node.burn.webapp.action.BaseAction;
+import com.node.burn.model.SysMenuItemEntity;
 
 import java.util.List;
 
 public class MenuItemAction extends BaseAction implements Preparable {
     private MenuItemManager menuItemManager;
     private List menuItems;
-    private MenuItem menuItem;
+    private SysMenuItemEntity menuItem;
     private Long id;
     private String query;
 
@@ -42,7 +41,7 @@ public class MenuItemAction extends BaseAction implements Preparable {
 
     public String list() {
         try {
-            menuItems = menuItemManager.search(query, MenuItem.class);
+            menuItems = menuItemManager.search(query, SysMenuItemEntity.class);
         } catch (SearchException se) {
             addActionError(se.getMessage());
             menuItems = menuItemManager.getAll();
@@ -54,11 +53,11 @@ public class MenuItemAction extends BaseAction implements Preparable {
         this.id = id;
     }
 
-    public MenuItem getMenuItem() {
+    public SysMenuItemEntity getMenuItem() {
         return menuItem;
     }
 
-    public void setMenuItem(MenuItem menuItem) {
+    public void setMenuItem(SysMenuItemEntity menuItem) {
         this.menuItem = menuItem;
     }
 
@@ -73,7 +72,7 @@ public class MenuItemAction extends BaseAction implements Preparable {
         if (id != null) {
             menuItem = menuItemManager.get(id);
         } else {
-            menuItem = new MenuItem();
+            menuItem = new SysMenuItemEntity();
         }
 
         return SUCCESS;

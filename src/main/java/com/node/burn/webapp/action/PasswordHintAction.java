@@ -1,6 +1,6 @@
 package com.node.burn.webapp.action;
 
-import com.node.burn.model.User;
+import com.node.burn.model.SysUserEntity;
 import com.node.burn.webapp.util.RequestUtil;
 import org.springframework.mail.MailException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -47,11 +47,11 @@ public class PasswordHintAction extends BaseAction {
 
         // look up the user's information
         try {
-            User user = userManager.getUserByUsername(username);
+            SysUserEntity user = userManager.getUserByUsername(username);
             String hint = user.getPasswordHint();
 
             if (hint == null || hint.trim().equals("")) {
-                log.warn("User '" + username + "' found, but no password hint exists.");
+                log.warn("SysUserEntity '" + username + "' found, but no password hint exists.");
                 addActionError(getText("login.passwordHint.missing"));
                 return INPUT;
             }

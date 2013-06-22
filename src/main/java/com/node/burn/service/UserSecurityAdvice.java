@@ -1,11 +1,11 @@
 package com.node.burn.service;
 
+import com.node.burn.model.SysUserEntity;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.node.burn.Constants;
-import com.node.burn.model.Role;
-import com.node.burn.model.User;
+import com.node.burn.model.SysRoleEntity;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.security.access.AccessDeniedException;
@@ -43,7 +43,7 @@ public class UserSecurityAdvice implements MethodBeforeAdvice, AfterReturningAdv
      * @param method the name of the method executed
      * @param args the arguments to the method
      * @param target the target class
-     * @throws Throwable thrown when args[0] is null or not a User object
+     * @throws Throwable thrown when args[0] is null or not a SysUserEntity object
      */
     public void before(Method method, Object[] args, Object target) throws Throwable {
         SecurityContext ctx = SecurityContextHolder.getContext();
@@ -59,14 +59,14 @@ public class UserSecurityAdvice implements MethodBeforeAdvice, AfterReturningAdv
                 }
             }
 
-            User user = (User) args[0];
+            SysUserEntity user = (SysUserEntity) args[0];
 
             AuthenticationTrustResolver resolver = new AuthenticationTrustResolverImpl();
             // allow new users to signup - this is OK b/c Signup doesn't allow setting of roles
             boolean signupUser = resolver.isAnonymous(auth);
 
             if (!signupUser) {
-                User currentUser = getCurrentUser(auth);
+                SysUserEntity currentUser = getCurrentUser(auth);
 
                 if (user.getId() != null && !user.getId().equals(currentUser.getId()) && !administrator) {
                     log.warn("Access Denied: '" + currentUser.getUsername() + "' tried to modify '" + user.getUsername() + "'!");
@@ -76,7 +76,7 @@ public class UserSecurityAdvice implements MethodBeforeAdvice, AfterReturningAdv
                     Set<String> userRoles = new HashSet<String>();
                     if (user.getRoles() != null) {
                         for (Object o : user.getRoles()) {
-                            Role role = (Role) o;
+                            SysRoleEntity role = (SysRoleEntity) o;
                             userRoles.add(role.getName());
                         }
                     }
@@ -108,11 +108,11 @@ public class UserSecurityAdvice implements MethodBeforeAdvice, AfterReturningAdv
      * @param method the name of the method executed
      * @param args the arguments to the method
      * @param target the target class
-     * @throws Throwable thrown when args[0] is null or not a User object
+     * @throws Throwable thrown when args[0] is null or not a SysUserEntity object
      */
     public void afterReturning(Object returnValue, Method method, Object[] args, Object target)
     throws Throwable {
-        User user = (User) args[0];
+        SysUserEntity user = (SysUserEntity) args[0];
 
         if (user.getVersion() != null) {
             // reset the authentication object if current user
@@ -121,7 +121,7 @@ public class UserSecurityAdvice implements MethodBeforeAdvice, AfterReturningAdv
             // allow new users to signup - this is OK b/c Signup doesn't allow setting of roles
             boolean signupUser = resolver.isAnonymous(auth);
             if (auth != null && !signupUser) {
-                User currentUser = getCurrentUser(auth);
+                SysUserEntity currentUser = getCurrentUser(auth);
                 if (currentUser.getId().equals(user.getId())) {
                     auth = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(auth);
@@ -130,14 +130,14 @@ public class UserSecurityAdvice implements MethodBeforeAdvice, AfterReturningAdv
         }
     }
 
-    private User getCurrentUser(Authentication auth) {
-        User currentUser;
+    private SysUserEntity getCurrentUser(Authentication auth) {
+        SysUserEntity currentUser;
         if (auth.getPrincipal() instanceof UserDetails) {
-            currentUser = (User) auth.getPrincipal();
+            currentUser = (SysUserEntity) auth.getPrincipal();
         } else if (auth.getDetails() instanceof UserDetails) {
-            currentUser = (User) auth.getDetails();
+            currentUser = (SysUserEntity) auth.getDetails();
         } else {
-            throw new AccessDeniedException("User not properly authenticated.");
+            throw new AccessDeniedException("SysUserEntity not properly authenticated.");
         }
         return currentUser;
     }

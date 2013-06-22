@@ -1,6 +1,6 @@
 package com.node.burn.service;
 
-import com.node.burn.model.Role;
+import com.node.burn.model.SysRoleEntity;
 
 import java.util.List;
 
@@ -10,21 +10,21 @@ import java.util.List;
  *
  * @author <a href="mailto:dan@getrolling.com">Dan Kibler </a>
  */
-public interface RoleManager extends GenericManager<Role, Long> {
+public interface RoleManager extends GenericManager<SysRoleEntity, Long> {
     /**
      * {@inheritDoc}
      */
-    List getRoles(Role role);
+    List getRoles(SysRoleEntity role);
 
     /**
      * {@inheritDoc}
      */
-    Role getRole(String rolename);
+    SysRoleEntity getRole(String rolename);
 
     /**
      * {@inheritDoc}
      */
-    Role saveRole(Role role);
+    SysRoleEntity saveRole(SysRoleEntity role);
 
     /**
      * {@inheritDoc}

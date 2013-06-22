@@ -24,7 +24,7 @@ public final class Constants {
     public static final String FILE_SEP = System.getProperty("file.separator");
 
     /**
-     * User home from System properties
+     * SysUserEntity home from System properties
      */
     public static final String USER_HOME = System.getProperty("user.home") + FILE_SEP;
 
@@ -61,7 +61,7 @@ public final class Constants {
     public static final String ADMIN_ROLE = "ROLE_ADMIN";
 
     /**
-     * The name of the User role, as specified in web.xml
+     * The name of the SysUserEntity role, as specified in web.xml
      */
     public static final String USER_ROLE = "ROLE_USER";
 

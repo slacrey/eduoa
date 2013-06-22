@@ -1,8 +1,8 @@
 package com.node.burn.service;
 
+import com.node.burn.model.SysUserEntity;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.node.burn.model.User;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +27,10 @@ public class UserExistsExceptionTest extends AbstractTransactionalJUnit4SpringCo
         log.debug("entered 'testAddExistingUser' method");
         assertNotNull(manager);
 
-        User user = manager.getUser("-1");
+        SysUserEntity user = manager.getUser("-1");
         
         // create new object with null id - Hibernate doesn't like setId(null)
-        User user2 = new User();
+        SysUserEntity user2 = new SysUserEntity();
         BeanUtils.copyProperties(user, user2);
         user2.setId(null);
         user2.setVersion(null);

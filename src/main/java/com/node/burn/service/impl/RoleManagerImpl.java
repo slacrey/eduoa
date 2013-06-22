@@ -1,7 +1,7 @@
 package com.node.burn.service.impl;
 
 import com.node.burn.dao.RoleDao;
-import com.node.burn.model.Role;
+import com.node.burn.model.SysRoleEntity;
 import com.node.burn.service.RoleManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
  * @author <a href="mailto:dan@getrolling.com">Dan Kibler</a>
  */
 @Service("roleManager")
-public class RoleManagerImpl extends GenericManagerImpl<Role, Long> implements RoleManager {
+public class RoleManagerImpl extends GenericManagerImpl<SysRoleEntity, Long> implements RoleManager {
     RoleDao roleDao;
 
     @Autowired
@@ -26,21 +26,21 @@ public class RoleManagerImpl extends GenericManagerImpl<Role, Long> implements R
     /**
      * {@inheritDoc}
      */
-    public List<Role> getRoles(Role role) {
+    public List<SysRoleEntity> getRoles(SysRoleEntity role) {
         return dao.getAll();
     }
 
     /**
      * {@inheritDoc}
      */
-    public Role getRole(String rolename) {
+    public SysRoleEntity getRole(String rolename) {
         return roleDao.getRoleByName(rolename);
     }
 
     /**
      * {@inheritDoc}
      */
-    public Role saveRole(Role role) {
+    public SysRoleEntity saveRole(SysRoleEntity role) {
         return dao.save(role);
     }
 

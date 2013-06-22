@@ -1,6 +1,6 @@
 package com.node.burn.dao;
 
-import com.node.burn.model.User;
+import com.node.burn.model.SysUserEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * User Data Access Object (GenericDao) interface.
+ * SysUserEntity Data Access Object (GenericDao) interface.
  *
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
-public interface UserDao extends GenericDao<User, Long> {
+public interface UserDao extends GenericDao<SysUserEntity, Long> {
 
     /**
      * Gets users information based on login name.
@@ -30,14 +30,14 @@ public interface UserDao extends GenericDao<User, Long> {
      *
      * @return List populated list of users
      */
-    List<User> getUsers();
+    List<SysUserEntity> getUsers();
 
     /**
      * Saves a user's information.
      * @param user the object to be saved
-     * @return the persisted User object
+     * @return the persisted SysUserEntity object
      */
-    User saveUser(User user);
+    SysUserEntity saveUser(SysUserEntity user);
 
     /**
      * Retrieves the password in DB for a user

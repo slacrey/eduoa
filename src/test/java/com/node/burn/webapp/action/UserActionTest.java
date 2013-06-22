@@ -1,7 +1,7 @@
 package com.node.burn.webapp.action;
 
+import com.node.burn.model.SysUserEntity;
 import org.apache.struts2.ServletActionContext;
-import com.node.burn.model.User;
 import com.node.burn.service.UserManager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class UserActionTest extends BaseActionTestCase {
     @Test
     public void testSave() throws Exception {
         UserManager userManager = (UserManager) applicationContext.getBean("userManager");
-        User user = userManager.getUserByUsername("user");
+        SysUserEntity user = userManager.getUserByUsername("user");
         user.setPassword("user");
         user.setConfirmPassword("user");
         action.setUser(user);
@@ -56,11 +56,11 @@ public class UserActionTest extends BaseActionTestCase {
     @Test
     public void testSaveConflictingUser() throws Exception {
         UserManager userManager = (UserManager) applicationContext.getBean("userManager");
-        User user = userManager.getUserByUsername("user");
+        SysUserEntity user = userManager.getUserByUsername("user");
         user.setPassword("user");
         user.setConfirmPassword("user");
         // e-mail address from existing user
-        User existingUser = (User) userManager.getUsers().get(0);
+        SysUserEntity existingUser = (SysUserEntity) userManager.getUsers().get(0);
         user.setEmail(existingUser.getEmail());
         action.setUser(user);
         action.setFrom("list");
@@ -88,7 +88,7 @@ public class UserActionTest extends BaseActionTestCase {
 
     @Test
     public void testRemove() throws Exception {
-        User user = new User("admin");
+        SysUserEntity user = new SysUserEntity("admin");
         user.setId(-2L);
         action.setUser(user);
         assertEquals("success", action.delete());

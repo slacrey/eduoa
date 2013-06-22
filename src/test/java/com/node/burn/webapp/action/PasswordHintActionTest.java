@@ -1,7 +1,7 @@
 package com.node.burn.webapp.action;
 
+import com.node.burn.model.SysUserEntity;
 import com.opensymphony.xwork2.Action;
-import com.node.burn.model.User;
 import com.node.burn.service.UserManager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class PasswordHintActionTest extends BaseActionTestCase {
     @Test
     public void testExecuteNoPasswordHintUserName() throws Exception {
         action.setUsername("manager");
-        final User user = userManager.getUserByUsername("admin");
+        final SysUserEntity user = userManager.getUserByUsername("admin");
         user.setPasswordHint("  ");
         userManager.save(user);
         assertEquals(Action.INPUT, action.execute());

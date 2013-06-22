@@ -1,6 +1,6 @@
 package com.node.burn.service;
 
-import com.node.burn.model.User;
+import com.node.burn.model.SysUserEntity;
 
 import javax.jws.WebService;
 import javax.ws.rs.DELETE;
@@ -20,19 +20,19 @@ public interface UserService {
      * Retrieves a user by userId.  An exception is thrown if user not found
      *
      * @param userId the identifier for the user
-     * @return User
+     * @return SysUserEntity
      */
     @GET
     @Path("{id}")
-    User getUser(@PathParam("id") String userId);
+    SysUserEntity getUser(@PathParam("id") String userId);
 
     /**
      * Finds a user by their username.
      *
      * @param username the user's username used to login
-     * @return User a populated user object
+     * @return SysUserEntity a populated user object
      */
-    User getUserByUsername(@PathParam("username") String username);
+    SysUserEntity getUserByUsername(@PathParam("username") String username);
 
     /**
      * Retrieves a list of all users.
@@ -40,7 +40,7 @@ public interface UserService {
      * @return List
      */
     @GET
-    List<User> getUsers();
+    List<SysUserEntity> getUsers();
 
     /**
      * Saves a user's information
@@ -50,7 +50,7 @@ public interface UserService {
      * @throws UserExistsException thrown when user already exists
      */
     @POST
-    User saveUser(User user) throws UserExistsException;
+    SysUserEntity saveUser(SysUserEntity user) throws UserExistsException;
 
     /**
      * Removes a user from the database by their userId

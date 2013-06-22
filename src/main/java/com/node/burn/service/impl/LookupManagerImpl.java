@@ -2,7 +2,7 @@ package com.node.burn.service.impl;
 
 import com.node.burn.dao.LookupDao;
 import com.node.burn.model.LabelValue;
-import com.node.burn.model.Role;
+import com.node.burn.model.SysRoleEntity;
 import com.node.burn.service.LookupManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +25,10 @@ public class LookupManagerImpl implements LookupManager {
      * {@inheritDoc}
      */
     public List<LabelValue> getAllRoles() {
-        List<Role> roles = dao.getRoles();
+        List<SysRoleEntity> roles = dao.getRoles();
         List<LabelValue> list = new ArrayList<LabelValue>();
 
-        for (Role role1 : roles) {
+        for (SysRoleEntity role1 : roles) {
             list.add(new LabelValue(role1.getName(), role1.getName()));
         }
 

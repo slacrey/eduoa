@@ -1,19 +1,19 @@
 package com.node.burn.dao;
 
-import com.node.burn.model.Role;
+import com.node.burn.model.SysRoleEntity;
 
 /**
- * Role Data Access Object (DAO) interface.
+ * SysRoleEntity Data Access Object (DAO) interface.
  *
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
-public interface RoleDao extends GenericDao<Role, Long> {
+public interface RoleDao extends GenericDao<SysRoleEntity, Long> {
     /**
      * Gets role information based on rolename
      * @param rolename the rolename
      * @return populated role object
      */
-    Role getRoleByName(String rolename);
+    SysRoleEntity getRoleByName(String rolename);
 
     /**
      * Removes a role from the database by name

@@ -1,14 +1,11 @@
 package com.node.burn.webapp.action;
 
+import com.node.burn.model.SysMenuItemEntity;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import com.node.burn.service.MenuItemManager;
-import com.node.burn.model.MenuItem;
-import com.node.burn.webapp.action.BaseActionTestCase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -25,7 +22,7 @@ public class MenuItemActionTest extends BaseActionTestCase {
         action.setMenuItemManager(menuItemManager);
 
         // add a test menuItem to the database
-        MenuItem menuItem = new MenuItem();
+        SysMenuItemEntity menuItem = new SysMenuItemEntity();
 
         // enter all required fields
 
@@ -67,7 +64,7 @@ public class MenuItemActionTest extends BaseActionTestCase {
         assertEquals("success", action.edit());
         assertNotNull(action.getMenuItem());
 
-        MenuItem menuItem = action.getMenuItem();
+        SysMenuItemEntity menuItem = action.getMenuItem();
         // update required fields
 
         action.setMenuItem(menuItem);
@@ -83,7 +80,7 @@ public class MenuItemActionTest extends BaseActionTestCase {
         MockHttpServletRequest request = new MockHttpServletRequest();
         ServletActionContext.setRequest(request);
         action.setDelete("");
-        MenuItem menuItem = new MenuItem();
+        SysMenuItemEntity menuItem = new SysMenuItemEntity();
         menuItem.setId(-2L);
         action.setMenuItem(menuItem);
         assertEquals("success", action.delete());

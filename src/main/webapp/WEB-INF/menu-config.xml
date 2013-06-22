@@ -17,9 +17,9 @@
         <!--Emp-START-->
         <Menu name="EmpMenu" title="empList.title" page="/emps"/>
         <!--Emp-END-->
-        <!--MenuItem-START-->
+        <!--SysMenuItemEntity-START-->
         <Menu name="MenuItemMenu" title="menuItemList.title" page="/menuItems"/>
-        <!--MenuItem-END-->
+        <!--SysMenuItemEntity-END-->
     </Menus>
 
 

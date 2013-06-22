@@ -1,9 +1,9 @@
 package com.node.burn.dao.hibernate;
 
+import com.node.burn.model.SysRoleEntity;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.node.burn.dao.LookupDao;
-import com.node.burn.model.Role;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,9 +35,9 @@ public class LookupDaoHibernate implements LookupDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Role> getRoles() {
+    public List<SysRoleEntity> getRoles() {
         log.debug("Retrieving all role names...");
         Session session = sessionFactory.getCurrentSession();
-        return session.createCriteria(Role.class).list();
+        return session.createCriteria(SysRoleEntity.class).list();
     }
 }

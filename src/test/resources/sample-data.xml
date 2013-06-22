@@ -4,15 +4,11 @@
         <column>id</column>
         <column>username</column>
         <column>password</column>
+        <column>real_name</column>
         <column>first_name</column>
         <column>last_name</column>
-        <column>address</column>
-        <column>city</column>
-        <column>country</column>
         <column>email</column>
         <column>phone_number</column>
-        <column>postal_code</column>
-        <column>province</column>
         <column>website</column>
         <column>password_hint</column>
         <column>version</column>
@@ -24,15 +20,11 @@
             <value description="id">-1</value>
             <value description="username">user</value>
             <value description="password">b6b1f4781776979c0775c71ebdd8bdc084aac5fe</value>
+            <value description="real_name">Tomcat</value>
             <value description="first_name">Tomcat</value>
             <value description="last_name">User</value>
-            <value description="address"></value>
-            <value description="city">Denver</value>
-            <value description="country">US</value>
             <value description="email">matt_raible@yahoo.com</value>
             <value description="phone_number"></value>
-            <value description="postal_code">80210</value>
-            <value description="province">CO</value>
             <value description="website">http://tomcat.apache.org</value>
             <value description="password_hint"><![CDATA[A male kitty.]]></value>
             <value description="version">1</value>
@@ -45,15 +37,11 @@
             <value description="id">-2</value>
             <value description="username">admin</value>
             <value description="password">a40546cc4fd6a12572828bb803380888ad1bfdab</value>
+            <value description="real_name">Matt</value>
             <value description="first_name">Matt</value>
             <value description="last_name">Raible</value>
-            <value description="address"></value>
-            <value description="city">Denver</value>
-            <value description="country">US</value>
             <value description="email">matt@raibledesigns.com</value>
             <value description="phone_number"></value>
-            <value description="postal_code">80210</value>
-            <value description="province">CO</value>
             <value description="website">http://raibledesigns.com</value>
             <value description="password_hint"><![CDATA[Not a female kitty.]]></value>
             <value description="version">1</value>
@@ -91,7 +79,7 @@
         </row>
     </table>
 
-    <!--MenuItem-START-->
+    <!--SysMenuItemEntity-START-->
     <table name="sys_menu_item">
         <column>id</column>
         <column>name</column>
@@ -125,7 +113,7 @@
             <value description="name">ViewUsers</value>
             <value description="title">menu.admin.users</value>
             <value description="page">/admin/users</value>
-            <value description="roles"></value>
+            <value description="roles"><NULL/></value>
             <value description="parent_id">-3</value>
         </row>
         <row>
@@ -133,7 +121,7 @@
             <value description="name">ActiveUsers</value>
             <value description="title">mainMenu.activeUsers</value>
             <value description="page">/admin/activeUsers</value>
-            <value description="roles"></value>
+            <value description="roles"><NULL/></value>
             <value description="parent_id">-3</value>
         </row>
         <row>
@@ -141,7 +129,7 @@
             <value description="name">ReloadContext</value>
             <value description="title">menu.admin.reload</value>
             <value description="page">/admin/reload</value>
-            <value description="roles"></value>
+            <value description="roles"><NULL/></value>
             <value description="parent_id">-3</value>
         </row>
         <row>
@@ -149,7 +137,7 @@
             <value description="name">FileUpload</value>
             <value description="title">menu.selectFile</value>
             <value description="page">/uploadFile</value>
-            <value description="roles"></value>
+            <value description="roles"><NULL/></value>
             <value description="parent_id">-3</value>
         </row>
         <row>
@@ -166,32 +154,32 @@
             <value description="page">/emps</value>
         </row>
     </table>
-    <!--MenuItem-END-->
+    <!--SysMenuItemEntity-END-->
     <!--Emp-START-->
-    <table name="emp">
-        <column>eid</column>
-        <column>eage</column>
-        <column>ename</column>
-        <column>estate</column>
-        <row>
-            <value description="eid">-1</value>
-            <value description="eage">7744026202364690432</value>
-            <value description="ename">VgWyKeHwCrWhYaQhYgCxAlCqYzVmOgUtWtTbJqUjPeAuNyGxPz</value>
-            <value description="estate">7384031023756826624</value>
-        </row>
-        <row>
-            <value description="eid">-2</value>
-            <value description="eage">2002554165256981504</value>
-            <value description="ename">YdCgQuHqHzSsXlHiLiQyBvXcBdOvJbUrVgAcHdBlLrGgGkZqNh</value>
-            <value description="estate">6744456507711263744</value>
-        </row>
-        <row>
-            <value description="eid">-3</value>
-            <value description="eage">5318800185363330048</value>
-            <value description="ename">EsRhFeElDgVlJoAvGpBzNoPaQiBqQfYxZgEbDbBbLcYfApGsBo</value>
-            <value description="estate">3645437963912275968</value>
-        </row>
-    </table>
+    <!--<table name="emp">-->
+        <!--<column>eid</column>-->
+        <!--<column>eage</column>-->
+        <!--<column>ename</column>-->
+        <!--<column>estate</column>-->
+        <!--<row>-->
+            <!--<value description="eid">-1</value>-->
+            <!--<value description="eage">7744026202364690432</value>-->
+            <!--<value description="ename">VgWyKeHwCrWhYaQhYgCxAlCqYzVmOgUtWtTbJqUjPeAuNyGxPz</value>-->
+            <!--<value description="estate">7384031023756826624</value>-->
+        <!--</row>-->
+        <!--<row>-->
+            <!--<value description="eid">-2</value>-->
+            <!--<value description="eage">2002554165256981504</value>-->
+            <!--<value description="ename">YdCgQuHqHzSsXlHiLiQyBvXcBdOvJbUrVgAcHdBlLrGgGkZqNh</value>-->
+            <!--<value description="estate">6744456507711263744</value>-->
+        <!--</row>-->
+        <!--<row>-->
+            <!--<value description="eid">-3</value>-->
+            <!--<value description="eage">5318800185363330048</value>-->
+            <!--<value description="ename">EsRhFeElDgVlJoAvGpBzNoPaQiBqQfYxZgEbDbBbLcYfApGsBo</value>-->
+            <!--<value description="estate">3645437963912275968</value>-->
+        <!--</row>-->
+    <!--</table>-->
     <!--Emp-END-->
 </dataset>
 

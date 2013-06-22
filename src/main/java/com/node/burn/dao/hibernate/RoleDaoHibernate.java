@@ -1,9 +1,9 @@
 package com.node.burn.dao.hibernate;
 
 import com.node.burn.dao.RoleDao;
-import com.node.burn.model.Role;
+import com.node.burn.model.SysRoleEntity;
 import java.util.List;
-import org.hibernate.Query;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -11,30 +11,30 @@ import org.springframework.stereotype.Repository;
 
 /**
  * This class interacts with hibernate session to save/delete and
- * retrieve Role objects.
+ * retrieve SysRoleEntity objects.
  *
  * @author <a href="mailto:bwnoll@gmail.com">Bryan Noll</a>
  * @author jgarcia (updated to hibernate 4)
  */
 @Repository
-public class RoleDaoHibernate extends GenericDaoHibernate<Role, Long> implements RoleDao {
+public class RoleDaoHibernate extends GenericDaoHibernate<SysRoleEntity, Long> implements RoleDao {
 
     /**
-     * Constructor to create a Generics-based version using Role as the entity
+     * Constructor to create a Generics-based version using SysRoleEntity as the entity
      */
     public RoleDaoHibernate() {
-        super(Role.class);
+        super(SysRoleEntity.class);
     }
 
     /**
      * {@inheritDoc}
      */
-    public Role getRoleByName(String rolename) {
-        List roles = getSession().createCriteria(Role.class).add(Restrictions.eq("name", rolename)).list();
+    public SysRoleEntity getRoleByName(String rolename) {
+        List roles = getSession().createCriteria(SysRoleEntity.class).add(Restrictions.eq("name", rolename)).list();
         if (roles.isEmpty()) {
             return null;
         } else {
-            return (Role) roles.get(0);
+            return (SysRoleEntity) roles.get(0);
         }
     }
 

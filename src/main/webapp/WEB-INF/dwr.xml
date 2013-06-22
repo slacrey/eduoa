@@ -8,6 +8,6 @@
             <param name="beanName" value="userManager"/>
             <include method="getUsers"/>
         </create>
-        <convert converter="bean" match="com.node.burn.model.User"/>
+        <convert converter="bean" match="com.node.burn.model.SysUserEntity"/>
     </allow>
 </dwr>

@@ -3,7 +3,7 @@ package com.node.burn.service.impl;
 import com.node.burn.Constants;
 import com.node.burn.dao.LookupDao;
 import com.node.burn.model.LabelValue;
-import com.node.burn.model.Role;
+import com.node.burn.model.SysRoleEntity;
 import org.jmock.Expectations;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +29,8 @@ public class LookupManagerImplTest extends BaseManagerMockTestCase {
         log.debug("entered 'testGetAllRoles' method");
 
         // set expected behavior on dao
-        Role role = new Role(Constants.ADMIN_ROLE);
-        final List<Role> testData = new ArrayList<Role>();
+        SysRoleEntity role = new SysRoleEntity(Constants.ADMIN_ROLE);
+        final List<SysRoleEntity> testData = new ArrayList<SysRoleEntity>();
         testData.add(role);
         context.checking(new Expectations() {{
             one(lookupDao).getRoles();

@@ -3,8 +3,8 @@ package com.node.burn.service.impl;
 import com.node.burn.Constants;
 import com.node.burn.dao.RoleDao;
 import com.node.burn.dao.UserDao;
-import com.node.burn.model.Role;
-import com.node.burn.model.User;
+import com.node.burn.model.SysRoleEntity;
+import com.node.burn.model.SysUserEntity;
 import com.node.burn.service.UserExistsException;
 import org.jmock.Expectations;
 import org.junit.Before;
@@ -31,8 +31,8 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
 
     @Test
     public void testGetUser() throws Exception {
-        final User testData = new User("1");
-        testData.getRoles().add(new Role("user"));
+        final SysUserEntity testData = new SysUserEntity("1");
+        testData.getRoles().add(new SysRoleEntity("user"));
 
         // set expected behavior on dao
         context.checking(new Expectations() {{
@@ -40,7 +40,7 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
             will(returnValue(testData));
         }});
         
-        User user = userManager.getUser("1");
+        SysUserEntity user = userManager.getUser("1");
         assertTrue(user != null);
         assert user != null;
         assertTrue(user.getRoles().size() == 1);
@@ -48,8 +48,8 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
 
     @Test
     public void testSaveUser() throws Exception {                                           
-        final User testData = new User("1");
-        testData.getRoles().add(new Role("user"));
+        final SysUserEntity testData = new SysUserEntity("1");
+        testData.getRoles().add(new SysRoleEntity("user"));
 
         // set expected behavior on dao
         context.checking(new Expectations() {{
@@ -57,7 +57,7 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
             will(returnValue(testData));
         }});
         
-        final User user = userManager.getUser("1");
+        final SysUserEntity user = userManager.getUser("1");
         user.setPhoneNumber("303-555-1212");
 
         context.checking(new Expectations() {{
@@ -65,30 +65,30 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
             will(returnValue(user));
         }});
         
-        User returned = userManager.saveUser(user);
+        SysUserEntity returned = userManager.saveUser(user);
         assertTrue(returned.getPhoneNumber().equals("303-555-1212"));
         assertTrue(returned.getRoles().size() == 1);
     }
 
     @Test
     public void testAddAndRemoveUser() throws Exception {
-        User user = new User();
+        SysUserEntity user = new SysUserEntity();
 
         // call populate method in super class to populate test data
         // from a properties file matching this class name
-        user = (User) populate(user);
+        user = (SysUserEntity) populate(user);
         
         // set expected behavior on role dao
         context.checking(new Expectations() {{
             one(roleDao).getRoleByName(with(equal("ROLE_USER")));
-            will(returnValue(new Role("ROLE_USER")));
+            will(returnValue(new SysRoleEntity("ROLE_USER")));
         }});
                 
-        Role role = roleManager.getRole(Constants.USER_ROLE);
+        SysRoleEntity role = roleManager.getRole(Constants.USER_ROLE);
         user.addRole(role);
 
         // set expected behavior on user dao
-        final User user1 = user;
+        final SysUserEntity user1 = user;
         context.checking(new Expectations() {{
             one(userDao).saveUser(with(same(user1)));
             will(returnValue(user1));
@@ -116,7 +116,7 @@ public class UserManagerImplTest extends BaseManagerMockTestCase {
     @Test
     public void testUserExistsException() {
         // set expectations
-        final User user = new User("admin");
+        final SysUserEntity user = new SysUserEntity("admin");
         user.setEmail("matt@raibledesigns.com");
 
         final Exception ex = new DataIntegrityViolationException("");

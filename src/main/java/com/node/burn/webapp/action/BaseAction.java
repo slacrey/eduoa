@@ -1,11 +1,11 @@
 package com.node.burn.webapp.action;
 
+import com.node.burn.model.SysUserEntity;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 import com.node.burn.Constants;
-import com.node.burn.model.User;
 import com.node.burn.service.MailEngine;
 import com.node.burn.service.RoleManager;
 import com.node.burn.service.UserManager;
@@ -159,7 +159,7 @@ public class BaseAction extends ActionSupport {
      * @param msg the message to send
      * @param url the URL to the application (or where ever you'd like to send them)
      */
-    protected void sendUserMessage(User user, String msg, String url) {
+    protected void sendUserMessage(SysUserEntity user, String msg, String url) {
         if (log.isDebugEnabled()) {
             log.debug("sending e-mail to user [" + user.getEmail() + "]...");
         }

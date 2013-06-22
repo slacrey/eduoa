@@ -248,7 +248,7 @@
         </webtest>
     </target>
     
-    <!--MenuItem-START-->
+    <!--SysMenuItemEntity-START-->
     <!-- runs menuItem-related tests -->
     <target name="MenuItemTests" depends="SearchMenuItems,EditMenuItem,SaveMenuItem,AddMenuItem,DeleteMenuItem"
             description="Call and executes all menuItem test cases (targets)">
@@ -305,7 +305,7 @@
         </webtest>
     </target>
 
-    <!-- Add a new MenuItem -->
+    <!-- Add a new SysMenuItemEntity -->
     <target name="AddMenuItem" description="Adds a new MenuItem">
         <webtest name="addMenuItem">
             &config;
@@ -340,7 +340,7 @@
             </steps>
         </webtest>
     </target>
-    <!--MenuItem-END-->
+    <!--SysMenuItemEntity-END-->
     <!--Emp-START-->
     <!-- runs emp-related tests -->
     <target name="EmpTests" depends="SearchEmps,EditEmp,SaveEmp,AddEmp,DeleteEmp"

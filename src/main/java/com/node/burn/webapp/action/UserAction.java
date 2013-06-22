@@ -1,11 +1,11 @@
 package com.node.burn.webapp.action;
 
+import com.node.burn.model.SysUserEntity;
 import com.opensymphony.xwork2.Preparable;
 import org.apache.struts2.ServletActionContext;
 import com.node.burn.Constants;
 import com.node.burn.dao.SearchException;
-import com.node.burn.model.Role;
-import com.node.burn.model.User;
+import com.node.burn.model.SysRoleEntity;
 import com.node.burn.service.UserExistsException;
 import com.node.burn.webapp.util.RequestUtil;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -24,12 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Action for facilitating User Management feature.
+ * Action for facilitating SysUserEntity Management feature.
  */
 public class UserAction extends BaseAction implements Preparable {
     private static final long serialVersionUID = 6776558938712115191L;
-    private List<User> users;
-    private User user;
+    private List<SysUserEntity> users;
+    private SysUserEntity user;
     private String id;
     private String query;
 
@@ -48,7 +48,7 @@ public class UserAction extends BaseAction implements Preparable {
      *
      * @return list of users
      */
-    public List<User> getUsers() {
+    public List<SysUserEntity> getUsers() {
         return users;
     }
 
@@ -56,11 +56,11 @@ public class UserAction extends BaseAction implements Preparable {
         this.id = id;
     }
 
-    public User getUser() {
+    public SysUserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(SysUserEntity user) {
         this.user = user;
     }
 
@@ -95,7 +95,7 @@ public class UserAction extends BaseAction implements Preparable {
         // if URL is "editProfile" - make sure it's the current user
         if (editProfile && ((request.getParameter("id") != null) || (request.getParameter("from") != null))) {
             ServletActionContext.getResponse().sendError(HttpServletResponse.SC_FORBIDDEN);
-            log.warn("User '" + request.getRemoteUser() + "' is trying to edit user '" +
+            log.warn("SysUserEntity '" + request.getRemoteUser() + "' is trying to edit user '" +
                     request.getParameter("id") + "'");
             return null;
         }
@@ -107,8 +107,8 @@ public class UserAction extends BaseAction implements Preparable {
         } else if (editProfile) {
             user = userManager.getUserByUsername(request.getRemoteUser());
         } else {
-            user = new User();
-            user.addRole(new Role(Constants.USER_ROLE));
+            user = new SysUserEntity();
+            user.addRole(new SysRoleEntity(Constants.USER_ROLE));
         }
 
         if (user.getUsername() != null) {

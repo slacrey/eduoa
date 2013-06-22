@@ -1,14 +1,11 @@
 package com.node.burn.service.impl;
 
 import com.node.burn.dao.UserDao;
-import com.node.burn.model.User;
+import com.node.burn.model.SysUserEntity;
 import com.node.burn.service.UserExistsException;
 import com.node.burn.service.UserManager;
 import com.node.burn.service.UserService;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,7 +22,7 @@ import java.util.List;
  */
 @Service("userManager")
 @WebService(serviceName = "UserService", endpointInterface = "com.node.burn.service.UserService")
-public class UserManagerImpl extends GenericManagerImpl<User, Long> implements UserManager, UserService {
+public class UserManagerImpl extends GenericManagerImpl<SysUserEntity, Long> implements UserManager, UserService {
     private PasswordEncoder passwordEncoder;
     private UserDao userDao;
     @Autowired(required = false)
@@ -45,21 +42,21 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
     /**
      * {@inheritDoc}
      */
-    public User getUser(String userId) {
+    public SysUserEntity getUser(String userId) {
         return userDao.get(new Long(userId));
     }
 
     /**
      * {@inheritDoc}
      */
-    public List<User> getUsers() {
+    public List<SysUserEntity> getUsers() {
         return userDao.getAllDistinct();
     }
 
     /**
      * {@inheritDoc}
      */
-    public User saveUser(User user) throws UserExistsException {
+    public SysUserEntity saveUser(SysUserEntity user) throws UserExistsException {
 
         if (user.getVersion() == null) {
             // if new user, lowercase userId
@@ -105,14 +102,14 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
         } catch (Exception e) {
             e.printStackTrace();
             log.warn(e.getMessage());
-            throw new UserExistsException("User '" + user.getUsername() + "' already exists!");
+            throw new UserExistsException("SysUserEntity '" + user.getUsername() + "' already exists!");
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public void removeUser(User user) {
+    public void removeUser(SysUserEntity user) {
         log.debug("removing user: " + user);
         userDao.remove(user);
     }
@@ -129,17 +126,17 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
      * {@inheritDoc}
      *
      * @param username the login name of the human
-     * @return User the populated user object
+     * @return SysUserEntity the populated user object
      * @throws UsernameNotFoundException thrown when username not found
      */
-    public User getUserByUsername(String username) throws UsernameNotFoundException {
-        return (User) userDao.loadUserByUsername(username);
+    public SysUserEntity getUserByUsername(String username) throws UsernameNotFoundException {
+        return (SysUserEntity) userDao.loadUserByUsername(username);
     }
 
     /**
      * {@inheritDoc}
      */
-    public List<User> search(String searchTerm) {
-        return super.search(searchTerm, User.class);
+    public List<SysUserEntity> search(String searchTerm) {
+        return super.search(searchTerm, SysUserEntity.class);
     }
 }

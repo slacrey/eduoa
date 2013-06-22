@@ -3,9 +3,35 @@
 
     <persistence-unit name="ApplicationEntityManager" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.node.burn.model.User</class>
-        <class>com.node.burn.model.Role</class>
+        <class>com.node.burn.model.SysUserEntity</class>
+        <class>com.node.burn.model.SysRoleEntity</class>
         <class>com.node.burn.entity.SysMenuItemEntity</class>
+        <class>com.node.burn.entity.CmsArticleEntity</class>
+        <class>com.node.burn.entity.CmsArticleTeacherEntity</class>
+        <class>com.node.burn.entity.CmsChannelEntity</class>
+        <class>com.node.burn.entity.OaAppraisalEntity</class>
+        <class>com.node.burn.entity.OaCertificateEntity</class>
+        <class>com.node.burn.entity.OaCertificateTypeEntity</class>
+        <class>com.node.burn.entity.OaClassTeacherEntity</class>
+        <class>com.node.burn.entity.OaContactEntity</class>
+        <class>com.node.burn.entity.OaDepartmentEntity</class>
+        <class>com.node.burn.entity.OaEducationEntity</class>
+        <class>com.node.burn.entity.OaGradeEntity</class>
+        <class>com.node.burn.entity.OaOrganizationalStructureEntity</class>
+        <class>com.node.burn.entity.OaPositionEntity</class>
+        <class>com.node.burn.entity.OaStudentEntity</class>
+        <class>com.node.burn.entity.OaStudentClassEntity</class>
+        <class>com.node.burn.entity.OaStudentGradeEntity</class>
+        <class>com.node.burn.entity.OaSubjectEntity</class>
+        <class>com.node.burn.entity.OaTeacherInfoEntity</class>
+        <class>com.node.burn.entity.SysAttachmentEntity</class>
+        <class>com.node.burn.entity.SysRoleEntity</class>
+        <class>com.node.burn.entity.SysTypeRulesEntity</class>
+        <class>com.node.burn.entity.SysUserEntity</class>
+        <class>com.node.burn.entity.SysUserRoleEntity</class>
+        <class>com.node.burn.entity.OaClassEntity</class>
+        <class>com.node.burn.entity.OaDictionaryEntity</class>
+        <class>com.node.burn.entity.OaDictionaryValueEntity</class>
         <properties>
             <property name="hibernate.connection.url"
                       value="jdbc:mysql://localhost:3306/eduoa?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true"/>

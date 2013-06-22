@@ -4,16 +4,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * This class is used to represent available roles in the database.
@@ -28,10 +21,10 @@ import java.io.Serializable;
 @NamedQueries({
         @NamedQuery(
                 name = "findRoleByName",
-                query = "select r from Role r where r.name = :name "
+                query = "select r from SysRoleEntity r where r.name = :name "
         )
 })
-public class Role extends BaseObject implements Serializable, GrantedAuthority {
+public class SysRoleEntity extends BaseObject implements Serializable, GrantedAuthority {
     private static final long serialVersionUID = 3690197650654049848L;
     private Long id;
     private String name;
@@ -40,7 +33,7 @@ public class Role extends BaseObject implements Serializable, GrantedAuthority {
     /**
      * Default constructor - creates a new instance with no values set.
      */
-    public Role() {
+    public SysRoleEntity() {
     }
 
     /**
@@ -48,7 +41,7 @@ public class Role extends BaseObject implements Serializable, GrantedAuthority {
      *
      * @param name name of the role.
      */
-    public Role(final String name) {
+    public SysRoleEntity(final String name) {
         this.name = name;
     }
 
@@ -96,11 +89,11 @@ public class Role extends BaseObject implements Serializable, GrantedAuthority {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Role)) {
+        if (!(o instanceof SysRoleEntity)) {
             return false;
         }
 
-        final Role role = (Role) o;
+        final SysRoleEntity role = (SysRoleEntity) o;
 
         return !(name != null ? !name.equals(role.name) : role.name != null);
 
@@ -121,4 +114,6 @@ public class Role extends BaseObject implements Serializable, GrantedAuthority {
                 .append(this.name)
                 .toString();
     }
+
+
 }

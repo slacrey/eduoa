@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.node.burn.dao.MenuItemDao;
-import com.node.burn.model.MenuItem;
-import com.node.burn.service.impl.BaseManagerMockTestCase;
+import com.node.burn.model.SysMenuItemEntity;
 
 import org.jmock.Expectations;
 import org.junit.Before;
@@ -33,7 +32,7 @@ public class MenuItemManagerImplTest extends BaseManagerMockTestCase {
         log.debug("testing get...");
 
         final Long id = 7L;
-        final MenuItem menuItem = new MenuItem();
+        final SysMenuItemEntity menuItem = new SysMenuItemEntity();
 
         // set expected behavior on dao
         context.checking(new Expectations() {{
@@ -41,7 +40,7 @@ public class MenuItemManagerImplTest extends BaseManagerMockTestCase {
             will(returnValue(menuItem));
         }});
 
-        MenuItem result = manager.get(id);
+        SysMenuItemEntity result = manager.get(id);
         assertSame(menuItem, result);
     }
 
@@ -65,7 +64,7 @@ public class MenuItemManagerImplTest extends BaseManagerMockTestCase {
     public void testSaveMenuItem() {
         log.debug("testing save...");
 
-        final MenuItem menuItem = new MenuItem();
+        final SysMenuItemEntity menuItem = new SysMenuItemEntity();
         // enter all required fields
         
         // set expected behavior on dao

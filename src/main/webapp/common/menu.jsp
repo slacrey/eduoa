@@ -13,9 +13,9 @@
     <menu:displayMenu name="AdminMenu"/>
     <menu:displayMenu name="Logout"/>
 
-    <%--<!--MenuItem-START-->--%>
+    <%--<!--SysMenuItemEntity-START-->--%>
     <%--<menu:displayMenu name="MenuItemMenu"/>--%>
-    <%--<!--MenuItem-END-->--%>
+    <%--<!--SysMenuItemEntity-END-->--%>
     <!--Emp-START-->
     <menu:displayMenu name="EmpMenu"/>
     <!--Emp-END-->

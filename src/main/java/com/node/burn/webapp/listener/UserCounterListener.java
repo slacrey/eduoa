@@ -1,6 +1,6 @@
 package com.node.burn.webapp.listener;
 
-import com.node.burn.model.User;
+import com.node.burn.model.SysUserEntity;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.Authentication;
@@ -42,7 +42,7 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
     public static final String EVENT_KEY = HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
     private transient ServletContext servletContext;
     private int counter;
-    private Set<User> users;
+    private Set<SysUserEntity> users;
 
     /**
      * Initialize the context
@@ -83,11 +83,11 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
     }
 
     @SuppressWarnings("unchecked")
-    synchronized void addUsername(User user) {
-        users = (Set<User>) servletContext.getAttribute(USERS_KEY);
+    synchronized void addUsername(SysUserEntity user) {
+        users = (Set<SysUserEntity>) servletContext.getAttribute(USERS_KEY);
 
         if (users == null) {
-            users = new LinkedHashSet<User>();
+            users = new LinkedHashSet<SysUserEntity>();
         }
 
         if (!users.contains(user)) {
@@ -98,8 +98,8 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
     }
 
     @SuppressWarnings("unchecked")
-    synchronized void removeUsername(User user) {
-        users = (Set<User>) servletContext.getAttribute(USERS_KEY);
+    synchronized void removeUsername(SysUserEntity user) {
+        users = (Set<SysUserEntity>) servletContext.getAttribute(USERS_KEY);
 
         if (users != null) {
             users.remove(user);
@@ -118,8 +118,8 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
     public void attributeAdded(HttpSessionBindingEvent event) {
         if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
             SecurityContext securityContext = (SecurityContext) event.getValue();
-            if (securityContext != null && securityContext.getAuthentication().getPrincipal() instanceof User) {
-                User user = (User) securityContext.getAuthentication().getPrincipal();
+            if (securityContext != null && securityContext.getAuthentication().getPrincipal() instanceof SysUserEntity) {
+                SysUserEntity user = (SysUserEntity) securityContext.getAuthentication().getPrincipal();
                 addUsername(user);
             }
         }
@@ -145,8 +145,8 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
         if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
             SecurityContext securityContext = (SecurityContext) event.getValue();
             Authentication auth = securityContext.getAuthentication();
-            if (auth != null && (auth.getPrincipal() instanceof User)) {
-                User user = (User) auth.getPrincipal();
+            if (auth != null && (auth.getPrincipal() instanceof SysUserEntity)) {
+                SysUserEntity user = (SysUserEntity) auth.getPrincipal();
                 removeUsername(user);
             }
         }
@@ -163,8 +163,8 @@ public class UserCounterListener implements ServletContextListener, HttpSessionA
         if (event.getName().equals(EVENT_KEY) && !isAnonymous()) {
             final SecurityContext securityContext = (SecurityContext) event.getValue();
             if (securityContext.getAuthentication() != null
-                    && securityContext.getAuthentication().getPrincipal() instanceof User) {
-                final User user = (User) securityContext.getAuthentication().getPrincipal();
+                    && securityContext.getAuthentication().getPrincipal() instanceof SysUserEntity) {
+                final SysUserEntity user = (SysUserEntity) securityContext.getAuthentication().getPrincipal();
                 addUsername(user);
             }
         }

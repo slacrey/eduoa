@@ -1,15 +1,13 @@
 package com.node.burn.service;
 
-import com.node.burn.service.GenericManager;
-import com.node.burn.model.MenuItem;
+import com.node.burn.model.SysMenuItemEntity;
 
 import java.util.List;
-import java.util.Map;
 import javax.jws.WebService;
 
 @WebService
-public interface MenuItemManager extends GenericManager<MenuItem, Long> {
+public interface MenuItemManager extends GenericManager<SysMenuItemEntity, Long> {
 
-    List<MenuItem> findTopMenuItems();
+    List<SysMenuItemEntity> findTopMenuItems();
 
 }

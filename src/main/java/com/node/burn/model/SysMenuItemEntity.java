@@ -1,26 +1,18 @@
 package com.node.burn.model;
 
-import com.node.burn.model.BaseObject;
-
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.OrderBy;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.IndexedEmbedded;
 
 import javax.persistence.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
 import java.util.Collection;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "sys_menu_item")
@@ -28,11 +20,11 @@ import static javax.persistence.GenerationType.IDENTITY;
 @XmlRootElement
 @org.hibernate.annotations.NamedQueries({
         @org.hibernate.annotations.NamedQuery(name = "menuItem.findAllMenuItem",
-                query = "SELECT u FROM MenuItem u ORDER BY u.order desc "),
+                query = "SELECT u FROM SysMenuItemEntity u ORDER BY u.menuOrder desc "),
         @org.hibernate.annotations.NamedQuery(name = "menuItem.findTopMenuItem",
-                query = "SELECT u FROM MenuItem u WHERE (u.parentMenuItem is null OR u.parentMenuItem = '') ORDER BY u.order desc ")
+                query = "SELECT u FROM SysMenuItemEntity u WHERE (u.parentMenuItem is null OR u.parentMenuItem = '') ORDER BY u.menuOrder desc ")
 })
-public class MenuItem extends BaseObject implements Serializable, Comparable<MenuItem> {
+public class SysMenuItemEntity extends BaseObject implements Serializable, Comparable<SysMenuItemEntity> {
     private Long id;
     private String name;
     private String title;
@@ -51,7 +43,7 @@ public class MenuItem extends BaseObject implements Serializable, Comparable<Men
     private String height;
     private String forward;
     private String action;
-    private Integer order;
+    private Integer menuOrder;
 
     @Id
     @Column(name = "id")
@@ -155,7 +147,7 @@ public class MenuItem extends BaseObject implements Serializable, Comparable<Men
         this.image = image;
     }
 
-    @Column(name = "altImage", length = 30)
+    @Column(name = "alt_image", length = 30)
     @Field
     public String getAltImage() {
         return this.altImage;
@@ -237,19 +229,19 @@ public class MenuItem extends BaseObject implements Serializable, Comparable<Men
 
     @Column(name = "menu_order", length = 11)
     @Field
-    public Integer getOrder() {
-        return order;
+    public Integer getMenuOrder() {
+        return menuOrder;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setMenuOrder(Integer order) {
+        this.menuOrder = order;
     }
 
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MenuItem pojo = (MenuItem) o;
+        SysMenuItemEntity pojo = (SysMenuItemEntity) o;
 
         if (name != null ? !name.equals(pojo.name) : pojo.name != null) return false;
         if (title != null ? !title.equals(pojo.title) : pojo.title != null) return false;
@@ -322,32 +314,32 @@ public class MenuItem extends BaseObject implements Serializable, Comparable<Men
         return sb.toString();
     }
 
-    private MenuItem parentMenuItem;
+    private SysMenuItemEntity parentMenuItem;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = MenuItem.class)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = SysMenuItemEntity.class)
     @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName = "id")
-    public MenuItem getParentMenuItem() {
+    public SysMenuItemEntity getParentMenuItem() {
         return parentMenuItem;
     }
 
-    public void setParentMenuItem(MenuItem parentMenuItem) {
+    public void setParentMenuItem(SysMenuItemEntity parentMenuItem) {
         this.parentMenuItem = parentMenuItem;
     }
 
-    private Collection<MenuItem> childeanMenuItem;
+    private Collection<SysMenuItemEntity> childeanMenuItem;
 
     @OneToMany(mappedBy = "parentMenuItem", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public Collection<MenuItem> getChildeanMenuItem() {
+    public Collection<SysMenuItemEntity> getChildeanMenuItem() {
         return childeanMenuItem;
     }
 
-    public void setChildeanMenuItem(Collection<MenuItem> childeanMenuItem) {
+    public void setChildeanMenuItem(Collection<SysMenuItemEntity> childeanMenuItem) {
         this.childeanMenuItem = childeanMenuItem;
     }
 
     @Override
-    public int compareTo(MenuItem o) {
-        if (this.getOrder() >= o.getOrder()) {
+    public int compareTo(SysMenuItemEntity o) {
+        if (this.getMenuOrder() >= o.getMenuOrder()) {
             return 1;
         } else {
             return -1;

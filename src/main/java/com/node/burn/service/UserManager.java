@@ -1,7 +1,7 @@
 package com.node.burn.service;
 
 import com.node.burn.dao.UserDao;
-import com.node.burn.model.User;
+import com.node.burn.model.SysUserEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  *  Modified by <a href="mailto:dan@getrolling.com">Dan Kibler </a>
  */
-public interface UserManager extends GenericManager<User, Long> {
+public interface UserManager extends GenericManager<SysUserEntity, Long> {
     /**
      * Convenience method for testing - allows you to mock the DAO and set it on an interface.
      * @param userDao the UserDao implementation to use
@@ -25,24 +25,24 @@ public interface UserManager extends GenericManager<User, Long> {
      * Retrieves a user by userId.  An exception is thrown if user not found
      *
      * @param userId the identifier for the user
-     * @return User
+     * @return SysUserEntity
      */
-    User getUser(String userId);
+    SysUserEntity getUser(String userId);
 
     /**
      * Finds a user by their username.
      * @param username the user's username used to login
-     * @return User a populated user object
+     * @return SysUserEntity a populated user object
      * @throws org.springframework.security.core.userdetails.UsernameNotFoundException
      *         exception thrown when user not found
      */
-    User getUserByUsername(String username) throws UsernameNotFoundException;
+    SysUserEntity getUserByUsername(String username) throws UsernameNotFoundException;
 
     /**
      * Retrieves a list of all users.
      * @return List
      */
-    List<User> getUsers();
+    List<SysUserEntity> getUsers();
 
     /**
      * Saves a user's information.
@@ -51,14 +51,14 @@ public interface UserManager extends GenericManager<User, Long> {
      * @throws UserExistsException thrown when user already exists
      * @return user the updated user object
      */
-    User saveUser(User user) throws UserExistsException;
+    SysUserEntity saveUser(SysUserEntity user) throws UserExistsException;
 
     /**
      * Removes a user from the database
      *
      * @param user the user to remove
      */
-    void removeUser(User user);
+    void removeUser(SysUserEntity user);
 
     /**
      * Removes a user from the database by their userId
@@ -72,5 +72,5 @@ public interface UserManager extends GenericManager<User, Long> {
      * @param searchTerm the search terms.
      * @return a list of matches, or all if no searchTerm.
      */
-    List<User> search(String searchTerm);
+    List<SysUserEntity> search(String searchTerm);
 }

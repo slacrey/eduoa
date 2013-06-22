@@ -2,8 +2,8 @@ package com.node.burn.service.impl;
 
 import com.node.burn.Constants;
 import com.node.burn.dao.UserDao;
-import com.node.burn.model.Role;
-import com.node.burn.model.User;
+import com.node.burn.model.SysRoleEntity;
+import com.node.burn.model.SysUserEntity;
 import com.node.burn.service.UserManager;
 import com.node.burn.service.UserSecurityAdvice;
 import org.jmock.Expectations;
@@ -39,10 +39,10 @@ public class UserSecurityAdviceTest {
         initialSecurityContext = SecurityContextHolder.getContext();
 
         SecurityContext context = new SecurityContextImpl();
-        User user = new User("user");
+        SysUserEntity user = new SysUserEntity("user");
         user.setId(1L);
         user.setPassword("password");
-        user.addRole(new Role(Constants.USER_ROLE));
+        user.addRole(new SysRoleEntity(Constants.USER_ROLE));
 
         UsernamePasswordAuthenticationToken token =
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
@@ -61,7 +61,7 @@ public class UserSecurityAdviceTest {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         assertTrue(auth.isAuthenticated());
         UserManager userManager = makeInterceptedTarget();
-        User user = new User("admin");
+        SysUserEntity user = new SysUserEntity("admin");
         user.setId(2L);
 
         try {
@@ -76,10 +76,10 @@ public class UserSecurityAdviceTest {
     @Test
     public void testAddUserAsAdmin() throws Exception {
         SecurityContext securityContext = new SecurityContextImpl();
-        User user = new User("admin");
+        SysUserEntity user = new SysUserEntity("admin");
         user.setId(2L);
         user.setPassword("password");
-        user.addRole(new Role(Constants.ADMIN_ROLE));
+        user.addRole(new SysRoleEntity(Constants.ADMIN_ROLE));
         UsernamePasswordAuthenticationToken token =
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
         token.setDetails(user);
@@ -87,7 +87,7 @@ public class UserSecurityAdviceTest {
         SecurityContextHolder.setContext(securityContext);
 
         UserManager userManager = makeInterceptedTarget();
-        final User adminUser = new User("admin");
+        final SysUserEntity adminUser = new SysUserEntity("admin");
         adminUser.setId(2L);
 
         context.checking(new Expectations() {{
@@ -100,9 +100,9 @@ public class UserSecurityAdviceTest {
     @Test
     public void testUpdateUserProfile() throws Exception {
         UserManager userManager = makeInterceptedTarget();
-        final User user = new User("user");
+        final SysUserEntity user = new SysUserEntity("user");
         user.setId(1L);
-        user.getRoles().add(new Role(Constants.USER_ROLE));
+        user.getRoles().add(new SysRoleEntity(Constants.USER_ROLE));
 
         context.checking(new Expectations() {{
             one(userDao).saveUser(with(same(user)));
@@ -115,9 +115,9 @@ public class UserSecurityAdviceTest {
     @Test
     public void testChangeToAdminRoleFromUserRole() throws Exception {
         UserManager userManager = makeInterceptedTarget();
-        User user = new User("user");
+        SysUserEntity user = new SysUserEntity("user");
         user.setId(1L);
-        user.getRoles().add(new Role(Constants.ADMIN_ROLE));
+        user.getRoles().add(new SysRoleEntity(Constants.ADMIN_ROLE));
 
         try {
             userManager.saveUser(user);
@@ -132,10 +132,10 @@ public class UserSecurityAdviceTest {
     @Test
     public void testAddAdminRoleWhenAlreadyHasUserRole() throws Exception {
         UserManager userManager = makeInterceptedTarget();
-        User user = new User("user");
+        SysUserEntity user = new SysUserEntity("user");
         user.setId(1L);
-        user.getRoles().add(new Role(Constants.ADMIN_ROLE));
-        user.getRoles().add(new Role(Constants.USER_ROLE));
+        user.getRoles().add(new SysRoleEntity(Constants.ADMIN_ROLE));
+        user.getRoles().add(new SysRoleEntity(Constants.USER_ROLE));
 
         try {
             userManager.saveUser(user);
@@ -150,10 +150,10 @@ public class UserSecurityAdviceTest {
     @Test
     public void testAddUserRoleWhenHasAdminRole() throws Exception {
         SecurityContext securityContext = new SecurityContextImpl();
-        User user1 = new User("user");
+        SysUserEntity user1 = new SysUserEntity("user");
         user1.setId(1L);
         user1.setPassword("password");
-        user1.addRole(new Role(Constants.ADMIN_ROLE));
+        user1.addRole(new SysRoleEntity(Constants.ADMIN_ROLE));
         UsernamePasswordAuthenticationToken token =
                 new UsernamePasswordAuthenticationToken(user1.getUsername(), user1.getPassword(), user1.getAuthorities());
         token.setDetails(user1);
@@ -161,10 +161,10 @@ public class UserSecurityAdviceTest {
         SecurityContextHolder.setContext(securityContext);
 
         UserManager userManager = makeInterceptedTarget();
-        final User user = new User("user");
+        final SysUserEntity user = new SysUserEntity("user");
         user.setId(1L);
-        user.getRoles().add(new Role(Constants.ADMIN_ROLE));
-        user.getRoles().add(new Role(Constants.USER_ROLE));
+        user.getRoles().add(new SysRoleEntity(Constants.ADMIN_ROLE));
+        user.getRoles().add(new SysRoleEntity(Constants.USER_ROLE));
 
         context.checking(new Expectations() {{
             one(userDao).saveUser(with(same(user)));
@@ -177,9 +177,9 @@ public class UserSecurityAdviceTest {
     @Test
     public void testUpdateUserWithUserRole() throws Exception {
         UserManager userManager = makeInterceptedTarget();
-        final User user = new User("user");
+        final SysUserEntity user = new SysUserEntity("user");
         user.setId(1L);
-        user.getRoles().add(new Role(Constants.USER_ROLE));
+        user.getRoles().add(new SysRoleEntity(Constants.USER_ROLE));
 
         context.checking(new Expectations() {{
             one(userDao).saveUser(with(same(user)));

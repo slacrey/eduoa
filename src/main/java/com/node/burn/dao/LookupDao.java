@@ -1,6 +1,6 @@
 package com.node.burn.dao;
 
-import com.node.burn.model.Role;
+import com.node.burn.model.SysRoleEntity;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface LookupDao {
      * Returns all Roles ordered by name
      * @return populated list of roles
      */
-    List<Role> getRoles();
+    List<SysRoleEntity> getRoles();
 }

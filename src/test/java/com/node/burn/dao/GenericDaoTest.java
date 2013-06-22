@@ -1,9 +1,9 @@
 package com.node.burn.dao;
 
+import com.node.burn.model.SysUserEntity;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.node.burn.dao.hibernate.GenericDaoHibernate;
-import com.node.burn.model.User;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,18 +13,18 @@ import static org.junit.Assert.*;
 
 public class GenericDaoTest extends BaseDaoTestCase {
     Log log = LogFactory.getLog(GenericDaoTest.class);
-    GenericDao<User, Long> genericDao;
+    GenericDao<SysUserEntity, Long> genericDao;
     @Autowired
     SessionFactory sessionFactory;
 
     @Before
     public void setUp() {
-        genericDao = new GenericDaoHibernate<User, Long>(User.class, sessionFactory);
+        genericDao = new GenericDaoHibernate<SysUserEntity, Long>(SysUserEntity.class, sessionFactory);
     }
 
     @Test
     public void getUser() {
-        User user = genericDao.get(-1L);
+        SysUserEntity user = genericDao.get(-1L);
         assertNotNull(user);
         assertEquals("user", user.getUsername());
     }

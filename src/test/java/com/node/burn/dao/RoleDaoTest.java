@@ -1,7 +1,7 @@
 package com.node.burn.dao;
 
 import com.node.burn.Constants;
-import com.node.burn.model.Role;
+import com.node.burn.model.SysRoleEntity;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,19 +16,19 @@ public class RoleDaoTest extends BaseDaoTestCase {
 
     @Test
     public void testGetRoleInvalid() throws Exception {
-        Role role = dao.getRoleByName("badrolename");
+        SysRoleEntity role = dao.getRoleByName("badrolename");
         assertNull(role);
     }
 
     @Test
     public void testGetRole() throws Exception {
-        Role role = dao.getRoleByName(Constants.USER_ROLE);
+        SysRoleEntity role = dao.getRoleByName(Constants.USER_ROLE);
         assertNotNull(role);
     }
 
     @Test
     public void testUpdateRole() throws Exception {
-        Role role = dao.getRoleByName("ROLE_USER");
+        SysRoleEntity role = dao.getRoleByName("ROLE_USER");
         role.setDescription("test descr");
         dao.save(role);
         flush();
@@ -39,7 +39,7 @@ public class RoleDaoTest extends BaseDaoTestCase {
 
     @Test
     public void testAddAndRemoveRole() throws Exception {
-        Role role = new Role("testrole");
+        SysRoleEntity role = new SysRoleEntity("testrole");
         role.setDescription("new role descr");
         dao.save(role);
         flush();
@@ -58,7 +58,7 @@ public class RoleDaoTest extends BaseDaoTestCase {
     public void testFindByNamedQuery() {
         HashMap<String, Object> queryParams = new HashMap<String, Object>();
         queryParams.put("name", Constants.USER_ROLE);
-        List<Role> roles = dao.findByNamedQuery("findRoleByName", queryParams);
+        List<SysRoleEntity> roles = dao.findByNamedQuery("findRoleByName", queryParams);
         assertNotNull(roles);
         assertTrue(roles.size() > 0);
     }

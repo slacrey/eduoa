@@ -3,7 +3,7 @@ package com.node.burn.service;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.node.burn.Constants;
-import com.node.burn.model.User;
+import com.node.burn.model.SysUserEntity;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,7 +15,7 @@ public class UserManagerTest extends BaseManagerTestCase {
     private UserManager mgr;
     @Autowired
     private RoleManager roleManager;
-    private User user;
+    private SysUserEntity user;
 
     @Test
     public void testGetUser() throws Exception {
@@ -40,11 +40,11 @@ public class UserManagerTest extends BaseManagerTestCase {
 
     @Test
     public void testAddAndRemoveUser() throws Exception {
-        user = new User();
+        user = new SysUserEntity();
 
         // call populate method in super class to populate test data
         // from a properties file matching this class name
-        user = (User) populate(user);
+        user = (SysUserEntity) populate(user);
 
         user.addRole(roleManager.getRole(Constants.USER_ROLE));
 

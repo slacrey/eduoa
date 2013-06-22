@@ -8,7 +8,7 @@ import javax.servlet.jsp.PageContext;
 
 /**
  * Created with IntelliJ IDEA.
- * User: linfeng at Administrator
+ * SysUserEntity: linfeng at Administrator
  * Date: 13-6-12
  * Time: 下午8:06
  * To change this template use File | Settings | File Templates.

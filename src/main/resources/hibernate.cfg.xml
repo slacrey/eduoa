@@ -4,9 +4,9 @@
 
 <hibernate-configuration>
     <session-factory>
-        <mapping class="com.node.burn.model.User"/>
-        <mapping class="com.node.burn.model.Role"/>
-        <mapping class="com.node.burn.model.MenuItem"/>
+        <mapping class="com.node.burn.model.SysUserEntity"/>
+        <mapping class="com.node.burn.model.SysRoleEntity"/>
+        <mapping class="com.node.burn.model.SysMenuItemEntity"/>
         <mapping class="com.node.burn.model.Emp"/>
     </session-factory>
 </hibernate-configuration>

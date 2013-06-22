@@ -3,7 +3,7 @@ package com.node.burn.webapp.action;
 
 import org.apache.struts2.ServletActionContext;
 import com.node.burn.Constants;
-import com.node.burn.model.User;
+import com.node.burn.model.SysUserEntity;
 import com.node.burn.service.UserExistsException;
 import com.node.burn.webapp.util.RequestUtil;
 import org.springframework.mail.MailException;
@@ -20,14 +20,14 @@ import java.util.List;
  */
 public class SignupAction extends BaseAction {
     private static final long serialVersionUID = 6558317334878272308L;
-    private User user;
+    private SysUserEntity user;
     private String cancel;
 
     public void setCancel(String cancel) {
         this.cancel = cancel;
     }
 
-    public void setUser(User user) {
+    public void setUser(SysUserEntity user) {
         this.user = user;
     }
 
@@ -35,7 +35,7 @@ public class SignupAction extends BaseAction {
      * Return an instance of the user - to display when validation errors occur
      * @return a populated user
      */
-    public User getUser() {
+    public SysUserEntity getUser() {
         return user;
     }
 
