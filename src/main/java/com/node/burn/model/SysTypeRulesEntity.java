@@ -13,7 +13,7 @@ import java.sql.Date;
  * Time: 下午11:10
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "sys_type_rules", catalog = "eduoa")
+@javax.persistence.Table(name = "sys_type_rules")
 @Entity
 public class SysTypeRulesEntity {
     private long id;

@@ -1,6 +1,10 @@
 package com.node.burn.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -10,18 +14,20 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_education", catalog = "eduoa")
+@SuppressWarnings("ALL")
+@Table(name = "oa_education")
 @Entity
-public class OaEducationEntity {
-    private long id;
+public class OaEducationEntity extends BaseObject implements Serializable {
+    private Long id;
 
     @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -29,11 +35,11 @@ public class OaEducationEntity {
 
     @Column(name = "edu_name")
     @Basic
-    String getEduName() {
+    public String getEduName() {
         return eduName;
     }
 
-    void setEduName(String eduName) {
+    public void setEduName(String eduName) {
         this.eduName = eduName;
     }
 
@@ -41,12 +47,19 @@ public class OaEducationEntity {
 
     @Column(name = "description")
     @Basic
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.eduName)
+                .toString();
     }
 
     @Override
@@ -74,11 +87,11 @@ public class OaEducationEntity {
     private Collection<OaDepartmentEntity> oaDepartmentsById;
 
     @OneToMany(mappedBy = "oaEducationByEducationId")
-    Collection<OaDepartmentEntity> getOaDepartmentsById() {
+    public Collection<OaDepartmentEntity> getOaDepartmentsById() {
         return oaDepartmentsById;
     }
 
-    void setOaDepartmentsById(Collection<OaDepartmentEntity> oaDepartmentsById) {
+    public void setOaDepartmentsById(Collection<OaDepartmentEntity> oaDepartmentsById) {
         this.oaDepartmentsById = oaDepartmentsById;
     }
 
@@ -86,11 +99,11 @@ public class OaEducationEntity {
 
     @ManyToOne
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
-    OaEducationEntity getOaEducationByParentId() {
+    public OaEducationEntity getOaEducationByParentId() {
         return oaEducationByParentId;
     }
 
-    void setOaEducationByParentId(OaEducationEntity oaEducationByParentId) {
+    public void setOaEducationByParentId(OaEducationEntity oaEducationByParentId) {
         this.oaEducationByParentId = oaEducationByParentId;
     }
 

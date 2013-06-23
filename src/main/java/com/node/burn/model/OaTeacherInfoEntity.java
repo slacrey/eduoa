@@ -1,6 +1,10 @@
 package com.node.burn.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -11,18 +15,19 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_teacher_info", catalog = "eduoa")
+@Table(name = "oa_teacher_info")
 @Entity
-public class OaTeacherInfoEntity {
-    private long id;
+public class OaTeacherInfoEntity extends BaseObject implements Serializable {
+    private Long id;
 
     @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -30,11 +35,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "teacher_name")
     @Basic
-    String getTeacherName() {
+    public String getTeacherName() {
         return teacherName;
     }
 
-    void setTeacherName(String teacherName) {
+    public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
     }
 
@@ -42,11 +47,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "teacher_number")
     @Basic
-    String getTeacherNumber() {
+    public String getTeacherNumber() {
         return teacherNumber;
     }
 
-    void setTeacherNumber(String teacherNumber) {
+    public void setTeacherNumber(String teacherNumber) {
         this.teacherNumber = teacherNumber;
     }
 
@@ -54,11 +59,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "id_number")
     @Basic
-    String getIdNumber() {
+    public String getIdNumber() {
         return idNumber;
     }
 
-    void setIdNumber(String idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
 
@@ -66,11 +71,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "is_teacher")
     @Basic
-    Integer getTeacher() {
+    public Integer getTeacher() {
         return isTeacher;
     }
 
-    void setTeacher(Integer teacher) {
+    public void setTeacher(Integer teacher) {
         isTeacher = teacher;
     }
 
@@ -78,11 +83,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "phone")
     @Basic
-    String getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    void setPhone(String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -90,11 +95,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "head_teacher")
     @Basic
-    Integer getHeadTeacher() {
+    public Integer getHeadTeacher() {
         return headTeacher;
     }
 
-    void setHeadTeacher(Integer headTeacher) {
+    public void setHeadTeacher(Integer headTeacher) {
         this.headTeacher = headTeacher;
     }
 
@@ -102,11 +107,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "email")
     @Basic
-    String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -114,11 +119,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "gender")
     @Basic
-    Integer getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    void setGender(Integer gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
@@ -126,11 +131,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "birthday")
     @Basic
-    Date getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    void setBirthday(Date birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -138,11 +143,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "political_landscape")
     @Basic
-    Integer getPoliticalLandscape() {
+    public Integer getPoliticalLandscape() {
         return politicalLandscape;
     }
 
-    void setPoliticalLandscape(Integer politicalLandscape) {
+    public void setPoliticalLandscape(Integer politicalLandscape) {
         this.politicalLandscape = politicalLandscape;
     }
 
@@ -150,11 +155,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "join_time")
     @Basic
-    Date getJoinTime() {
+    public Date getJoinTime() {
         return joinTime;
     }
 
-    void setJoinTime(Date joinTime) {
+    public void setJoinTime(Date joinTime) {
         this.joinTime = joinTime;
     }
 
@@ -162,11 +167,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "working_time")
     @Basic
-    Date getWorkingTime() {
+    public Date getWorkingTime() {
         return workingTime;
     }
 
-    void setWorkingTime(Date workingTime) {
+    public void setWorkingTime(Date workingTime) {
         this.workingTime = workingTime;
     }
 
@@ -174,11 +179,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "original_education")
     @Basic
-    String getOriginalEducation() {
+    public String getOriginalEducation() {
         return originalEducation;
     }
 
-    void setOriginalEducation(String originalEducation) {
+    public void setOriginalEducation(String originalEducation) {
         this.originalEducation = originalEducation;
     }
 
@@ -186,11 +191,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "original_education_time")
     @Basic
-    Date getOriginalEducationTime() {
+    public Date getOriginalEducationTime() {
         return originalEducationTime;
     }
 
-    void setOriginalEducationTime(Date originalEducationTime) {
+    public void setOriginalEducationTime(Date originalEducationTime) {
         this.originalEducationTime = originalEducationTime;
     }
 
@@ -198,11 +203,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "special")
     @Basic
-    String getSpecial() {
+    public String getSpecial() {
         return special;
     }
 
-    void setSpecial(String special) {
+    public void setSpecial(String special) {
         this.special = special;
     }
 
@@ -210,11 +215,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "new_education")
     @Basic
-    String getNewEducation() {
+    public String getNewEducation() {
         return newEducation;
     }
 
-    void setNewEducation(String newEducation) {
+    public void setNewEducation(String newEducation) {
         this.newEducation = newEducation;
     }
 
@@ -222,11 +227,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "new_education_time")
     @Basic
-    Date getNewEducationTime() {
+    public Date getNewEducationTime() {
         return newEducationTime;
     }
 
-    void setNewEducationTime(Date newEducationTime) {
+    public void setNewEducationTime(Date newEducationTime) {
         this.newEducationTime = newEducationTime;
     }
 
@@ -234,11 +239,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "certificates_time")
     @Basic
-    Date getCertificatesTime() {
+    public Date getCertificatesTime() {
         return certificatesTime;
     }
 
-    void setCertificatesTime(Date certificatesTime) {
+    public void setCertificatesTime(Date certificatesTime) {
         this.certificatesTime = certificatesTime;
     }
 
@@ -246,11 +251,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "establishment")
     @Basic
-    Integer getEstablishment() {
+    public Integer getEstablishment() {
         return establishment;
     }
 
-    void setEstablishment(Integer establishment) {
+    public void setEstablishment(Integer establishment) {
         this.establishment = establishment;
     }
 
@@ -258,11 +263,11 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "create_time")
     @Basic
-    Date getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    void setCreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -270,12 +275,19 @@ public class OaTeacherInfoEntity {
 
     @Column(name = "update_time")
     @Basic
-    Date getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.teacherName)
+                .toString();
     }
 
     @Override
@@ -348,22 +360,22 @@ public class OaTeacherInfoEntity {
     private Collection<OaCertificateEntity> oaCertificatesById;
 
     @OneToMany(mappedBy = "oaTeacherInfoByTeacherId")
-    Collection<OaCertificateEntity> getOaCertificatesById() {
+    public Collection<OaCertificateEntity> getOaCertificatesById() {
         return oaCertificatesById;
     }
 
-    void setOaCertificatesById(Collection<OaCertificateEntity> oaCertificatesById) {
+    public void setOaCertificatesById(Collection<OaCertificateEntity> oaCertificatesById) {
         this.oaCertificatesById = oaCertificatesById;
     }
 
     private Collection<OaClassTeacherEntity> oaClassTeachersById;
 
     @OneToMany(mappedBy = "oaTeacherInfoByTeacherId")
-    Collection<OaClassTeacherEntity> getOaClassTeachersById() {
+    public Collection<OaClassTeacherEntity> getOaClassTeachersById() {
         return oaClassTeachersById;
     }
 
-    void setOaClassTeachersById(Collection<OaClassTeacherEntity> oaClassTeachersById) {
+    public void setOaClassTeachersById(Collection<OaClassTeacherEntity> oaClassTeachersById) {
         this.oaClassTeachersById = oaClassTeachersById;
     }
 
@@ -371,11 +383,11 @@ public class OaTeacherInfoEntity {
 
     @ManyToOne
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
-    OaSubjectEntity getOaSubjectBySubjectId() {
+    public OaSubjectEntity getOaSubjectBySubjectId() {
         return oaSubjectBySubjectId;
     }
 
-    void setOaSubjectBySubjectId(OaSubjectEntity oaSubjectBySubjectId) {
+    public void setOaSubjectBySubjectId(OaSubjectEntity oaSubjectBySubjectId) {
         this.oaSubjectBySubjectId = oaSubjectBySubjectId;
     }
 
@@ -383,11 +395,11 @@ public class OaTeacherInfoEntity {
 
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
-    OaDepartmentEntity getOaDepartmentByDepartmentId() {
+    public OaDepartmentEntity getOaDepartmentByDepartmentId() {
         return oaDepartmentByDepartmentId;
     }
 
-    void setOaDepartmentByDepartmentId(OaDepartmentEntity oaDepartmentByDepartmentId) {
+    public void setOaDepartmentByDepartmentId(OaDepartmentEntity oaDepartmentByDepartmentId) {
         this.oaDepartmentByDepartmentId = oaDepartmentByDepartmentId;
     }
 
@@ -395,11 +407,11 @@ public class OaTeacherInfoEntity {
 
     @ManyToOne
     @JoinColumn(name = "grade_id", referencedColumnName = "id")
-    OaGradeEntity getOaGradeByGradeId() {
+    public OaGradeEntity getOaGradeByGradeId() {
         return oaGradeByGradeId;
     }
 
-    void setOaGradeByGradeId(OaGradeEntity oaGradeByGradeId) {
+    public void setOaGradeByGradeId(OaGradeEntity oaGradeByGradeId) {
         this.oaGradeByGradeId = oaGradeByGradeId;
     }
 
@@ -407,22 +419,22 @@ public class OaTeacherInfoEntity {
 
     @ManyToOne
     @JoinColumn(name = "position_id", referencedColumnName = "id")
-    OaPositionEntity getOaPositionByPositionId() {
+    public OaPositionEntity getOaPositionByPositionId() {
         return oaPositionByPositionId;
     }
 
-    void setOaPositionByPositionId(OaPositionEntity oaPositionByPositionId) {
+    public void setOaPositionByPositionId(OaPositionEntity oaPositionByPositionId) {
         this.oaPositionByPositionId = oaPositionByPositionId;
     }
 
     private Collection<SysUserEntity> sysUsersById;
 
     @OneToMany(mappedBy = "oaTeacherInfoByTeacherId")
-    Collection<SysUserEntity> getSysUsersById() {
+    public Collection<SysUserEntity> getSysUsersById() {
         return sysUsersById;
     }
 
-    void setSysUsersById(Collection<SysUserEntity> sysUsersById) {
+    public void setSysUsersById(Collection<SysUserEntity> sysUsersById) {
         this.sysUsersById = sysUsersById;
     }
 }

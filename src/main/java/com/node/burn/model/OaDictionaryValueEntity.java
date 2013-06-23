@@ -1,9 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,43 +13,51 @@ import javax.persistence.ManyToOne;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "oa_dictionary_value", catalog = "eduoa")
+@Table(name = "oa_dictionary_value")
 @Entity
-public class OaDictionaryValueEntity {
-    private long id;
+public class OaDictionaryValueEntity extends BaseObject implements Serializable {
+    private Long id;
 
-    @javax.persistence.Column(name = "id")
+    @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     private String dictLabel;
 
-    @javax.persistence.Column(name = "dict_label")
+    @Column(name = "dict_label")
     @Basic
-    String getDictLabel() {
+    public String getDictLabel() {
         return dictLabel;
     }
 
-    void setDictLabel(String dictLabel) {
+    public void setDictLabel(String dictLabel) {
         this.dictLabel = dictLabel;
     }
 
     private String dictValue;
 
-    @javax.persistence.Column(name = "dict_value")
+    @Column(name = "dict_value")
     @Basic
-    String getDictValue() {
+    public String getDictValue() {
         return dictValue;
     }
 
-    void setDictValue(String dictValue) {
+    public void setDictValue(String dictValue) {
         this.dictValue = dictValue;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.dictLabel)
+                .toString();
     }
 
     @Override
@@ -76,12 +85,12 @@ public class OaDictionaryValueEntity {
     private OaDictionaryEntity oaDictionaryByDictionaryId;
 
     @ManyToOne
-    @javax.persistence.JoinColumn(name = "dictionary_id", referencedColumnName = "id")
-    OaDictionaryEntity getOaDictionaryByDictionaryId() {
+    @JoinColumn(name = "dictionary_id", referencedColumnName = "id")
+    public OaDictionaryEntity getOaDictionaryByDictionaryId() {
         return oaDictionaryByDictionaryId;
     }
 
-    void setOaDictionaryByDictionaryId(OaDictionaryEntity oaDictionaryByDictionaryId) {
+    public void setOaDictionaryByDictionaryId(OaDictionaryEntity oaDictionaryByDictionaryId) {
         this.oaDictionaryByDictionaryId = oaDictionaryByDictionaryId;
     }
 }

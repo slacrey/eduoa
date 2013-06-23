@@ -1,8 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,32 +13,39 @@ import javax.persistence.ManyToOne;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.IdClass(OaStudentClassEntityPK.class)
-@javax.persistence.Table(name = "oa_student_class", catalog = "eduoa")
+@IdClass(OaStudentClassEntityPK.class)
+@Table(name = "oa_student_class")
 @Entity
-public class OaStudentClassEntity {
-    private long studentId;
+public class OaStudentClassEntity extends BaseObject implements Serializable {
+    private Long studentId;
 
-    @javax.persistence.Column(name = "student_id")
+    @Column(name = "student_id")
     @Id
-    long getStudentId() {
+    public Long getStudentId() {
         return studentId;
     }
 
-    void setStudentId(long studentId) {
+    public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
 
     private long classId;
 
-    @javax.persistence.Column(name = "class_id")
+    @Column(name = "class_id")
     @Id
-    long getClassId() {
+    public long getClassId() {
         return classId;
     }
 
-    void setClassId(long classId) {
+    public void setClassId(long classId) {
         this.classId = classId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.classId)
+                .toString();
     }
 
     @Override
@@ -62,24 +71,24 @@ public class OaStudentClassEntity {
     private OaClassEntity oaClassByClassId;
 
     @ManyToOne
-    @javax.persistence.JoinColumn(name = "class_id", referencedColumnName = "id", nullable = false)
-    OaClassEntity getOaClassByClassId() {
+    @JoinColumn(name = "class_id", referencedColumnName = "id", nullable = false)
+    public OaClassEntity getOaClassByClassId() {
         return oaClassByClassId;
     }
 
-    void setOaClassByClassId(OaClassEntity oaClassByClassId) {
+    public void setOaClassByClassId(OaClassEntity oaClassByClassId) {
         this.oaClassByClassId = oaClassByClassId;
     }
 
     private OaStudentEntity oaStudentByStudentId;
 
     @ManyToOne
-    @javax.persistence.JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
-    OaStudentEntity getOaStudentByStudentId() {
+    @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
+    public OaStudentEntity getOaStudentByStudentId() {
         return oaStudentByStudentId;
     }
 
-    void setOaStudentByStudentId(OaStudentEntity oaStudentByStudentId) {
+    public void setOaStudentByStudentId(OaStudentEntity oaStudentByStudentId) {
         this.oaStudentByStudentId = oaStudentByStudentId;
     }
 }

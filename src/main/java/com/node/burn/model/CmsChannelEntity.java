@@ -1,9 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -13,55 +14,63 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "cms_channel", catalog = "eduoa")
+@Table(name = "cms_channel")
 @Entity
-public class CmsChannelEntity {
-    private long id;
+public class CmsChannelEntity extends BaseObject implements Serializable {
+    private Long id;
 
-    @javax.persistence.Column(name = "id")
+    @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     private String channelName;
 
-    @javax.persistence.Column(name = "channel_name")
+    @Column(name = "channel_name")
     @Basic
-    String getChannelName() {
+    public String getChannelName() {
         return channelName;
     }
 
-    void setChannelName(String channelName) {
+    public void setChannelName(String channelName) {
         this.channelName = channelName;
     }
 
     private Integer channelSort;
 
-    @javax.persistence.Column(name = "channel_sort")
+    @Column(name = "channel_sort")
     @Basic
-    Integer getChannelSort() {
+    public Integer getChannelSort() {
         return channelSort;
     }
 
-    void setChannelSort(Integer channelSort) {
+    public void setChannelSort(Integer channelSort) {
         this.channelSort = channelSort;
     }
 
     private String channelUrl;
 
-    @javax.persistence.Column(name = "channel_url")
+    @Column(name = "channel_url")
     @Basic
-    String getChannelUrl() {
+    public String getChannelUrl() {
         return channelUrl;
     }
 
-    void setChannelUrl(String channelUrl) {
+    public void setChannelUrl(String channelUrl) {
         this.channelUrl = channelUrl;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.channelName)
+                .toString();
     }
 
     @Override
@@ -91,11 +100,11 @@ public class CmsChannelEntity {
     private Collection<CmsArticleEntity> cmsArticlesById;
 
     @OneToMany(mappedBy = "cmsChannelByChannelId")
-    Collection<CmsArticleEntity> getCmsArticlesById() {
+    public Collection<CmsArticleEntity> getCmsArticlesById() {
         return cmsArticlesById;
     }
 
-    void setCmsArticlesById(Collection<CmsArticleEntity> cmsArticlesById) {
+    public void setCmsArticlesById(Collection<CmsArticleEntity> cmsArticlesById) {
         this.cmsArticlesById = cmsArticlesById;
     }
 }

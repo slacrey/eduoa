@@ -1,9 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -14,103 +15,87 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "oa_grade", catalog = "eduoa")
+@Table(name = "oa_grade")
 @Entity
-public class OaGradeEntity {
-    private long id;
+public class OaGradeEntity extends BaseObject implements Serializable {
+    private Long id;
 
-    @javax.persistence.Column(name = "id")
+    @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     private String gradeName;
 
-    @javax.persistence.Column(name = "grade_name")
+    @Column(name = "grade_name")
     @Basic
-    String getGradeName() {
+    public String getGradeName() {
         return gradeName;
     }
 
-    void setGradeName(String gradeName) {
+    public void setGradeName(String gradeName) {
         this.gradeName = gradeName;
-    }
-
-    private Integer gradeType;
-
-    @javax.persistence.Column(name = "grade_type")
-    @Basic
-    Integer getGradeType() {
-        return gradeType;
-    }
-
-    void setGradeType(Integer gradeType) {
-        this.gradeType = gradeType;
-    }
-
-    private Integer grade;
-
-    @javax.persistence.Column(name = "grade")
-    @Basic
-    Integer getGrade() {
-        return grade;
-    }
-
-    void setGrade(Integer grade) {
-        this.grade = grade;
     }
 
     private String description;
 
-    @javax.persistence.Column(name = "description")
+    @Column(name = "description")
     @Basic
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
     private Date createTime;
 
-    @javax.persistence.Column(name = "create_time")
+    @Column(name = "create_time")
     @Basic
-    Date getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    void setCreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
     private String currentYear;
 
-    @javax.persistence.Column(name = "current_year")
+    @Column(name = "current_year")
     @Basic
-    String getCurrentYear() {
+    public String getCurrentYear() {
         return currentYear;
     }
 
-    void setCurrentYear(String currentYear) {
+    public void setCurrentYear(String currentYear) {
         this.currentYear = currentYear;
     }
 
     private Integer currentHalf;
 
-    @javax.persistence.Column(name = "current_half")
+    @Column(name = "current_half")
     @Basic
-    Integer getCurrentHalf() {
+    public Integer getCurrentHalf() {
         return currentHalf;
     }
 
-    void setCurrentHalf(Integer currentHalf) {
+    public void setCurrentHalf(Integer currentHalf) {
         this.currentHalf = currentHalf;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.gradeName)
+                .toString();
     }
 
     @Override
@@ -125,9 +110,7 @@ public class OaGradeEntity {
         if (currentHalf != null ? !currentHalf.equals(that.currentHalf) : that.currentHalf != null) return false;
         if (currentYear != null ? !currentYear.equals(that.currentYear) : that.currentYear != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (grade != null ? !grade.equals(that.grade) : that.grade != null) return false;
         if (gradeName != null ? !gradeName.equals(that.gradeName) : that.gradeName != null) return false;
-        if (gradeType != null ? !gradeType.equals(that.gradeType) : that.gradeType != null) return false;
 
         return true;
     }
@@ -136,8 +119,6 @@ public class OaGradeEntity {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (gradeName != null ? gradeName.hashCode() : 0);
-        result = 31 * result + (gradeType != null ? gradeType.hashCode() : 0);
-        result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
         result = 31 * result + (currentYear != null ? currentYear.hashCode() : 0);
@@ -148,33 +129,33 @@ public class OaGradeEntity {
     private Collection<OaClassEntity> oaClassesById;
 
     @OneToMany(mappedBy = "oaGradeByGradeId")
-    Collection<OaClassEntity> getOaClassesById() {
+    public Collection<OaClassEntity> getOaClassesById() {
         return oaClassesById;
     }
 
-    void setOaClassesById(Collection<OaClassEntity> oaClassesById) {
+    public void setOaClassesById(Collection<OaClassEntity> oaClassesById) {
         this.oaClassesById = oaClassesById;
     }
 
     private Collection<OaStudentGradeEntity> oaStudentGradesById;
 
     @OneToMany(mappedBy = "oaGradeByGradeId")
-    Collection<OaStudentGradeEntity> getOaStudentGradesById() {
+    public Collection<OaStudentGradeEntity> getOaStudentGradesById() {
         return oaStudentGradesById;
     }
 
-    void setOaStudentGradesById(Collection<OaStudentGradeEntity> oaStudentGradesById) {
+    public void setOaStudentGradesById(Collection<OaStudentGradeEntity> oaStudentGradesById) {
         this.oaStudentGradesById = oaStudentGradesById;
     }
 
     private Collection<OaTeacherInfoEntity> oaTeacherInfosById;
 
     @OneToMany(mappedBy = "oaGradeByGradeId")
-    Collection<OaTeacherInfoEntity> getOaTeacherInfosById() {
+    public Collection<OaTeacherInfoEntity> getOaTeacherInfosById() {
         return oaTeacherInfosById;
     }
 
-    void setOaTeacherInfosById(Collection<OaTeacherInfoEntity> oaTeacherInfosById) {
+    public void setOaTeacherInfosById(Collection<OaTeacherInfoEntity> oaTeacherInfosById) {
         this.oaTeacherInfosById = oaTeacherInfosById;
     }
 }

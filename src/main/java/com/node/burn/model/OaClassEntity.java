@@ -1,6 +1,10 @@
 package com.node.burn.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -11,18 +15,19 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_class", catalog = "eduoa")
+@Table(name = "oa_class")
 @Entity
-public class OaClassEntity {
-    private long id;
+public class OaClassEntity extends BaseObject implements Serializable {
+    private Long id;
 
     @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -30,11 +35,11 @@ public class OaClassEntity {
 
     @Column(name = "class_name")
     @Basic
-    String getClassName() {
+    public String getClassName() {
         return className;
     }
 
-    void setClassName(String className) {
+    public void setClassName(String className) {
         this.className = className;
     }
 
@@ -42,11 +47,11 @@ public class OaClassEntity {
 
     @Column(name = "category")
     @Basic
-    Integer getCategory() {
+    public Integer getCategory() {
         return category;
     }
 
-    void setCategory(Integer category) {
+    public void setCategory(Integer category) {
         this.category = category;
     }
 
@@ -54,11 +59,11 @@ public class OaClassEntity {
 
     @Column(name = "description")
     @Basic
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -66,11 +71,11 @@ public class OaClassEntity {
 
     @Column(name = "number_limit")
     @Basic
-    Integer getNumberLimit() {
+    public Integer getNumberLimit() {
         return numberLimit;
     }
 
-    void setNumberLimit(Integer numberLimit) {
+    public void setNumberLimit(Integer numberLimit) {
         this.numberLimit = numberLimit;
     }
 
@@ -78,11 +83,11 @@ public class OaClassEntity {
 
     @Column(name = "create_time")
     @Basic
-    Date getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    void setCreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -90,11 +95,11 @@ public class OaClassEntity {
 
     @Column(name = "update_time")
     @Basic
-    Date getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -102,11 +107,11 @@ public class OaClassEntity {
 
     @Column(name = "create_user_id")
     @Basic
-    Long getCreateUserId() {
+    public Long getCreateUserId() {
         return createUserId;
     }
 
-    void setCreateUserId(Long createUserId) {
+    public void setCreateUserId(Long createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -114,12 +119,19 @@ public class OaClassEntity {
 
     @Column(name = "update_user_id")
     @Basic
-    Long getUpdateUserId() {
+    public Long getUpdateUserId() {
         return updateUserId;
     }
 
-    void setUpdateUserId(Long updateUserId) {
+    public void setUpdateUserId(Long updateUserId) {
         this.updateUserId = updateUserId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.className)
+                .toString();
     }
 
     @Override
@@ -160,33 +172,33 @@ public class OaClassEntity {
 
     @ManyToOne
     @JoinColumn(name = "grade_id", referencedColumnName = "id")
-    OaGradeEntity getOaGradeByGradeId() {
+    public OaGradeEntity getOaGradeByGradeId() {
         return oaGradeByGradeId;
     }
 
-    void setOaGradeByGradeId(OaGradeEntity oaGradeByGradeId) {
+    public void setOaGradeByGradeId(OaGradeEntity oaGradeByGradeId) {
         this.oaGradeByGradeId = oaGradeByGradeId;
     }
 
     private Collection<OaClassTeacherEntity> oaClassTeachersById;
 
     @OneToMany(mappedBy = "oaClassByClassId")
-    Collection<OaClassTeacherEntity> getOaClassTeachersById() {
+    public Collection<OaClassTeacherEntity> getOaClassTeachersById() {
         return oaClassTeachersById;
     }
 
-    void setOaClassTeachersById(Collection<OaClassTeacherEntity> oaClassTeachersById) {
+    public void setOaClassTeachersById(Collection<OaClassTeacherEntity> oaClassTeachersById) {
         this.oaClassTeachersById = oaClassTeachersById;
     }
 
     private Collection<OaStudentClassEntity> oaStudentClassesById;
 
     @OneToMany(mappedBy = "oaClassByClassId")
-    Collection<OaStudentClassEntity> getOaStudentClassesById() {
+    public Collection<OaStudentClassEntity> getOaStudentClassesById() {
         return oaStudentClassesById;
     }
 
-    void setOaStudentClassesById(Collection<OaStudentClassEntity> oaStudentClassesById) {
+    public void setOaStudentClassesById(Collection<OaStudentClassEntity> oaStudentClassesById) {
         this.oaStudentClassesById = oaStudentClassesById;
     }
 }

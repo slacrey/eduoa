@@ -1,9 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -13,55 +14,63 @@ import java.sql.Date;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "oa_certificate", catalog = "eduoa")
+@Table(name = "oa_certificate")
 @Entity
-public class OaCertificateEntity {
-    private long id;
+public class OaCertificateEntity extends BaseObject implements Serializable {
+    private Long id;
 
-    @javax.persistence.Column(name = "id")
+    @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     private Integer advanced;
 
-    @javax.persistence.Column(name = "advanced")
+    @Column(name = "advanced")
     @Basic
-    Integer getAdvanced() {
+    public Integer getAdvanced() {
         return advanced;
     }
 
-    void setAdvanced(Integer advanced) {
+    public void setAdvanced(Integer advanced) {
         this.advanced = advanced;
     }
 
     private Date certificatesTime;
 
-    @javax.persistence.Column(name = "certificates_time")
+    @Column(name = "certificates_time")
     @Basic
-    Date getCertificatesTime() {
+    public Date getCertificatesTime() {
         return certificatesTime;
     }
 
-    void setCertificatesTime(Date certificatesTime) {
+    public void setCertificatesTime(Date certificatesTime) {
         this.certificatesTime = certificatesTime;
     }
 
     private String description;
 
-    @javax.persistence.Column(name = "description")
+    @Column(name = "description")
     @Basic
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.description)
+                .toString();
     }
 
     @Override
@@ -92,24 +101,24 @@ public class OaCertificateEntity {
     private OaCertificateTypeEntity oaCertificateTypeByTypeId;
 
     @ManyToOne
-    @javax.persistence.JoinColumn(name = "type_id", referencedColumnName = "id")
-    OaCertificateTypeEntity getOaCertificateTypeByTypeId() {
+    @JoinColumn(name = "type_id", referencedColumnName = "id")
+    public OaCertificateTypeEntity getOaCertificateTypeByTypeId() {
         return oaCertificateTypeByTypeId;
     }
 
-    void setOaCertificateTypeByTypeId(OaCertificateTypeEntity oaCertificateTypeByTypeId) {
+    public void setOaCertificateTypeByTypeId(OaCertificateTypeEntity oaCertificateTypeByTypeId) {
         this.oaCertificateTypeByTypeId = oaCertificateTypeByTypeId;
     }
 
     private OaTeacherInfoEntity oaTeacherInfoByTeacherId;
 
     @ManyToOne
-    @javax.persistence.JoinColumn(name = "teacher_id", referencedColumnName = "id")
-    OaTeacherInfoEntity getOaTeacherInfoByTeacherId() {
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    public OaTeacherInfoEntity getOaTeacherInfoByTeacherId() {
         return oaTeacherInfoByTeacherId;
     }
 
-    void setOaTeacherInfoByTeacherId(OaTeacherInfoEntity oaTeacherInfoByTeacherId) {
+    public void setOaTeacherInfoByTeacherId(OaTeacherInfoEntity oaTeacherInfoByTeacherId) {
         this.oaTeacherInfoByTeacherId = oaTeacherInfoByTeacherId;
     }
 }

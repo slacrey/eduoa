@@ -1,6 +1,10 @@
 package com.node.burn.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,18 +13,19 @@ import javax.persistence.*;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "cms_article_teacher", catalog = "eduoa")
+@Table(name = "cms_article_teacher")
 @Entity
-public class CmsArticleTeacherEntity {
-    private long id;
+public class CmsArticleTeacherEntity extends BaseObject implements Serializable {
+    private Long id;
 
     @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -28,11 +33,11 @@ public class CmsArticleTeacherEntity {
 
     @Column(name = "teacher_name")
     @Basic
-    String getTeacherName() {
+    public String getTeacherName() {
         return teacherName;
     }
 
-    void setTeacherName(String teacherName) {
+    public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
     }
 
@@ -40,11 +45,11 @@ public class CmsArticleTeacherEntity {
 
     @Column(name = "photo_url")
     @Basic
-    String getPhotoUrl() {
+    public String getPhotoUrl() {
         return photoUrl;
     }
 
-    void setPhotoUrl(String photoUrl) {
+    public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
 
@@ -52,12 +57,19 @@ public class CmsArticleTeacherEntity {
 
     @Column(name = "attachment_id")
     @Basic
-    Long getAttachmentId() {
+    public Long getAttachmentId() {
         return attachmentId;
     }
 
-    void setAttachmentId(Long attachmentId) {
+    public void setAttachmentId(Long attachmentId) {
         this.attachmentId = attachmentId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.getTeacherName())
+                .toString();
     }
 
     @Override
@@ -88,11 +100,11 @@ public class CmsArticleTeacherEntity {
 
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
-    SysAttachmentEntity getSysAttachmentById() {
+    public SysAttachmentEntity getSysAttachmentById() {
         return sysAttachmentById;
     }
 
-    void setSysAttachmentById(SysAttachmentEntity sysAttachmentById) {
+    public void setSysAttachmentById(SysAttachmentEntity sysAttachmentById) {
         this.sysAttachmentById = sysAttachmentById;
     }
 
@@ -100,11 +112,11 @@ public class CmsArticleTeacherEntity {
 
     @ManyToOne
     @JoinColumn(name = "article_id", referencedColumnName = "id")
-    CmsArticleEntity getCmsArticleByArticleId() {
+    public CmsArticleEntity getCmsArticleByArticleId() {
         return cmsArticleByArticleId;
     }
 
-    void setCmsArticleByArticleId(CmsArticleEntity cmsArticleByArticleId) {
+    public void setCmsArticleByArticleId(CmsArticleEntity cmsArticleByArticleId) {
         this.cmsArticleByArticleId = cmsArticleByArticleId;
     }
 }

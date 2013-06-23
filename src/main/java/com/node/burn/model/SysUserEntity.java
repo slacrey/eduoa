@@ -360,5 +360,16 @@ public class SysUserEntity extends BaseObject implements Serializable, UserDetai
         return sb.toString();
     }
 
+    private OaTeacherInfoEntity oaTeacherInfoByTeacherId;
+
+    @ManyToOne
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    public OaTeacherInfoEntity getOaTeacherInfoByTeacherId() {
+        return oaTeacherInfoByTeacherId;
+    }
+
+    public void setOaTeacherInfoByTeacherId(OaTeacherInfoEntity oaTeacherInfoByTeacherId) {
+        this.oaTeacherInfoByTeacherId = oaTeacherInfoByTeacherId;
+    }
 
 }

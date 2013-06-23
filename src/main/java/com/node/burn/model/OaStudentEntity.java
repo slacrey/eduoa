@@ -1,9 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -14,115 +15,123 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "oa_student", catalog = "eduoa")
+@Table(name = "oa_student")
 @Entity
-public class OaStudentEntity {
-    private long id;
+public class OaStudentEntity extends BaseObject implements Serializable {
+    private Long id;
 
-    @javax.persistence.Column(name = "id")
+    @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     private String studentName;
 
-    @javax.persistence.Column(name = "student_name")
+    @Column(name = "student_name")
     @Basic
-    String getStudentName() {
+    public String getStudentName() {
         return studentName;
     }
 
-    void setStudentName(String studentName) {
+    public void setStudentName(String studentName) {
         this.studentName = studentName;
     }
 
     private String idNumber;
 
-    @javax.persistence.Column(name = "id_number")
+    @Column(name = "id_number")
     @Basic
-    String getIdNumber() {
+    public String getIdNumber() {
         return idNumber;
     }
 
-    void setIdNumber(String idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
 
     private Integer gender;
 
-    @javax.persistence.Column(name = "gender")
+    @Column(name = "gender")
     @Basic
-    Integer getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    void setGender(Integer gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
     private String studentNumber;
 
-    @javax.persistence.Column(name = "student_number")
+    @Column(name = "student_number")
     @Basic
-    String getStudentNumber() {
+    public String getStudentNumber() {
         return studentNumber;
     }
 
-    void setStudentNumber(String studentNumber) {
+    public void setStudentNumber(String studentNumber) {
         this.studentNumber = studentNumber;
     }
 
     private Date birthday;
 
-    @javax.persistence.Column(name = "birthday")
+    @Column(name = "birthday")
     @Basic
-    Date getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    void setBirthday(Date birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
     private Date createTime;
 
-    @javax.persistence.Column(name = "create_time")
+    @Column(name = "create_time")
     @Basic
-    Date getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    void setCreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
     private Date updateTime;
 
-    @javax.persistence.Column(name = "update_time")
+    @Column(name = "update_time")
     @Basic
-    Date getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 
     private Long operatorId;
 
-    @javax.persistence.Column(name = "operator_id")
+    @Column(name = "operator_id")
     @Basic
-    Long getOperatorId() {
+    public Long getOperatorId() {
         return operatorId;
     }
 
-    void setOperatorId(Long operatorId) {
+    public void setOperatorId(Long operatorId) {
         this.operatorId = operatorId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.studentName)
+                .toString();
     }
 
     @Override
@@ -163,33 +172,33 @@ public class OaStudentEntity {
     private Collection<OaContactEntity> oaContactsById;
 
     @OneToMany(mappedBy = "oaStudentByStudentId")
-    Collection<OaContactEntity> getOaContactsById() {
+    public Collection<OaContactEntity> getOaContactsById() {
         return oaContactsById;
     }
 
-    void setOaContactsById(Collection<OaContactEntity> oaContactsById) {
+    public void setOaContactsById(Collection<OaContactEntity> oaContactsById) {
         this.oaContactsById = oaContactsById;
     }
 
     private Collection<OaStudentClassEntity> oaStudentClassesById;
 
     @OneToMany(mappedBy = "oaStudentByStudentId")
-    Collection<OaStudentClassEntity> getOaStudentClassesById() {
+    public Collection<OaStudentClassEntity> getOaStudentClassesById() {
         return oaStudentClassesById;
     }
 
-    void setOaStudentClassesById(Collection<OaStudentClassEntity> oaStudentClassesById) {
+    public void setOaStudentClassesById(Collection<OaStudentClassEntity> oaStudentClassesById) {
         this.oaStudentClassesById = oaStudentClassesById;
     }
 
     private Collection<OaStudentGradeEntity> oaStudentGradesById;
 
     @OneToMany(mappedBy = "oaStudentByStudentId")
-    Collection<OaStudentGradeEntity> getOaStudentGradesById() {
+    public Collection<OaStudentGradeEntity> getOaStudentGradesById() {
         return oaStudentGradesById;
     }
 
-    void setOaStudentGradesById(Collection<OaStudentGradeEntity> oaStudentGradesById) {
+    public void setOaStudentGradesById(Collection<OaStudentGradeEntity> oaStudentGradesById) {
         this.oaStudentGradesById = oaStudentGradesById;
     }
 }

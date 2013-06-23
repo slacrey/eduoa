@@ -1,6 +1,10 @@
 package com.node.burn.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -10,18 +14,19 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_dictionary", catalog = "eduoa")
+@Table(name = "oa_dictionary")
 @Entity
-public class OaDictionaryEntity {
-    private long id;
+public class OaDictionaryEntity extends BaseObject implements Serializable {
+    private Long id;
 
     @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -29,11 +34,11 @@ public class OaDictionaryEntity {
 
     @Column(name = "dict_name")
     @Basic
-    String getDictName() {
+    public String getDictName() {
         return dictName;
     }
 
-    void setDictName(String dictName) {
+    public void setDictName(String dictName) {
         this.dictName = dictName;
     }
 
@@ -41,12 +46,19 @@ public class OaDictionaryEntity {
 
     @Column(name = "dict_key")
     @Basic
-    String getDictKey() {
+    public String getDictKey() {
         return dictKey;
     }
 
-    void setDictKey(String dictKey) {
+    public void setDictKey(String dictKey) {
         this.dictKey = dictKey;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.dictName)
+                .toString();
     }
 
     @Override
@@ -75,33 +87,33 @@ public class OaDictionaryEntity {
 
     @ManyToOne
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
-    OaDictionaryEntity getOaDictionaryByParentId() {
+    public OaDictionaryEntity getOaDictionaryByParentId() {
         return oaDictionaryByParentId;
     }
 
-    void setOaDictionaryByParentId(OaDictionaryEntity oaDictionaryByParentId) {
+    public void setOaDictionaryByParentId(OaDictionaryEntity oaDictionaryByParentId) {
         this.oaDictionaryByParentId = oaDictionaryByParentId;
     }
 
     private Collection<OaDictionaryEntity> oaDictionariesById;
 
     @OneToMany(mappedBy = "oaDictionaryByParentId")
-    Collection<OaDictionaryEntity> getOaDictionariesById() {
+    public Collection<OaDictionaryEntity> getOaDictionariesById() {
         return oaDictionariesById;
     }
 
-    void setOaDictionariesById(Collection<OaDictionaryEntity> oaDictionariesById) {
+    public void setOaDictionariesById(Collection<OaDictionaryEntity> oaDictionariesById) {
         this.oaDictionariesById = oaDictionariesById;
     }
 
     private Collection<OaDictionaryValueEntity> oaDictionaryValuesById;
 
     @OneToMany(mappedBy = "oaDictionaryByDictionaryId")
-    Collection<OaDictionaryValueEntity> getOaDictionaryValuesById() {
+    public Collection<OaDictionaryValueEntity> getOaDictionaryValuesById() {
         return oaDictionaryValuesById;
     }
 
-    void setOaDictionaryValuesById(Collection<OaDictionaryValueEntity> oaDictionaryValuesById) {
+    public void setOaDictionaryValuesById(Collection<OaDictionaryValueEntity> oaDictionaryValuesById) {
         this.oaDictionaryValuesById = oaDictionaryValuesById;
     }
 }

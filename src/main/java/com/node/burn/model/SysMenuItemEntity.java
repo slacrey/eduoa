@@ -317,7 +317,7 @@ public class SysMenuItemEntity extends BaseObject implements Serializable, Compa
     private SysMenuItemEntity parentMenuItem;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = SysMenuItemEntity.class)
-    @javax.persistence.JoinColumn(name = "parent_id", referencedColumnName = "id")
+    @JoinColumn(name = "parent_id", referencedColumnName = "id")
     public SysMenuItemEntity getParentMenuItem() {
         return parentMenuItem;
     }

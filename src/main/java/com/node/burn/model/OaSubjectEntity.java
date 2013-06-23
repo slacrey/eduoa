@@ -1,9 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -13,43 +14,51 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "oa_subject", catalog = "eduoa")
+@Table(name = "oa_subject")
 @Entity
-public class OaSubjectEntity {
-    private long id;
+public class OaSubjectEntity extends BaseObject implements Serializable {
+    private Long id;
 
-    @javax.persistence.Column(name = "id")
+    @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     private String subjectName;
 
-    @javax.persistence.Column(name = "subject_name")
+    @Column(name = "subject_name")
     @Basic
-    String getSubjectName() {
+    public String getSubjectName() {
         return subjectName;
     }
 
-    void setSubjectName(String subjectName) {
+    public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
     }
 
     private String description;
 
-    @javax.persistence.Column(name = "description")
+    @Column(name = "description")
     @Basic
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.subjectName)
+                .toString();
     }
 
     @Override
@@ -77,11 +86,11 @@ public class OaSubjectEntity {
     private Collection<OaTeacherInfoEntity> oaTeacherInfosById;
 
     @OneToMany(mappedBy = "oaSubjectBySubjectId")
-    Collection<OaTeacherInfoEntity> getOaTeacherInfosById() {
+    public Collection<OaTeacherInfoEntity> getOaTeacherInfosById() {
         return oaTeacherInfosById;
     }
 
-    void setOaTeacherInfosById(Collection<OaTeacherInfoEntity> oaTeacherInfosById) {
+    public void setOaTeacherInfosById(Collection<OaTeacherInfoEntity> oaTeacherInfosById) {
         this.oaTeacherInfosById = oaTeacherInfosById;
     }
 }

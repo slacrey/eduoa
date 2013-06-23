@@ -1,9 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -14,91 +15,99 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "oa_appraisal", catalog = "eduoa")
+@Table(name = "oa_appraisal")
 @Entity
-public class OaAppraisalEntity {
-    private long id;
+public class OaAppraisalEntity extends BaseObject implements Serializable {
+    private Long id;
 
-    @javax.persistence.Column(name = "id")
+    @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     private Integer atype;
 
-    @javax.persistence.Column(name = "atype")
+    @Column(name = "atype")
     @Basic
-    Integer getAtype() {
+    public Integer getAtype() {
         return atype;
     }
 
-    void setAtype(Integer atype) {
+    public void setAtype(Integer atype) {
         this.atype = atype;
     }
 
     private Date startMonth;
 
-    @javax.persistence.Column(name = "start_month")
+    @Column(name = "start_month")
     @Basic
-    Date getStartMonth() {
+    public Date getStartMonth() {
         return startMonth;
     }
 
-    void setStartMonth(Date startMonth) {
+    public void setStartMonth(Date startMonth) {
         this.startMonth = startMonth;
     }
 
     private Date endMonth;
 
-    @javax.persistence.Column(name = "end_month")
+    @Column(name = "end_month")
     @Basic
-    Date getEndMonth() {
+    public Date getEndMonth() {
         return endMonth;
     }
 
-    void setEndMonth(Date endMonth) {
+    public void setEndMonth(Date endMonth) {
         this.endMonth = endMonth;
     }
 
     private Long teacherId;
 
-    @javax.persistence.Column(name = "teacher_id")
+    @Column(name = "teacher_id")
     @Basic
-    Long getTeacherId() {
+    public Long getTeacherId() {
         return teacherId;
     }
 
-    void setTeacherId(Long teacherId) {
+    public void setTeacherId(Long teacherId) {
         this.teacherId = teacherId;
     }
 
     private Date createTime;
 
-    @javax.persistence.Column(name = "create_time")
+    @Column(name = "create_time")
     @Basic
-    Date getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    void setCreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
     private Long userId;
 
-    @javax.persistence.Column(name = "user_id")
+    @Column(name = "user_id")
     @Basic
-    Long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    void setUserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.getId())
+                .toString();
     }
 
     @Override
@@ -134,11 +143,11 @@ public class OaAppraisalEntity {
     private Collection<SysTypeRulesEntity> sysTypeRulesesById;
 
     @OneToMany(mappedBy = "oaAppraisalByApplayId")
-    Collection<SysTypeRulesEntity> getSysTypeRulesesById() {
+    public Collection<SysTypeRulesEntity> getSysTypeRulesesById() {
         return sysTypeRulesesById;
     }
 
-    void setSysTypeRulesesById(Collection<SysTypeRulesEntity> sysTypeRulesesById) {
+    public void setSysTypeRulesesById(Collection<SysTypeRulesEntity> sysTypeRulesesById) {
         this.sysTypeRulesesById = sysTypeRulesesById;
     }
 }

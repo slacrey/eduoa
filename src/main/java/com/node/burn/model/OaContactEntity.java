@@ -1,9 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -13,151 +14,159 @@ import java.sql.Date;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "oa_contact", catalog = "eduoa")
+@Table(name = "oa_contact")
 @Entity
-public class OaContactEntity {
-    private long id;
+public class OaContactEntity extends BaseObject implements Serializable {
+    private Long id;
 
-    @javax.persistence.Column(name = "id")
+    @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     private String nexus;
 
-    @javax.persistence.Column(name = "nexus")
+    @Column(name = "nexus")
     @Basic
-    String getNexus() {
+    public String getNexus() {
         return nexus;
     }
 
-    void setNexus(String nexus) {
+    public void setNexus(String nexus) {
         this.nexus = nexus;
     }
 
     private String contactName;
 
-    @javax.persistence.Column(name = "contact_name")
+    @Column(name = "contact_name")
     @Basic
-    String getContactName() {
+    public String getContactName() {
         return contactName;
     }
 
-    void setContactName(String contactName) {
+    public void setContactName(String contactName) {
         this.contactName = contactName;
     }
 
     private String job;
 
-    @javax.persistence.Column(name = "job")
+    @Column(name = "job")
     @Basic
-    String getJob() {
+    public String getJob() {
         return job;
     }
 
-    void setJob(String job) {
+    public void setJob(String job) {
         this.job = job;
     }
 
     private String phone;
 
-    @javax.persistence.Column(name = "phone")
+    @Column(name = "phone")
     @Basic
-    String getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    void setPhone(String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
     private String qq;
 
-    @javax.persistence.Column(name = "qq")
+    @Column(name = "qq")
     @Basic
-    String getQq() {
+    public String getQq() {
         return qq;
     }
 
-    void setQq(String qq) {
+    public void setQq(String qq) {
         this.qq = qq;
     }
 
     private String email;
 
-    @javax.persistence.Column(name = "email")
+    @Column(name = "email")
     @Basic
-    String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
     private String address;
 
-    @javax.persistence.Column(name = "address")
+    @Column(name = "address")
     @Basic
-    String getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    void setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
     private String homePhone;
 
-    @javax.persistence.Column(name = "home_phone")
+    @Column(name = "home_phone")
     @Basic
-    String getHomePhone() {
+    public String getHomePhone() {
         return homePhone;
     }
 
-    void setHomePhone(String homePhone) {
+    public void setHomePhone(String homePhone) {
         this.homePhone = homePhone;
     }
 
     private String officePhone;
 
-    @javax.persistence.Column(name = "office_phone")
+    @Column(name = "office_phone")
     @Basic
-    String getOfficePhone() {
+    public String getOfficePhone() {
         return officePhone;
     }
 
-    void setOfficePhone(String officePhone) {
+    public void setOfficePhone(String officePhone) {
         this.officePhone = officePhone;
     }
 
     private Date createTime;
 
-    @javax.persistence.Column(name = "create_time")
+    @Column(name = "create_time")
     @Basic
-    Date getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    void setCreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
     private Date updateTime;
 
-    @javax.persistence.Column(name = "update_time")
+    @Column(name = "update_time")
     @Basic
-    Date getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.contactName)
+                .toString();
     }
 
     @Override
@@ -203,12 +212,12 @@ public class OaContactEntity {
     private OaStudentEntity oaStudentByStudentId;
 
     @ManyToOne
-    @javax.persistence.JoinColumn(name = "student_id", referencedColumnName = "id")
-    OaStudentEntity getOaStudentByStudentId() {
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    public OaStudentEntity getOaStudentByStudentId() {
         return oaStudentByStudentId;
     }
 
-    void setOaStudentByStudentId(OaStudentEntity oaStudentByStudentId) {
+    public void setOaStudentByStudentId(OaStudentEntity oaStudentByStudentId) {
         this.oaStudentByStudentId = oaStudentByStudentId;
     }
 }

@@ -3,6 +3,7 @@ package com.node.burn.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,18 +13,18 @@ import javax.persistence.ManyToOne;
  * To change this template use File | Settings | File Templates.
  */
 @javax.persistence.IdClass(OaStudentGradeEntityPK.class)
-@javax.persistence.Table(name = "oa_student_grade", catalog = "eduoa")
+@javax.persistence.Table(name = "oa_student_grade")
 @Entity
-public class OaStudentGradeEntity {
-    private long gradeId;
+public class OaStudentGradeEntity extends BaseObject implements Serializable {
+    private Long gradeId;
 
     @javax.persistence.Column(name = "grade_id")
     @Id
-    long getGradeId() {
+    public Long getGradeId() {
         return gradeId;
     }
 
-    void setGradeId(long gradeId) {
+    public void setGradeId(Long gradeId) {
         this.gradeId = gradeId;
     }
 
@@ -31,12 +32,17 @@ public class OaStudentGradeEntity {
 
     @javax.persistence.Column(name = "student_id")
     @Id
-    long getStudentId() {
+    public long getStudentId() {
         return studentId;
     }
 
-    void setStudentId(long studentId) {
+    public void setStudentId(long studentId) {
         this.studentId = studentId;
+    }
+
+    @Override
+    public String toString() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -63,11 +69,11 @@ public class OaStudentGradeEntity {
 
     @ManyToOne
     @javax.persistence.JoinColumn(name = "grade_id", referencedColumnName = "id", nullable = false)
-    OaGradeEntity getOaGradeByGradeId() {
+    public OaGradeEntity getOaGradeByGradeId() {
         return oaGradeByGradeId;
     }
 
-    void setOaGradeByGradeId(OaGradeEntity oaGradeByGradeId) {
+    public void setOaGradeByGradeId(OaGradeEntity oaGradeByGradeId) {
         this.oaGradeByGradeId = oaGradeByGradeId;
     }
 
@@ -75,11 +81,11 @@ public class OaStudentGradeEntity {
 
     @ManyToOne
     @javax.persistence.JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
-    OaStudentEntity getOaStudentByStudentId() {
+    public OaStudentEntity getOaStudentByStudentId() {
         return oaStudentByStudentId;
     }
 
-    void setOaStudentByStudentId(OaStudentEntity oaStudentByStudentId) {
+    public void setOaStudentByStudentId(OaStudentEntity oaStudentByStudentId) {
         this.oaStudentByStudentId = oaStudentByStudentId;
     }
 }

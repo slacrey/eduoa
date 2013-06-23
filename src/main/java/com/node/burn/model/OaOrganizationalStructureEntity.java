@@ -1,9 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -13,55 +14,63 @@ import java.sql.Date;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "oa_organizational_structure", catalog = "eduoa")
+@Table(name = "oa_organizational_structure")
 @Entity
-public class OaOrganizationalStructureEntity {
-    private long id;
+public class OaOrganizationalStructureEntity extends BaseObject implements Serializable {
+    private Long id;
 
-    @javax.persistence.Column(name = "id")
+    @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     private String structureName;
 
-    @javax.persistence.Column(name = "structure_name")
+    @Column(name = "structure_name")
     @Basic
-    String getStructureName() {
+    public String getStructureName() {
         return structureName;
     }
 
-    void setStructureName(String structureName) {
+    public void setStructureName(String structureName) {
         this.structureName = structureName;
     }
 
     private Date createTime;
 
-    @javax.persistence.Column(name = "create_time")
+    @Column(name = "create_time")
     @Basic
-    Date getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    void setCreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
     private Long userId;
 
-    @javax.persistence.Column(name = "user_id")
+    @Column(name = "user_id")
     @Basic
-    Long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    void setUserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.structureName)
+                .toString();
     }
 
     @Override
@@ -92,12 +101,12 @@ public class OaOrganizationalStructureEntity {
     private SysAttachmentEntity sysAttachmentByAttachmentId;
 
     @ManyToOne
-    @javax.persistence.JoinColumn(name = "attachment_id", referencedColumnName = "id")
-    SysAttachmentEntity getSysAttachmentByAttachmentId() {
+    @JoinColumn(name = "attachment_id", referencedColumnName = "id")
+    public SysAttachmentEntity getSysAttachmentByAttachmentId() {
         return sysAttachmentByAttachmentId;
     }
 
-    void setSysAttachmentByAttachmentId(SysAttachmentEntity sysAttachmentByAttachmentId) {
+    public void setSysAttachmentByAttachmentId(SysAttachmentEntity sysAttachmentByAttachmentId) {
         this.sysAttachmentByAttachmentId = sysAttachmentByAttachmentId;
     }
 }

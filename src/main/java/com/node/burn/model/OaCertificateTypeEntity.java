@@ -1,9 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -13,55 +14,63 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "oa_certificate_type", catalog = "eduoa")
+@Table(name = "oa_certificate_type")
 @Entity
-public class OaCertificateTypeEntity {
-    private long id;
+public class OaCertificateTypeEntity extends BaseObject implements Serializable {
+    private Long id;
 
-    @javax.persistence.Column(name = "id")
+    @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     private String typeName;
 
-    @javax.persistence.Column(name = "type_name")
+    @Column(name = "type_name")
     @Basic
-    String getTypeName() {
+    public String getTypeName() {
         return typeName;
     }
 
-    void setTypeName(String typeName) {
+    public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
 
     private String description;
 
-    @javax.persistence.Column(name = "description")
+    @Column(name = "description")
     @Basic
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
     private Integer typeLevel;
 
-    @javax.persistence.Column(name = "type_level")
+    @Column(name = "type_level")
     @Basic
-    Integer getTypeLevel() {
+    public Integer getTypeLevel() {
         return typeLevel;
     }
 
-    void setTypeLevel(Integer typeLevel) {
+    public void setTypeLevel(Integer typeLevel) {
         this.typeLevel = typeLevel;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.typeName)
+                .toString();
     }
 
     @Override
@@ -91,11 +100,11 @@ public class OaCertificateTypeEntity {
     private Collection<OaCertificateEntity> oaCertificatesById;
 
     @OneToMany(mappedBy = "oaCertificateTypeByTypeId")
-    Collection<OaCertificateEntity> getOaCertificatesById() {
+    public Collection<OaCertificateEntity> getOaCertificatesById() {
         return oaCertificatesById;
     }
 
-    void setOaCertificatesById(Collection<OaCertificateEntity> oaCertificatesById) {
+    public void setOaCertificatesById(Collection<OaCertificateEntity> oaCertificatesById) {
         this.oaCertificatesById = oaCertificatesById;
     }
 }

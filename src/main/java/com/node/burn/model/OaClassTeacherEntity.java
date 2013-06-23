@@ -1,9 +1,10 @@
 package com.node.burn.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -13,55 +14,63 @@ import java.sql.Date;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "oa_class_teacher", catalog = "eduoa")
+@Table(name = "oa_class_teacher")
 @Entity
-public class OaClassTeacherEntity {
-    private long id;
+public class OaClassTeacherEntity extends BaseObject implements Serializable {
+    private Long id;
 
-    @javax.persistence.Column(name = "id")
+    @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     private Date startTime;
 
-    @javax.persistence.Column(name = "start_time")
+    @Column(name = "start_time")
     @Basic
-    Date getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    void setStartTime(Date startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
     private Date endTime;
 
-    @javax.persistence.Column(name = "end_time")
+    @Column(name = "end_time")
     @Basic
-    Date getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    void setEndTime(Date endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
     private Integer headTeacher;
 
-    @javax.persistence.Column(name = "head_teacher")
+    @Column(name = "head_teacher")
     @Basic
-    Integer getHeadTeacher() {
+    public Integer getHeadTeacher() {
         return headTeacher;
     }
 
-    void setHeadTeacher(Integer headTeacher) {
+    public void setHeadTeacher(Integer headTeacher) {
         this.headTeacher = headTeacher;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.getId())
+                .toString();
     }
 
     @Override
@@ -91,24 +100,24 @@ public class OaClassTeacherEntity {
     private OaClassEntity oaClassByClassId;
 
     @ManyToOne
-    @javax.persistence.JoinColumn(name = "class_id", referencedColumnName = "id")
-    OaClassEntity getOaClassByClassId() {
+    @JoinColumn(name = "class_id", referencedColumnName = "id")
+    public OaClassEntity getOaClassByClassId() {
         return oaClassByClassId;
     }
 
-    void setOaClassByClassId(OaClassEntity oaClassByClassId) {
+    public void setOaClassByClassId(OaClassEntity oaClassByClassId) {
         this.oaClassByClassId = oaClassByClassId;
     }
 
     private OaTeacherInfoEntity oaTeacherInfoByTeacherId;
 
     @ManyToOne
-    @javax.persistence.JoinColumn(name = "teacher_id", referencedColumnName = "id")
-    OaTeacherInfoEntity getOaTeacherInfoByTeacherId() {
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    public OaTeacherInfoEntity getOaTeacherInfoByTeacherId() {
         return oaTeacherInfoByTeacherId;
     }
 
-    void setOaTeacherInfoByTeacherId(OaTeacherInfoEntity oaTeacherInfoByTeacherId) {
+    public void setOaTeacherInfoByTeacherId(OaTeacherInfoEntity oaTeacherInfoByTeacherId) {
         this.oaTeacherInfoByTeacherId = oaTeacherInfoByTeacherId;
     }
 }

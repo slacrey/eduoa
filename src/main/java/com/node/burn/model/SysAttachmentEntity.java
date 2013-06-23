@@ -1,6 +1,10 @@
 package com.node.burn.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -11,18 +15,19 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "sys_attachment", catalog = "eduoa")
+@Table(name = "sys_attachment")
 @Entity
-public class SysAttachmentEntity {
-    private long id;
+public class SysAttachmentEntity extends BaseObject implements Serializable {
+    private Long id;
 
     @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -30,11 +35,11 @@ public class SysAttachmentEntity {
 
     @Column(name = "file_name")
     @Basic
-    String getFileName() {
+    public String getFileName() {
         return fileName;
     }
 
-    void setFileName(String fileName) {
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
@@ -42,11 +47,11 @@ public class SysAttachmentEntity {
 
     @Column(name = "file_ext")
     @Basic
-    String getFileExt() {
+    public String getFileExt() {
         return fileExt;
     }
 
-    void setFileExt(String fileExt) {
+    public void setFileExt(String fileExt) {
         this.fileExt = fileExt;
     }
 
@@ -54,11 +59,11 @@ public class SysAttachmentEntity {
 
     @Column(name = "file_size")
     @Basic
-    Integer getFileSize() {
+    public Integer getFileSize() {
         return fileSize;
     }
 
-    void setFileSize(Integer fileSize) {
+    public void setFileSize(Integer fileSize) {
         this.fileSize = fileSize;
     }
 
@@ -66,11 +71,11 @@ public class SysAttachmentEntity {
 
     @Column(name = "service_file")
     @Basic
-    String getServiceFile() {
+    public String getServiceFile() {
         return serviceFile;
     }
 
-    void setServiceFile(String serviceFile) {
+    public void setServiceFile(String serviceFile) {
         this.serviceFile = serviceFile;
     }
 
@@ -78,11 +83,11 @@ public class SysAttachmentEntity {
 
     @Column(name = "create_time")
     @Basic
-    Date getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    void setCreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -90,12 +95,19 @@ public class SysAttachmentEntity {
 
     @Column(name = "user_id")
     @Basic
-    Long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    void setUserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.fileName)
+                .toString();
     }
 
     @Override
@@ -131,22 +143,22 @@ public class SysAttachmentEntity {
     private CmsArticleTeacherEntity cmsArticleTeacherById;
 
     @OneToOne(mappedBy = "sysAttachmentById")
-    CmsArticleTeacherEntity getCmsArticleTeacherById() {
+    public CmsArticleTeacherEntity getCmsArticleTeacherById() {
         return cmsArticleTeacherById;
     }
 
-    void setCmsArticleTeacherById(CmsArticleTeacherEntity cmsArticleTeacherById) {
+    public void setCmsArticleTeacherById(CmsArticleTeacherEntity cmsArticleTeacherById) {
         this.cmsArticleTeacherById = cmsArticleTeacherById;
     }
 
     private Collection<OaOrganizationalStructureEntity> oaOrganizationalStructuresById;
 
     @OneToMany(mappedBy = "sysAttachmentByAttachmentId")
-    Collection<OaOrganizationalStructureEntity> getOaOrganizationalStructuresById() {
+    public Collection<OaOrganizationalStructureEntity> getOaOrganizationalStructuresById() {
         return oaOrganizationalStructuresById;
     }
 
-    void setOaOrganizationalStructuresById(Collection<OaOrganizationalStructureEntity> oaOrganizationalStructuresById) {
+    public void setOaOrganizationalStructuresById(Collection<OaOrganizationalStructureEntity> oaOrganizationalStructuresById) {
         this.oaOrganizationalStructuresById = oaOrganizationalStructuresById;
     }
 }

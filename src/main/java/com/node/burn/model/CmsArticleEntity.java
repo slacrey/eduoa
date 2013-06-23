@@ -1,6 +1,10 @@
 package com.node.burn.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -11,18 +15,19 @@ import java.util.Collection;
  * Time: 下午11:09
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "cms_article", catalog = "eduoa")
+@Table(name = "cms_article")
 @Entity
-public class CmsArticleEntity {
-    private long id;
+public class CmsArticleEntity extends BaseObject implements Serializable {
+    private Long id;
 
     @Column(name = "id")
     @Id
-    long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -30,11 +35,11 @@ public class CmsArticleEntity {
 
     @Column(name = "article_class_id")
     @Basic
-    Long getArticleClassId() {
+    public Long getArticleClassId() {
         return articleClassId;
     }
 
-    void setArticleClassId(Long articleClassId) {
+    public void setArticleClassId(Long articleClassId) {
         this.articleClassId = articleClassId;
     }
 
@@ -42,11 +47,11 @@ public class CmsArticleEntity {
 
     @Column(name = "title")
     @Basic
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -54,11 +59,11 @@ public class CmsArticleEntity {
 
     @Column(name = "summary")
     @Basic
-    String getSummary() {
+    public String getSummary() {
         return summary;
     }
 
-    void setSummary(String summary) {
+    public void setSummary(String summary) {
         this.summary = summary;
     }
 
@@ -66,11 +71,11 @@ public class CmsArticleEntity {
 
     @Column(name = "content")
     @Basic
-    String getContent() {
+    public String getContent() {
         return content;
     }
 
-    void setContent(String content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
@@ -78,11 +83,11 @@ public class CmsArticleEntity {
 
     @Column(name = "hits")
     @Basic
-    Integer getHits() {
+    public Integer getHits() {
         return hits;
     }
 
-    void setHits(Integer hits) {
+    public void setHits(Integer hits) {
         this.hits = hits;
     }
 
@@ -90,11 +95,11 @@ public class CmsArticleEntity {
 
     @Column(name = "create_time")
     @Basic
-    Date getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    void setCreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -102,11 +107,11 @@ public class CmsArticleEntity {
 
     @Column(name = "create_user_id")
     @Basic
-    Long getCreateUserId() {
+    public Long getCreateUserId() {
         return createUserId;
     }
 
-    void setCreateUserId(Long createUserId) {
+    public void setCreateUserId(Long createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -114,11 +119,11 @@ public class CmsArticleEntity {
 
     @Column(name = "update_time")
     @Basic
-    Date getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -126,11 +131,11 @@ public class CmsArticleEntity {
 
     @Column(name = "update_user_id")
     @Basic
-    Long getUpdateUserId() {
+    public Long getUpdateUserId() {
         return updateUserId;
     }
 
-    void setUpdateUserId(Long updateUserId) {
+    public void setUpdateUserId(Long updateUserId) {
         this.updateUserId = updateUserId;
     }
 
@@ -138,12 +143,19 @@ public class CmsArticleEntity {
 
     @Column(name = "article_state")
     @Basic
-    Integer getArticleState() {
+    public Integer getArticleState() {
         return articleState;
     }
 
-    void setArticleState(Integer articleState) {
+    public void setArticleState(Integer articleState) {
         this.articleState = articleState;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+                .append(this.title)
+                .toString();
     }
 
     @Override
@@ -189,22 +201,22 @@ public class CmsArticleEntity {
 
     @ManyToOne
     @JoinColumn(name = "channel_id", referencedColumnName = "id")
-    CmsChannelEntity getCmsChannelByChannelId() {
+    public CmsChannelEntity getCmsChannelByChannelId() {
         return cmsChannelByChannelId;
     }
 
-    void setCmsChannelByChannelId(CmsChannelEntity cmsChannelByChannelId) {
+    public void setCmsChannelByChannelId(CmsChannelEntity cmsChannelByChannelId) {
         this.cmsChannelByChannelId = cmsChannelByChannelId;
     }
 
     private Collection<CmsArticleTeacherEntity> cmsArticleTeachersById;
 
     @OneToMany(mappedBy = "cmsArticleByArticleId")
-    Collection<CmsArticleTeacherEntity> getCmsArticleTeachersById() {
+    public Collection<CmsArticleTeacherEntity> getCmsArticleTeachersById() {
         return cmsArticleTeachersById;
     }
 
-    void setCmsArticleTeachersById(Collection<CmsArticleTeacherEntity> cmsArticleTeachersById) {
+    public void setCmsArticleTeachersById(Collection<CmsArticleTeacherEntity> cmsArticleTeachersById) {
         this.cmsArticleTeachersById = cmsArticleTeachersById;
     }
 }
