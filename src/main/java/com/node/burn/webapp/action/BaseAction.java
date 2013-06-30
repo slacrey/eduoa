@@ -14,6 +14,8 @@ import org.springframework.mail.SimpleMailMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -210,5 +212,39 @@ public class BaseAction extends ActionSupport {
 
     public void setSave(String save) {
         this.save = save;
+    }
+
+    protected void sendError(String message) {
+        HttpServletResponse response = prepareSendResponse();
+        response.addHeader("Error-Json", "{code:2001,msg:'User settings is null!',script:''}");
+        try {
+            response.sendError(600, message);
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+    }
+
+    protected void sendMessage(String message) {
+        HttpServletResponse response = prepareSendResponse();
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            out.print(message);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
+        } finally {
+            out.close();
+        }
+
+    }
+
+    private HttpServletResponse prepareSendResponse() {
+        HttpServletResponse response = getResponse();
+        response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        return response;
     }
 }

@@ -1,6 +1,7 @@
+<%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
 <!DOCTYPE html>
 <%@ include file="/common/taglibs.jsp"%>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta http-equiv="Cache-Control" content="no-store"/>
     <meta http-equiv="Pragma" content="no-cache"/>
@@ -12,12 +13,14 @@
     <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/styles/lib/bootstrap-2.2.1.min.css'/>" />
     <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/styles/lib/bootstrap-responsive-2.2.1.min.css'/>" />
     <link rel="stylesheet" type="text/css" media="all" href="<c:url value='/styles/style.css'/>" />
-    <decorator:head/>
 
+    <script type="text/javascript" src="<c:url value='/scripts/lib/require.js'/>"></script>
     <script type="text/javascript" src="<c:url value='/scripts/lib/jquery-1.8.2.min.js'/>"></script>
     <script type="text/javascript" src="<c:url value='/scripts/lib/bootstrap-2.2.1.min.js'/>"></script>
     <script type="text/javascript" src="<c:url value='/scripts/lib/plugins/jquery.cookie.js'/>"></script>
     <script type="text/javascript" src="<c:url value='/scripts/script.js'/>"></script>
+
+    <decorator:head/>
 </head>
 <body<decorator:getProperty property="body.id" writeEntireProperty="true"/><decorator:getProperty property="body.class" writeEntireProperty="true"/>>
     <c:set var="currentMenu" scope="request"><decorator:getProperty property="meta.menu"/></c:set>
@@ -45,8 +48,6 @@
     <div class="container-fluid">
         <%@ include file="/common/messages.jsp" %>
         <div class="row-fluid">
-            <decorator:body/>
-
             <c:if test="${currentMenu == 'AdminMenu'}">
                 <div class="span2">
                 <menu:useMenuDisplayer name="Velocity" config="navlistMenu.vm" permissions="rolesAdapter">
@@ -55,6 +56,7 @@
                 </div>
             </c:if>
 
+            <decorator:body/>
         </div>
     </div>
 

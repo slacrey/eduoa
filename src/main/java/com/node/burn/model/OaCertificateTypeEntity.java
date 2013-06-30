@@ -1,27 +1,31 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_certificate_type")
+@javax.persistence.Table(name = "oa_certificate_type", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class OaCertificateTypeEntity extends BaseObject implements Serializable {
     private Long id;
 
-    @Column(name = "id")
+    @javax.persistence.Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -32,7 +36,7 @@ public class OaCertificateTypeEntity extends BaseObject implements Serializable 
 
     private String typeName;
 
-    @Column(name = "type_name")
+    @javax.persistence.Column(name = "type_name")
     @Basic
     public String getTypeName() {
         return typeName;
@@ -44,7 +48,7 @@ public class OaCertificateTypeEntity extends BaseObject implements Serializable 
 
     private String description;
 
-    @Column(name = "description")
+    @javax.persistence.Column(name = "description")
     @Basic
     public String getDescription() {
         return description;
@@ -56,7 +60,7 @@ public class OaCertificateTypeEntity extends BaseObject implements Serializable 
 
     private Integer typeLevel;
 
-    @Column(name = "type_level")
+    @javax.persistence.Column(name = "type_level")
     @Basic
     public Integer getTypeLevel() {
         return typeLevel;
@@ -68,9 +72,7 @@ public class OaCertificateTypeEntity extends BaseObject implements Serializable 
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.typeName)
-                .toString();
+        return null;
     }
 
     @Override
@@ -80,7 +82,7 @@ public class OaCertificateTypeEntity extends BaseObject implements Serializable 
 
         OaCertificateTypeEntity that = (OaCertificateTypeEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (typeLevel != null ? !typeLevel.equals(that.typeLevel) : that.typeLevel != null) return false;
         if (typeName != null ? !typeName.equals(that.typeName) : that.typeName != null) return false;

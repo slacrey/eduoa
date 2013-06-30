@@ -1,28 +1,30 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ *
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@SuppressWarnings("ALL")
-@Table(name = "oa_education")
+@Table(name = "oa_education", schema = "", catalog = "eduoa")
 @Entity
+@XmlRootElement
 public class OaEducationEntity extends BaseObject implements Serializable {
     private Long id;
 
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -55,11 +57,21 @@ public class OaEducationEntity extends BaseObject implements Serializable {
         this.description = description;
     }
 
+    private Integer departOrder;
+
+    @Column(name = "depart_order")
+    @Basic
+    public Integer getDepartOrder() {
+        return departOrder;
+    }
+
+    public void setDepartOrder(Integer departOrder) {
+        this.departOrder = departOrder;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.eduName)
-                .toString();
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -69,7 +81,7 @@ public class OaEducationEntity extends BaseObject implements Serializable {
 
         OaEducationEntity that = (OaEducationEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (eduName != null ? !eduName.equals(that.eduName) : that.eduName != null) return false;
 
@@ -110,11 +122,11 @@ public class OaEducationEntity extends BaseObject implements Serializable {
     private Collection<OaEducationEntity> oaEducationsById;
 
     @OneToMany(mappedBy = "oaEducationByParentId")
-    Collection<OaEducationEntity> getOaEducationsById() {
+    public Collection<OaEducationEntity> getOaEducationsById() {
         return oaEducationsById;
     }
 
-    void setOaEducationsById(Collection<OaEducationEntity> oaEducationsById) {
+    public void setOaEducationsById(Collection<OaEducationEntity> oaEducationsById) {
         this.oaEducationsById = oaEducationsById;
     }
 }

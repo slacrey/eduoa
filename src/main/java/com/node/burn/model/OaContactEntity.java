@@ -1,27 +1,31 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_contact")
+@javax.persistence.Table(name = "oa_contact", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class OaContactEntity extends BaseObject implements Serializable {
     private Long id;
 
-    @Column(name = "id")
+    @javax.persistence.Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -32,7 +36,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     private String nexus;
 
-    @Column(name = "nexus")
+    @javax.persistence.Column(name = "nexus")
     @Basic
     public String getNexus() {
         return nexus;
@@ -44,7 +48,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     private String contactName;
 
-    @Column(name = "contact_name")
+    @javax.persistence.Column(name = "contact_name")
     @Basic
     public String getContactName() {
         return contactName;
@@ -56,7 +60,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     private String job;
 
-    @Column(name = "job")
+    @javax.persistence.Column(name = "job")
     @Basic
     public String getJob() {
         return job;
@@ -68,7 +72,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     private String phone;
 
-    @Column(name = "phone")
+    @javax.persistence.Column(name = "phone")
     @Basic
     public String getPhone() {
         return phone;
@@ -80,7 +84,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     private String qq;
 
-    @Column(name = "qq")
+    @javax.persistence.Column(name = "qq")
     @Basic
     public String getQq() {
         return qq;
@@ -92,7 +96,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     private String email;
 
-    @Column(name = "email")
+    @javax.persistence.Column(name = "email")
     @Basic
     public String getEmail() {
         return email;
@@ -104,7 +108,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     private String address;
 
-    @Column(name = "address")
+    @javax.persistence.Column(name = "address")
     @Basic
     public String getAddress() {
         return address;
@@ -116,7 +120,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     private String homePhone;
 
-    @Column(name = "home_phone")
+    @javax.persistence.Column(name = "home_phone")
     @Basic
     public String getHomePhone() {
         return homePhone;
@@ -128,7 +132,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     private String officePhone;
 
-    @Column(name = "office_phone")
+    @javax.persistence.Column(name = "office_phone")
     @Basic
     public String getOfficePhone() {
         return officePhone;
@@ -140,7 +144,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     private Date createTime;
 
-    @Column(name = "create_time")
+    @javax.persistence.Column(name = "create_time")
     @Basic
     public Date getCreateTime() {
         return createTime;
@@ -152,7 +156,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     private Date updateTime;
 
-    @Column(name = "update_time")
+    @javax.persistence.Column(name = "update_time")
     @Basic
     public Date getUpdateTime() {
         return updateTime;
@@ -164,9 +168,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.contactName)
-                .toString();
+        return null;
     }
 
     @Override
@@ -176,7 +178,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
 
         OaContactEntity that = (OaContactEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
         if (contactName != null ? !contactName.equals(that.contactName) : that.contactName != null) return false;
         if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
@@ -212,7 +214,7 @@ public class OaContactEntity extends BaseObject implements Serializable {
     private OaStudentEntity oaStudentByStudentId;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    @javax.persistence.JoinColumn(name = "student_id", referencedColumnName = "id")
     public OaStudentEntity getOaStudentByStudentId() {
         return oaStudentByStudentId;
     }

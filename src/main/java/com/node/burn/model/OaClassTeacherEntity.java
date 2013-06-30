@@ -1,27 +1,31 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_class_teacher")
+@javax.persistence.Table(name = "oa_class_teacher", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class OaClassTeacherEntity extends BaseObject implements Serializable {
     private Long id;
 
-    @Column(name = "id")
+    @javax.persistence.Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -32,7 +36,7 @@ public class OaClassTeacherEntity extends BaseObject implements Serializable {
 
     private Date startTime;
 
-    @Column(name = "start_time")
+    @javax.persistence.Column(name = "start_time")
     @Basic
     public Date getStartTime() {
         return startTime;
@@ -44,7 +48,7 @@ public class OaClassTeacherEntity extends BaseObject implements Serializable {
 
     private Date endTime;
 
-    @Column(name = "end_time")
+    @javax.persistence.Column(name = "end_time")
     @Basic
     public Date getEndTime() {
         return endTime;
@@ -56,7 +60,7 @@ public class OaClassTeacherEntity extends BaseObject implements Serializable {
 
     private Integer headTeacher;
 
-    @Column(name = "head_teacher")
+    @javax.persistence.Column(name = "head_teacher")
     @Basic
     public Integer getHeadTeacher() {
         return headTeacher;
@@ -68,9 +72,7 @@ public class OaClassTeacherEntity extends BaseObject implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.getId())
-                .toString();
+        return null;
     }
 
     @Override
@@ -80,7 +82,7 @@ public class OaClassTeacherEntity extends BaseObject implements Serializable {
 
         OaClassTeacherEntity that = (OaClassTeacherEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (endTime != null ? !endTime.equals(that.endTime) : that.endTime != null) return false;
         if (headTeacher != null ? !headTeacher.equals(that.headTeacher) : that.headTeacher != null) return false;
         if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
@@ -100,7 +102,7 @@ public class OaClassTeacherEntity extends BaseObject implements Serializable {
     private OaClassEntity oaClassByClassId;
 
     @ManyToOne
-    @JoinColumn(name = "class_id", referencedColumnName = "id")
+    @javax.persistence.JoinColumn(name = "class_id", referencedColumnName = "id")
     public OaClassEntity getOaClassByClassId() {
         return oaClassByClassId;
     }
@@ -112,7 +114,7 @@ public class OaClassTeacherEntity extends BaseObject implements Serializable {
     private OaTeacherInfoEntity oaTeacherInfoByTeacherId;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @javax.persistence.JoinColumn(name = "teacher_id", referencedColumnName = "id")
     public OaTeacherInfoEntity getOaTeacherInfoByTeacherId() {
         return oaTeacherInfoByTeacherId;
     }

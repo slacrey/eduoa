@@ -1,26 +1,30 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ *
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_dictionary_value")
+@javax.persistence.Table(name = "oa_dictionary_value", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class OaDictionaryValueEntity extends BaseObject implements Serializable {
     private Long id;
 
-    @Column(name = "id")
+    @javax.persistence.Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -31,7 +35,7 @@ public class OaDictionaryValueEntity extends BaseObject implements Serializable 
 
     private String dictLabel;
 
-    @Column(name = "dict_label")
+    @javax.persistence.Column(name = "dict_label")
     @Basic
     public String getDictLabel() {
         return dictLabel;
@@ -43,7 +47,7 @@ public class OaDictionaryValueEntity extends BaseObject implements Serializable 
 
     private String dictValue;
 
-    @Column(name = "dict_value")
+    @javax.persistence.Column(name = "dict_value")
     @Basic
     public String getDictValue() {
         return dictValue;
@@ -55,9 +59,7 @@ public class OaDictionaryValueEntity extends BaseObject implements Serializable 
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.dictLabel)
-                .toString();
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -67,7 +69,7 @@ public class OaDictionaryValueEntity extends BaseObject implements Serializable 
 
         OaDictionaryValueEntity that = (OaDictionaryValueEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (dictLabel != null ? !dictLabel.equals(that.dictLabel) : that.dictLabel != null) return false;
         if (dictValue != null ? !dictValue.equals(that.dictValue) : that.dictValue != null) return false;
 
@@ -85,7 +87,7 @@ public class OaDictionaryValueEntity extends BaseObject implements Serializable 
     private OaDictionaryEntity oaDictionaryByDictionaryId;
 
     @ManyToOne
-    @JoinColumn(name = "dictionary_id", referencedColumnName = "id")
+    @javax.persistence.JoinColumn(name = "dictionary_id", referencedColumnName = "id")
     public OaDictionaryEntity getOaDictionaryByDictionaryId() {
         return oaDictionaryByDictionaryId;
     }

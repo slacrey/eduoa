@@ -7,6 +7,28 @@
         <mapping class="com.node.burn.model.SysUserEntity"/>
         <mapping class="com.node.burn.model.SysRoleEntity"/>
         <mapping class="com.node.burn.model.SysMenuItemEntity"/>
-        <mapping class="com.node.burn.model.Emp"/>
+        <mapping class="com.node.burn.model.OaTeacherInfoEntity"/>
+        <mapping class="com.node.burn.model.CmsArticleEntity"/>
+        <mapping class="com.node.burn.model.CmsArticleTeacherEntity"/>
+        <mapping class="com.node.burn.model.CmsChannelEntity"/>
+        <mapping class="com.node.burn.model.OaAppraisalEntity"/>
+        <mapping class="com.node.burn.model.OaCertificateEntity"/>
+        <mapping class="com.node.burn.model.OaCertificateTypeEntity"/>
+        <mapping class="com.node.burn.model.OaClassEntity"/>
+        <mapping class="com.node.burn.model.OaClassTeacherEntity"/>
+        <mapping class="com.node.burn.model.OaContactEntity"/>
+        <mapping class="com.node.burn.model.OaDepartmentEntity"/>
+        <mapping class="com.node.burn.model.OaDictionaryEntity"/>
+        <mapping class="com.node.burn.model.OaDictionaryValueEntity"/>
+        <mapping class="com.node.burn.model.OaEducationEntity"/>
+        <mapping class="com.node.burn.model.OaGradeEntity"/>
+        <mapping class="com.node.burn.model.OaOrganizationalStructureEntity"/>
+        <mapping class="com.node.burn.model.OaPositionEntity"/>
+        <mapping class="com.node.burn.model.OaStudentClassEntity"/>
+        <mapping class="com.node.burn.model.OaStudentEntity"/>
+        <mapping class="com.node.burn.model.OaStudentGradeEntity"/>
+        <mapping class="com.node.burn.model.OaSubjectEntity"/>
+        <mapping class="com.node.burn.model.SysAttachmentEntity"/>
+        <mapping class="com.node.burn.model.SysTypeRulesEntity"/>
     </session-factory>
 </hibernate-configuration>

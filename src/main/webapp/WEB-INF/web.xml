@@ -18,7 +18,7 @@
     <!-- Force a single locale using param-name 'javax.servlet.jsp.jstl.fmt.locale' -->
     <context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.fallbackLocale</param-name>
-        <param-value>en</param-value>
+        <param-value>zh</param-value>
     </context-param>
     <!-- Context Configuration locations for Spring XML files -->
     <context-param>
@@ -94,6 +94,8 @@
             <param-value>springSecurityFilterChain</param-value>
         </init-param>
     </filter>
+    <!-- zh-cn encoding -->
+
     <filter>
         <filter-name>sitemesh</filter-name>
         <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>

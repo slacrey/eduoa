@@ -1,10 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <decorators defaultdir="/decorators">
     <excludes>
         <pattern>/40*.jsp</pattern>
         <pattern>/*ajax=true*</pattern>
         <pattern>/struts/*</pattern>
         <pattern>/resources/*</pattern>
-    </excludes> 
+        <pattern>/scripts/**</pattern>
+        <pattern>/images/**</pattern>
+        <pattern>/styles/**</pattern>
+    </excludes>
     <decorator name="default" page="default.jsp">
         <pattern>/*</pattern>
     </decorator>

@@ -1,43 +1,36 @@
 package com.node.burn.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.IdClass(OaStudentGradeEntityPK.class)
-@javax.persistence.Table(name = "oa_student_grade")
+@javax.persistence.Table(name = "oa_student_grade", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class OaStudentGradeEntity extends BaseObject implements Serializable {
-    private Long gradeId;
+    private Long id;
 
-    @javax.persistence.Column(name = "grade_id")
+    @javax.persistence.Column(name = "id")
     @Id
-    public Long getGradeId() {
-        return gradeId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
+    public Long getId() {
+        return id;
     }
 
-    public void setGradeId(Long gradeId) {
-        this.gradeId = gradeId;
-    }
-
-    private long studentId;
-
-    @javax.persistence.Column(name = "student_id")
-    @Id
-    public long getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(long studentId) {
-        this.studentId = studentId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -52,17 +45,14 @@ public class OaStudentGradeEntity extends BaseObject implements Serializable {
 
         OaStudentGradeEntity that = (OaStudentGradeEntity) o;
 
-        if (gradeId != that.gradeId) return false;
-        if (studentId != that.studentId) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (gradeId ^ (gradeId >>> 32));
-        result = 31 * result + (int) (studentId ^ (studentId >>> 32));
-        return result;
+        return (int) (id ^ (id >>> 32));
     }
 
     private OaGradeEntity oaGradeByGradeId;

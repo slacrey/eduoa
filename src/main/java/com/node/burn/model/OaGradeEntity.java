@@ -1,28 +1,32 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_grade")
+@javax.persistence.Table(name = "oa_grade", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class OaGradeEntity extends BaseObject implements Serializable {
     private Long id;
 
-    @Column(name = "id")
+    @javax.persistence.Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -33,7 +37,7 @@ public class OaGradeEntity extends BaseObject implements Serializable {
 
     private String gradeName;
 
-    @Column(name = "grade_name")
+    @javax.persistence.Column(name = "grade_name")
     @Basic
     public String getGradeName() {
         return gradeName;
@@ -45,7 +49,7 @@ public class OaGradeEntity extends BaseObject implements Serializable {
 
     private String description;
 
-    @Column(name = "description")
+    @javax.persistence.Column(name = "description")
     @Basic
     public String getDescription() {
         return description;
@@ -57,7 +61,7 @@ public class OaGradeEntity extends BaseObject implements Serializable {
 
     private Date createTime;
 
-    @Column(name = "create_time")
+    @javax.persistence.Column(name = "create_time")
     @Basic
     public Date getCreateTime() {
         return createTime;
@@ -69,7 +73,7 @@ public class OaGradeEntity extends BaseObject implements Serializable {
 
     private String currentYear;
 
-    @Column(name = "current_year")
+    @javax.persistence.Column(name = "current_year")
     @Basic
     public String getCurrentYear() {
         return currentYear;
@@ -81,7 +85,7 @@ public class OaGradeEntity extends BaseObject implements Serializable {
 
     private Integer currentHalf;
 
-    @Column(name = "current_half")
+    @javax.persistence.Column(name = "current_half")
     @Basic
     public Integer getCurrentHalf() {
         return currentHalf;
@@ -93,9 +97,7 @@ public class OaGradeEntity extends BaseObject implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.gradeName)
-                .toString();
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -105,7 +107,7 @@ public class OaGradeEntity extends BaseObject implements Serializable {
 
         OaGradeEntity that = (OaGradeEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
         if (currentHalf != null ? !currentHalf.equals(that.currentHalf) : that.currentHalf != null) return false;
         if (currentYear != null ? !currentYear.equals(that.currentYear) : that.currentYear != null) return false;

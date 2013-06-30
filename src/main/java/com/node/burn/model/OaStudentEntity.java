@@ -1,28 +1,32 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_student")
+@javax.persistence.Table(name = "oa_student", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class OaStudentEntity extends BaseObject implements Serializable {
     private Long id;
 
-    @Column(name = "id")
+    @javax.persistence.Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -33,7 +37,7 @@ public class OaStudentEntity extends BaseObject implements Serializable {
 
     private String studentName;
 
-    @Column(name = "student_name")
+    @javax.persistence.Column(name = "student_name")
     @Basic
     public String getStudentName() {
         return studentName;
@@ -45,7 +49,7 @@ public class OaStudentEntity extends BaseObject implements Serializable {
 
     private String idNumber;
 
-    @Column(name = "id_number")
+    @javax.persistence.Column(name = "id_number")
     @Basic
     public String getIdNumber() {
         return idNumber;
@@ -57,7 +61,7 @@ public class OaStudentEntity extends BaseObject implements Serializable {
 
     private Integer gender;
 
-    @Column(name = "gender")
+    @javax.persistence.Column(name = "gender")
     @Basic
     public Integer getGender() {
         return gender;
@@ -69,7 +73,7 @@ public class OaStudentEntity extends BaseObject implements Serializable {
 
     private String studentNumber;
 
-    @Column(name = "student_number")
+    @javax.persistence.Column(name = "student_number")
     @Basic
     public String getStudentNumber() {
         return studentNumber;
@@ -81,7 +85,7 @@ public class OaStudentEntity extends BaseObject implements Serializable {
 
     private Date birthday;
 
-    @Column(name = "birthday")
+    @javax.persistence.Column(name = "birthday")
     @Basic
     public Date getBirthday() {
         return birthday;
@@ -93,7 +97,7 @@ public class OaStudentEntity extends BaseObject implements Serializable {
 
     private Date createTime;
 
-    @Column(name = "create_time")
+    @javax.persistence.Column(name = "create_time")
     @Basic
     public Date getCreateTime() {
         return createTime;
@@ -105,7 +109,7 @@ public class OaStudentEntity extends BaseObject implements Serializable {
 
     private Date updateTime;
 
-    @Column(name = "update_time")
+    @javax.persistence.Column(name = "update_time")
     @Basic
     public Date getUpdateTime() {
         return updateTime;
@@ -117,7 +121,7 @@ public class OaStudentEntity extends BaseObject implements Serializable {
 
     private Long operatorId;
 
-    @Column(name = "operator_id")
+    @javax.persistence.Column(name = "operator_id")
     @Basic
     public Long getOperatorId() {
         return operatorId;
@@ -129,9 +133,7 @@ public class OaStudentEntity extends BaseObject implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.studentName)
-                .toString();
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -141,7 +143,7 @@ public class OaStudentEntity extends BaseObject implements Serializable {
 
         OaStudentEntity that = (OaStudentEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
         if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
         if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;

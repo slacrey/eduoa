@@ -1,27 +1,31 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:47
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "cms_channel")
+@javax.persistence.Table(name = "cms_channel", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class CmsChannelEntity extends BaseObject implements Serializable {
     private Long id;
 
-    @Column(name = "id")
+    @javax.persistence.Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -32,7 +36,7 @@ public class CmsChannelEntity extends BaseObject implements Serializable {
 
     private String channelName;
 
-    @Column(name = "channel_name")
+    @javax.persistence.Column(name = "channel_name")
     @Basic
     public String getChannelName() {
         return channelName;
@@ -44,7 +48,7 @@ public class CmsChannelEntity extends BaseObject implements Serializable {
 
     private Integer channelSort;
 
-    @Column(name = "channel_sort")
+    @javax.persistence.Column(name = "channel_sort")
     @Basic
     public Integer getChannelSort() {
         return channelSort;
@@ -56,7 +60,7 @@ public class CmsChannelEntity extends BaseObject implements Serializable {
 
     private String channelUrl;
 
-    @Column(name = "channel_url")
+    @javax.persistence.Column(name = "channel_url")
     @Basic
     public String getChannelUrl() {
         return channelUrl;
@@ -68,9 +72,7 @@ public class CmsChannelEntity extends BaseObject implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.channelName)
-                .toString();
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

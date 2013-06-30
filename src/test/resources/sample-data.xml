@@ -155,32 +155,18 @@
         </row>
     </table>
     <!--SysMenuItemEntity-END-->
-    <!--Emp-START-->
-    <!--<table name="emp">-->
-        <!--<column>eid</column>-->
-        <!--<column>eage</column>-->
-        <!--<column>ename</column>-->
-        <!--<column>estate</column>-->
-        <!--<row>-->
-            <!--<value description="eid">-1</value>-->
-            <!--<value description="eage">7744026202364690432</value>-->
-            <!--<value description="ename">VgWyKeHwCrWhYaQhYgCxAlCqYzVmOgUtWtTbJqUjPeAuNyGxPz</value>-->
-            <!--<value description="estate">7384031023756826624</value>-->
-        <!--</row>-->
-        <!--<row>-->
-            <!--<value description="eid">-2</value>-->
-            <!--<value description="eage">2002554165256981504</value>-->
-            <!--<value description="ename">YdCgQuHqHzSsXlHiLiQyBvXcBdOvJbUrVgAcHdBlLrGgGkZqNh</value>-->
-            <!--<value description="estate">6744456507711263744</value>-->
-        <!--</row>-->
-        <!--<row>-->
-            <!--<value description="eid">-3</value>-->
-            <!--<value description="eage">5318800185363330048</value>-->
-            <!--<value description="ename">EsRhFeElDgVlJoAvGpBzNoPaQiBqQfYxZgEbDbBbLcYfApGsBo</value>-->
-            <!--<value description="estate">3645437963912275968</value>-->
-        <!--</row>-->
-    <!--</table>-->
-    <!--Emp-END-->
+
+    <table name="oa_education">
+        <column>id</column>
+        <column>edu_name</column>
+        <column>description</column>
+        <row>
+            <value description="id">1</value>
+            <value description="edu_name">香河县第一中学</value>
+            <value description="description">香河县第一中学</value>
+        </row>
+    </table>
+
 </dataset>
 
 

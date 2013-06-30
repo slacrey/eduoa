@@ -15,7 +15,7 @@
         </Menu>
         <Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>
         <!--Emp-START-->
-        <Menu name="EmpMenu" title="empList.title" page="/emps"/>
+        <Menu name="DepartmentMenu" title="empList.title" page="/system/departments"/>
         <!--Emp-END-->
         <!--SysMenuItemEntity-START-->
         <Menu name="MenuItemMenu" title="menuItemList.title" page="/menuItems"/>

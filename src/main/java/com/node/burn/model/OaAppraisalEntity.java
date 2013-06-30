@@ -1,28 +1,32 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
 /**
- * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ *
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:47
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_appraisal")
+@javax.persistence.Table(name = "oa_appraisal", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class OaAppraisalEntity extends BaseObject implements Serializable {
     private Long id;
 
-    @Column(name = "id")
+    @javax.persistence.Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -33,7 +37,7 @@ public class OaAppraisalEntity extends BaseObject implements Serializable {
 
     private Integer atype;
 
-    @Column(name = "atype")
+    @javax.persistence.Column(name = "atype")
     @Basic
     public Integer getAtype() {
         return atype;
@@ -45,7 +49,7 @@ public class OaAppraisalEntity extends BaseObject implements Serializable {
 
     private Date startMonth;
 
-    @Column(name = "start_month")
+    @javax.persistence.Column(name = "start_month")
     @Basic
     public Date getStartMonth() {
         return startMonth;
@@ -57,7 +61,7 @@ public class OaAppraisalEntity extends BaseObject implements Serializable {
 
     private Date endMonth;
 
-    @Column(name = "end_month")
+    @javax.persistence.Column(name = "end_month")
     @Basic
     public Date getEndMonth() {
         return endMonth;
@@ -69,7 +73,7 @@ public class OaAppraisalEntity extends BaseObject implements Serializable {
 
     private Long teacherId;
 
-    @Column(name = "teacher_id")
+    @javax.persistence.Column(name = "teacher_id")
     @Basic
     public Long getTeacherId() {
         return teacherId;
@@ -81,7 +85,7 @@ public class OaAppraisalEntity extends BaseObject implements Serializable {
 
     private Date createTime;
 
-    @Column(name = "create_time")
+    @javax.persistence.Column(name = "create_time")
     @Basic
     public Date getCreateTime() {
         return createTime;
@@ -93,7 +97,7 @@ public class OaAppraisalEntity extends BaseObject implements Serializable {
 
     private Long userId;
 
-    @Column(name = "user_id")
+    @javax.persistence.Column(name = "user_id")
     @Basic
     public Long getUserId() {
         return userId;
@@ -105,9 +109,7 @@ public class OaAppraisalEntity extends BaseObject implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.getId())
-                .toString();
+        return null;
     }
 
     @Override
@@ -117,13 +119,17 @@ public class OaAppraisalEntity extends BaseObject implements Serializable {
 
         OaAppraisalEntity that = (OaAppraisalEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (atype != null ? !atype.equals(that.atype) : that.atype != null) return false;
         if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
         if (endMonth != null ? !endMonth.equals(that.endMonth) : that.endMonth != null) return false;
         if (startMonth != null ? !startMonth.equals(that.startMonth) : that.startMonth != null) return false;
         if (teacherId != null ? !teacherId.equals(that.teacherId) : that.teacherId != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        if (userId != null) {
+            if (!userId.equals(that.userId)) return false;
+        } else {
+            if (that.userId != null) return false;
+        }
 
         return true;
     }

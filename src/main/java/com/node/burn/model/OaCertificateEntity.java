@@ -1,27 +1,31 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Date;
 
 /**
- * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ *
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:47
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_certificate")
+@javax.persistence.Table(name = "oa_certificate", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class OaCertificateEntity extends BaseObject implements Serializable {
     private Long id;
 
-    @Column(name = "id")
+    @javax.persistence.Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -32,7 +36,7 @@ public class OaCertificateEntity extends BaseObject implements Serializable {
 
     private Integer advanced;
 
-    @Column(name = "advanced")
+    @javax.persistence.Column(name = "advanced")
     @Basic
     public Integer getAdvanced() {
         return advanced;
@@ -44,7 +48,7 @@ public class OaCertificateEntity extends BaseObject implements Serializable {
 
     private Date certificatesTime;
 
-    @Column(name = "certificates_time")
+    @javax.persistence.Column(name = "certificates_time")
     @Basic
     public Date getCertificatesTime() {
         return certificatesTime;
@@ -56,7 +60,7 @@ public class OaCertificateEntity extends BaseObject implements Serializable {
 
     private String description;
 
-    @Column(name = "description")
+    @javax.persistence.Column(name = "description")
     @Basic
     public String getDescription() {
         return description;
@@ -68,9 +72,7 @@ public class OaCertificateEntity extends BaseObject implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.description)
-                .toString();
+        return null;
     }
 
     @Override
@@ -80,7 +82,7 @@ public class OaCertificateEntity extends BaseObject implements Serializable {
 
         OaCertificateEntity that = (OaCertificateEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (advanced != null ? !advanced.equals(that.advanced) : that.advanced != null) return false;
         if (certificatesTime != null ? !certificatesTime.equals(that.certificatesTime) : that.certificatesTime != null)
             return false;
@@ -101,7 +103,7 @@ public class OaCertificateEntity extends BaseObject implements Serializable {
     private OaCertificateTypeEntity oaCertificateTypeByTypeId;
 
     @ManyToOne
-    @JoinColumn(name = "type_id", referencedColumnName = "id")
+    @javax.persistence.JoinColumn(name = "type_id", referencedColumnName = "id")
     public OaCertificateTypeEntity getOaCertificateTypeByTypeId() {
         return oaCertificateTypeByTypeId;
     }
@@ -113,7 +115,7 @@ public class OaCertificateEntity extends BaseObject implements Serializable {
     private OaTeacherInfoEntity oaTeacherInfoByTeacherId;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @javax.persistence.JoinColumn(name = "teacher_id", referencedColumnName = "id")
     public OaTeacherInfoEntity getOaTeacherInfoByTeacherId() {
         return oaTeacherInfoByTeacherId;
     }

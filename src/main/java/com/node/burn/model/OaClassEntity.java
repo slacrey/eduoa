@@ -1,28 +1,32 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
 /**
- * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ *
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_class")
+@Table(name = "oa_class", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class OaClassEntity extends BaseObject implements Serializable {
     private Long id;
 
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -129,9 +133,7 @@ public class OaClassEntity extends BaseObject implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.className)
-                .toString();
+        return null;
     }
 
     @Override
@@ -141,7 +143,7 @@ public class OaClassEntity extends BaseObject implements Serializable {
 
         OaClassEntity that = (OaClassEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (category != null ? !category.equals(that.category) : that.category != null) return false;
         if (className != null ? !className.equals(that.className) : that.className != null) return false;
         if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;

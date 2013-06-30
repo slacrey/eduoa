@@ -17,7 +17,7 @@
     <%--<menu:displayMenu name="MenuItemMenu"/>--%>
     <%--<!--SysMenuItemEntity-END-->--%>
     <!--Emp-START-->
-    <menu:displayMenu name="EmpMenu"/>
+    <menu:displayMenu name="DepartmentMenu"/>
     <!--Emp-END-->
 </ul>
 </div>

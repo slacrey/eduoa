@@ -5,6 +5,7 @@
 <struts>
     <!-- Constants -->
     <constant name="struts.devMode" value="false"/>
+    <constant name="struts.locale" value="zh_CN"/>
     <constant name="struts.i18n.encoding" value="UTF-8"/>
     <constant name="struts.action.extension" value="action,"/>
     <constant name="struts.objectFactory" value="spring"/>
@@ -168,6 +169,29 @@
         <action name="users" class="userAction" method="list">
             <interceptor-ref name="adminCheck"/>
             <result name="success">/WEB-INF/pages/admin/userList.jsp</result>
+        </action>
+    </package>
+
+    <!-- Actions in this package will be prefixed with /admin/ -->
+    <package name="system" extends="default" namespace="/system">
+        <action name="departments" class="com.node.burn.webapp.action.OaDepartmentEntityAction" method="list">
+            <result>/WEB-INF/pages/system/departmentList.jsp</result>
+        </action>
+
+        <action name="initTree" class="com.node.burn.webapp.action.OaDepartmentEntityAction" method="initTree">
+            <result type="json">/WEB-INF/pages/system/departmentList.jsp</result>
+        </action>
+
+        <action name="editEmp" class="com.node.burn.webapp.action.OaDepartmentEntityAction" method="edit">
+            <result>/WEB-INF/pages/empForm.jsp</result>
+            <result name="error">/WEB-INF/pages/empList.jsp</result>
+        </action>
+
+        <action name="saveEmp" class="com.node.burn.webapp.action.OaDepartmentEntityAction" method="save">
+            <result name="input">/WEB-INF/pages/empForm.jsp</result>
+            <result name="cancel" type="redirectAction">departments</result>
+            <result name="delete" type="redirectAction">departments</result>
+            <result name="success" type="redirectAction">departments</result>
         </action>
     </package>
 </struts>

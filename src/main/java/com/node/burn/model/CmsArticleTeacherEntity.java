@@ -1,26 +1,30 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:47
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "cms_article_teacher")
+@Table(name = "cms_article_teacher", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class CmsArticleTeacherEntity extends BaseObject implements Serializable {
     private Long id;
 
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -67,9 +71,7 @@ public class CmsArticleTeacherEntity extends BaseObject implements Serializable 
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.getTeacherName())
-                .toString();
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

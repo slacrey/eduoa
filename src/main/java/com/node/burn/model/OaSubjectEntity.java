@@ -1,27 +1,31 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_subject")
+@javax.persistence.Table(name = "oa_subject", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
 public class OaSubjectEntity extends BaseObject implements Serializable {
     private Long id;
 
-    @Column(name = "id")
+    @javax.persistence.Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -32,7 +36,7 @@ public class OaSubjectEntity extends BaseObject implements Serializable {
 
     private String subjectName;
 
-    @Column(name = "subject_name")
+    @javax.persistence.Column(name = "subject_name")
     @Basic
     public String getSubjectName() {
         return subjectName;
@@ -44,7 +48,7 @@ public class OaSubjectEntity extends BaseObject implements Serializable {
 
     private String description;
 
-    @Column(name = "description")
+    @javax.persistence.Column(name = "description")
     @Basic
     public String getDescription() {
         return description;
@@ -56,9 +60,7 @@ public class OaSubjectEntity extends BaseObject implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.subjectName)
-                .toString();
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -68,7 +70,7 @@ public class OaSubjectEntity extends BaseObject implements Serializable {
 
         OaSubjectEntity that = (OaSubjectEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (subjectName != null ? !subjectName.equals(that.subjectName) : that.subjectName != null) return false;
 

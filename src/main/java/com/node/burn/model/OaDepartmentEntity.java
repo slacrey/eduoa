@@ -1,28 +1,34 @@
 package com.node.burn.model;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import com.node.burn.util.JacksonUtil;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.
- * SysUserEntity: linfeng at Administrator
- * Date: 13-6-21
- * Time: 下午11:09
+ * User: linfeng at Administrator
+ * Date: 13-6-28
+ * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@SuppressWarnings("ALL")
-@Table(name = "oa_department")
+@Table(name = "oa_department", schema = "", catalog = "eduoa")
 @Entity
+@Indexed
+@XmlRootElement
+@JsonAutoDetect(fieldVisibility= JsonAutoDetect.Visibility.ANY)
 public class OaDepartmentEntity extends BaseObject implements Serializable {
     private Long id;
 
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     public Long getId() {
         return id;
     }
@@ -55,11 +61,22 @@ public class OaDepartmentEntity extends BaseObject implements Serializable {
         this.description = description;
     }
 
+    private Integer departOrder;
+
+    @Column(name = "depart_order")
+    @Basic
+    public Integer getDepartOrder() {
+        return departOrder;
+    }
+
+    public void setDepartOrder(Integer departOrder) {
+        this.departOrder = departOrder;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
-                .append(this.departName)
-                .toString();
+        JacksonUtil jacksonUtil = new JacksonUtil();
+        return jacksonUtil.toJson(this);
     }
 
     @Override
@@ -69,7 +86,7 @@ public class OaDepartmentEntity extends BaseObject implements Serializable {
 
         OaDepartmentEntity that = (OaDepartmentEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (departName != null ? !departName.equals(that.departName) : that.departName != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
 
