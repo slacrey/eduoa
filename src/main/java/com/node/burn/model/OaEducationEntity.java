@@ -15,7 +15,7 @@ import java.util.Collection;
  * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_education", schema = "", catalog = "eduoa")
+@Table(name = "oa_education", catalog = "eduoa")
 @Entity
 @XmlRootElement
 public class OaEducationEntity extends BaseObject implements Serializable {
@@ -57,16 +57,16 @@ public class OaEducationEntity extends BaseObject implements Serializable {
         this.description = description;
     }
 
-    private Integer departOrder;
+    private Integer eduOrder;
 
-    @Column(name = "depart_order")
+    @Column(name = "edu_order")
     @Basic
-    public Integer getDepartOrder() {
-        return departOrder;
+    public Integer getEduOrder() {
+        return eduOrder;
     }
 
-    public void setDepartOrder(Integer departOrder) {
-        this.departOrder = departOrder;
+    public void setEduOrder(Integer eduOrder) {
+        this.eduOrder = eduOrder;
     }
 
     @Override

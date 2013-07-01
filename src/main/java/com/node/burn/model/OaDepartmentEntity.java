@@ -2,6 +2,7 @@ package com.node.burn.model;
 
 import com.node.burn.util.JacksonUtil;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 
@@ -29,6 +30,7 @@ public class OaDepartmentEntity extends BaseObject implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @DocumentId
+    @JsonSerialize
     public Long getId() {
         return id;
     }

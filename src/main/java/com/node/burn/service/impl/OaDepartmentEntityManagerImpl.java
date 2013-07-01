@@ -34,6 +34,10 @@ public class OaDepartmentEntityManagerImpl extends GenericManagerImpl<OaDepartme
 
     @Override
     public List<OaDepartmentEntity> searchByParentId(Long parentId) {
-        return oaDepartmentEntityDao.searchByParentId(parentId);
+        if (null == parentId) {
+            return oaDepartmentEntityDao.searchTop();
+        } else {
+            return oaDepartmentEntityDao.searchByParentId(parentId);
+        }
     }
 }

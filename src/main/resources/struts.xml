@@ -179,7 +179,7 @@
         </action>
 
         <action name="initTree" class="com.node.burn.webapp.action.OaDepartmentEntityAction" method="initTree">
-            <result type="json">/WEB-INF/pages/system/departmentList.jsp</result>
+
         </action>
 
         <action name="editEmp" class="com.node.burn.webapp.action.OaDepartmentEntityAction" method="edit">

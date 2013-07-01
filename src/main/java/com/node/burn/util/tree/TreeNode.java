@@ -1,5 +1,11 @@
 package com.node.burn.util.tree;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonMethod;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,6 +16,8 @@ import java.util.List;
  * Time: 下午5:15
  * To change this template use File | Settings | File Templates.
  */
+@JsonAutoDetect(JsonMethod.NONE)
+@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
 public class TreeNode<T> implements Serializable {
 
     private String id;//
@@ -34,6 +42,13 @@ public class TreeNode<T> implements Serializable {
     public TreeNode() {
     }
 
+    public TreeNode(String id, String name, Boolean parent) {
+        this.id = id;
+        this.name = name;
+        isParent = parent;
+    }
+
+    @JsonSerialize
     public String getId() {
         return id;
     }
@@ -42,6 +57,7 @@ public class TreeNode<T> implements Serializable {
         this.id = id;
     }
 
+    @JsonSerialize
     public String getName() {
         return name;
     }
@@ -50,6 +66,7 @@ public class TreeNode<T> implements Serializable {
         this.name = name;
     }
 
+    @JsonSerialize
     public Boolean getChecked() {
         return checked;
     }
@@ -58,6 +75,7 @@ public class TreeNode<T> implements Serializable {
         this.checked = checked;
     }
 
+    @JsonIgnore
     public List<TreeNode> getChildren() {
         return children;
     }
@@ -66,6 +84,7 @@ public class TreeNode<T> implements Serializable {
         this.children = children;
     }
 
+    @JsonSerialize
     public Boolean getChkDisabled() {
         return chkDisabled;
     }
@@ -74,6 +93,7 @@ public class TreeNode<T> implements Serializable {
         this.chkDisabled = chkDisabled;
     }
 
+    @JsonSerialize
     public String getClick() {
         return click;
     }
@@ -82,6 +102,7 @@ public class TreeNode<T> implements Serializable {
         this.click = click;
     }
 
+    @JsonSerialize
     public Boolean getHalfCheck() {
         return halfCheck;
     }
@@ -90,6 +111,7 @@ public class TreeNode<T> implements Serializable {
         this.halfCheck = halfCheck;
     }
 
+    @JsonSerialize
     public String getIcon() {
         return icon;
     }
@@ -98,6 +120,7 @@ public class TreeNode<T> implements Serializable {
         this.icon = icon;
     }
 
+    @JsonSerialize
     public String getIconClose() {
         return iconClose;
     }
@@ -106,6 +129,7 @@ public class TreeNode<T> implements Serializable {
         this.iconClose = iconClose;
     }
 
+    @JsonSerialize
     public String getIconOpen() {
         return iconOpen;
     }
@@ -114,6 +138,7 @@ public class TreeNode<T> implements Serializable {
         this.iconOpen = iconOpen;
     }
 
+    @JsonSerialize
     public String getIconSkin() {
         return iconSkin;
     }
@@ -122,6 +147,7 @@ public class TreeNode<T> implements Serializable {
         this.iconSkin = iconSkin;
     }
 
+    @JsonSerialize
     public Boolean getHidden() {
         return isHidden;
     }
@@ -130,14 +156,16 @@ public class TreeNode<T> implements Serializable {
         isHidden = hidden;
     }
 
-    public Boolean getParent() {
+    @JsonSerialize
+    public Boolean getIsParent() {
         return isParent;
     }
 
-    public void setParent(Boolean parent) {
-        isParent = parent;
+    public void setIsParent(Boolean isParent) {
+        this.isParent = isParent;
     }
 
+    @JsonSerialize
     public Boolean getNocheck() {
         return nocheck;
     }
@@ -146,6 +174,7 @@ public class TreeNode<T> implements Serializable {
         this.nocheck = nocheck;
     }
 
+    @JsonSerialize
     public Boolean getOpen() {
         return open;
     }
@@ -154,6 +183,7 @@ public class TreeNode<T> implements Serializable {
         this.open = open;
     }
 
+    @JsonSerialize
     public String getTarget() {
         return target;
     }
@@ -162,6 +192,7 @@ public class TreeNode<T> implements Serializable {
         this.target = target;
     }
 
+    @JsonSerialize
     public String getUrl() {
         return url;
     }
@@ -170,6 +201,7 @@ public class TreeNode<T> implements Serializable {
         this.url = url;
     }
 
+    @JsonIgnore
     public T getVal() {
         return val;
     }

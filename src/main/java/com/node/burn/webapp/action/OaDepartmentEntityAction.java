@@ -7,10 +7,12 @@ import com.node.burn.service.EmpManager;
 import com.node.burn.service.OaDepartmentEntityManager;
 import com.node.burn.service.impl.OaDepartmentEntityManagerImpl;
 import com.node.burn.util.JacksonUtil;
+import com.node.burn.util.tree.TreeNode;
 import com.opensymphony.xwork2.Preparable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OaDepartmentEntityAction extends BaseAction implements Preparable {
@@ -51,9 +53,27 @@ public class OaDepartmentEntityAction extends BaseAction implements Preparable {
     }
 
     public void initTree() {
+        String id = getRequest().getParameter("parentId");
+        if (id != null) {
+            parentId = Long.valueOf(id);
+        }
         List<OaDepartmentEntity> oaDepartmentEntities = oaDepartmentEntityManager.searchByParentId(parentId);
+        List<TreeNode<OaDepartmentEntity>> treeNodes = new ArrayList<TreeNode<OaDepartmentEntity>>();
+        if (oaDepartmentEntities != null && !oaDepartmentEntities.isEmpty()) {
+            TreeNode<OaDepartmentEntity> treeNode = null;
+            for (OaDepartmentEntity departmentEntity: oaDepartmentEntities) {
+                if (departmentEntity.getOaDepartmentsById() != null
+                        && !departmentEntity.getOaDepartmentsById().isEmpty()) {
+                    treeNode = new TreeNode<OaDepartmentEntity>(departmentEntity.getId()+"", departmentEntity.getDepartName(), true);
+                } else {
+                    treeNode = new TreeNode<OaDepartmentEntity>(departmentEntity.getId()+"", departmentEntity.getDepartName(), false);
+                }
+                treeNode.setVal(departmentEntity);
+                treeNodes.add(treeNode);
+            }
+        }
         JacksonUtil jacksonUtil = new JacksonUtil();
-        String result = jacksonUtil.toJson(oaDepartmentEntities);
+        String result = jacksonUtil.toJson(treeNodes);
         this.sendMessage(result);
     }
 

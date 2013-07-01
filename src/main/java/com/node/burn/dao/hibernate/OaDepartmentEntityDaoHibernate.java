@@ -36,4 +36,16 @@ public class OaDepartmentEntityDaoHibernate extends GenericDaoHibernate<OaDepart
             return roles;
         }
     }
+
+    @Override
+    public List<OaDepartmentEntity> searchTop() {
+        Query query = getSession().createQuery("from OaDepartmentEntity d where d.oaDepartmentByParentId is null " +
+                "order by d.departOrder asc ");
+        List roles = query.list();
+        if (roles.isEmpty()) {
+            return null;
+        } else {
+            return roles;
+        }
+    }
 }

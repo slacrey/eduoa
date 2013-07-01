@@ -15,4 +15,6 @@ public interface OaDepartmentEntityDao extends GenericDao<OaDepartmentEntity, Lo
 
     public List<OaDepartmentEntity> searchByParentId(Long parentId);
 
+    public List<OaDepartmentEntity> searchTop();
+
 }

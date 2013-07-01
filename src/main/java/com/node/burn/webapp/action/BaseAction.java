@@ -238,13 +238,13 @@ public class BaseAction extends ActionSupport {
         } finally {
             out.close();
         }
-
     }
 
     private HttpServletResponse prepareSendResponse() {
         HttpServletResponse response = getResponse();
-        response.setContentType("text/html;charset=utf-8");
+        response.setContentType("text/json;charset=utf-8");
         response.setCharacterEncoding("UTF-8");
+        response.setDateHeader("Expires", 0);
         return response;
     }
 }

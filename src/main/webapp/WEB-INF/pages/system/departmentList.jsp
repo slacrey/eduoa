@@ -8,7 +8,24 @@
     <script type="text/javascript" src="<c:url value='/scripts/zTree/js/jquery.ztree.core-3.5.js'/>"></script>
     <script type="text/javascript">
         <!--
-        var setting = {};
+        var setting = {
+            async: {
+                enable: true,
+                url:"${ctx}/system/initTree?ajax=true",
+                autoParam:["id=parentId", "name=n", "level=lv"],
+                otherParam:{"otherParam":"zTreeAsyncTest"},
+                dataFilter: filter
+            }
+        };
+
+        function filter(treeId, parentNode, childNodes) {
+            if (!childNodes) return null;
+            for (var i=0, l=childNodes.length; i<l; i++) {
+                childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+            }
+            return childNodes;
+        }
+
         var zNodes =[
             { name:"父节点1 - 展开", open:true,
                 children: [
@@ -58,7 +75,10 @@
 
 
         $(document).ready(function(){
-            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+//            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+
+            $.fn.zTree.init($("#treeDemo"), setting);
+
         });
         //-->
 
