@@ -15,8 +15,15 @@
                 autoParam:["id=parentId", "name=n", "level=lv"],
                 otherParam:{"otherParam":"zTreeAsyncTest"},
                 dataFilter: filter
+            },
+            callback: {
+                onClick: onClick
             }
         };
+
+        function onClick(event, treeId, treeNode, clickFlag) {
+
+        }
 
         function filter(treeId, parentNode, childNodes) {
             if (!childNodes) return null;
@@ -26,58 +33,12 @@
             return childNodes;
         }
 
-        var zNodes =[
-            { name:"父节点1 - 展开", open:true,
-                children: [
-                    { name:"父节点11 - 折叠",
-                        children: [
-                            { name:"叶子节点111"},
-                            { name:"叶子节点112"},
-                            { name:"叶子节点113"},
-                            { name:"叶子节点114"}
-                        ]},
-                    { name:"父节点12 - 折叠",
-                        children: [
-                            { name:"叶子节点121"},
-                            { name:"叶子节点122"},
-                            { name:"叶子节点123"},
-                            { name:"叶子节点124"}
-                        ]},
-                    { name:"父节点13 - 没有子节点", isParent:true}
-                ]},
-            { name:"父节点2 - 折叠",
-                children: [
-                    { name:"父节点21 - 展开", open:true,
-                        children: [
-                            { name:"叶子节点211"},
-                            { name:"叶子节点212"},
-                            { name:"叶子节点213"},
-                            { name:"叶子节点214"}
-                        ]},
-                    { name:"父节点22 - 折叠",
-                        children: [
-                            { name:"叶子节点221"},
-                            { name:"叶子节点222"},
-                            { name:"叶子节点223"},
-                            { name:"叶子节点224"}
-                        ]},
-                    { name:"父节点23 - 折叠",
-                        children: [
-                            { name:"叶子节点231"},
-                            { name:"叶子节点232"},
-                            { name:"叶子节点233"},
-                            { name:"叶子节点234"}
-                        ]}
-                ]},
-            { name:"父节点3 - 没有子节点", isParent:true}
-
-        ];
-
 
         $(document).ready(function(){
 //            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
 
-            $.fn.zTree.init($("#treeDemo"), setting);
+            var treeObj = $.fn.zTree.init($("#treeDemo"), setting);
+            treeObj.expandAll(true);
 
         });
         //-->
@@ -115,13 +76,11 @@
                 </a>
             </div>
 
-            <display:table name="emps" class="table table-condensed table-striped table-hover" requestURI="" id="empList" export="true" pagesize="25">
-                <display:column property="eid" sortable="true" href="editEmp" media="html"
-                                paramId="eid" paramProperty="eid" titleKey="emp.eid"/>
-                <display:column property="eid" media="csv excel xml pdf" titleKey="emp.eid"/>
-                <display:column property="eage" sortable="true" titleKey="emp.eage"/>
-                <display:column property="ename" sortable="true" titleKey="emp.ename"/>
-                <display:column property="estate" sortable="true" titleKey="emp.estate"/>
+            <display:table name="oaDepartmentEntities" class="table table-condensed table-striped table-hover" requestURI=""
+                           id="departmentList" export="true" pagesize="25">
+                <display:column property="departName" escapeXml="true"  media="html" sortable="true" titleKey="department.departName" style="width: 25%"
+                                url="/editUser?from=list" paramId="id" paramProperty="id"/>
+                <display:column property="description" sortable="true" titleKey="department.description"/>
 
                 <display:setProperty name="paging.banner.item_name"><fmt:message key="empList.emp"/></display:setProperty>
                 <display:setProperty name="paging.banner.items_name"><fmt:message key="empList.emps"/></display:setProperty>

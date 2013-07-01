@@ -27,6 +27,8 @@ public class OaDepartmentEntityAction extends BaseAction implements Preparable {
     @Autowired
     private OaDepartmentEntityManager oaDepartmentEntityManager;
 
+    private List<OaDepartmentEntity> oaDepartmentEntities;
+
     public void setEmpManager(EmpManager empManager) {
         this.empManager = empManager;
     }
@@ -65,6 +67,7 @@ public class OaDepartmentEntityAction extends BaseAction implements Preparable {
                 if (departmentEntity.getOaDepartmentsById() != null
                         && !departmentEntity.getOaDepartmentsById().isEmpty()) {
                     treeNode = new TreeNode<OaDepartmentEntity>(departmentEntity.getId()+"", departmentEntity.getDepartName(), true);
+                    treeNode.setOpen(true);
                 } else {
                     treeNode = new TreeNode<OaDepartmentEntity>(departmentEntity.getId()+"", departmentEntity.getDepartName(), false);
                 }
@@ -79,10 +82,10 @@ public class OaDepartmentEntityAction extends BaseAction implements Preparable {
 
     public String list() {
         try {
-            emps = empManager.search(query, Emp.class);
+            oaDepartmentEntities = oaDepartmentEntityManager.search(query, OaDepartmentEntity.class);
         } catch (SearchException se) {
             addActionError(se.getMessage());
-            emps = empManager.getAll();
+            oaDepartmentEntities = oaDepartmentEntityManager.getAll();
         }
         return SUCCESS;
     }
@@ -139,5 +142,11 @@ public class OaDepartmentEntityAction extends BaseAction implements Preparable {
         }
     }
 
+    public List<OaDepartmentEntity> getOaDepartmentEntities() {
+        return oaDepartmentEntities;
+    }
 
+    public void setOaDepartmentEntities(List<OaDepartmentEntity> oaDepartmentEntities) {
+        this.oaDepartmentEntities = oaDepartmentEntities;
+    }
 }

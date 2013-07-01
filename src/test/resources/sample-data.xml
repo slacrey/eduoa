@@ -167,6 +167,62 @@
         </row>
     </table>
 
+    <table name="oa_department">
+        <column>id</column>
+        <column>depart_name</column>
+        <column>description</column>
+        <column>depart_order</column>
+        <column>parent_id</column>
+        <row>
+            <value description="id">1</value>
+            <value description="depart_name">组织机构</value>
+            <value description="description">组织机构</value>
+            <value description="depart_order">0</value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="depart_name">高一年级</value>
+            <value description="description">高一年级</value>
+            <value description="depart_order">0</value>
+            <value description="parent_id">1</value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="depart_name">高二年级</value>
+            <value description="description">高二年级</value>
+            <value description="depart_order">1</value>
+            <value description="parent_id">1</value>
+        </row>
+        <row>
+            <value description="id">4</value>
+            <value description="depart_name">高三年级</value>
+            <value description="description">高三年级</value>
+            <value description="depart_order">2</value>
+            <value description="parent_id">1</value>
+        </row>
+        <row>
+            <value description="id">5</value>
+            <value description="depart_name">教务处</value>
+            <value description="description">教务处</value>
+            <value description="depart_order">3</value>
+            <value description="parent_id">1</value>
+        </row>
+        <row>
+            <value description="id">6</value>
+            <value description="depart_name">政教处</value>
+            <value description="description">政教处</value>
+            <value description="depart_order">4</value>
+            <value description="parent_id">1</value>
+        </row>
+        <row>
+            <value description="id">7</value>
+            <value description="depart_name">办公室</value>
+            <value description="description">办公室</value>
+            <value description="depart_order">5</value>
+            <value description="parent_id">1</value>
+        </row>
+    </table>
+
 </dataset>
 
 

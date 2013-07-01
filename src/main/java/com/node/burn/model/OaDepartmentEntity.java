@@ -2,6 +2,9 @@ package com.node.burn.model;
 
 import com.node.burn.util.JacksonUtil;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonMethod;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
@@ -12,17 +15,18 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * Created with IntelliJ IDEA.
+ * 部门
  * User: linfeng at Administrator
  * Date: 13-6-28
  * Time: 下午10:48
  * To change this template use File | Settings | File Templates.
  */
-@Table(name = "oa_department", schema = "", catalog = "eduoa")
+@Table(name = "oa_department", catalog = "eduoa")
 @Entity
 @Indexed
 @XmlRootElement
-@JsonAutoDetect(fieldVisibility= JsonAutoDetect.Visibility.ANY)
+@JsonAutoDetect(JsonMethod.NONE)
+@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
 public class OaDepartmentEntity extends BaseObject implements Serializable {
     private Long id;
 
@@ -43,6 +47,7 @@ public class OaDepartmentEntity extends BaseObject implements Serializable {
 
     @Column(name = "depart_name")
     @Basic
+    @JsonSerialize
     public String getDepartName() {
         return departName;
     }
@@ -55,6 +60,7 @@ public class OaDepartmentEntity extends BaseObject implements Serializable {
 
     @Column(name = "description")
     @Basic
+    @JsonSerialize
     public String getDescription() {
         return description;
     }
@@ -67,6 +73,7 @@ public class OaDepartmentEntity extends BaseObject implements Serializable {
 
     @Column(name = "depart_order")
     @Basic
+    @JsonSerialize
     public Integer getDepartOrder() {
         return departOrder;
     }
@@ -107,6 +114,7 @@ public class OaDepartmentEntity extends BaseObject implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
+    @JsonIgnore
     public OaDepartmentEntity getOaDepartmentByParentId() {
         return oaDepartmentByParentId;
     }
@@ -118,6 +126,7 @@ public class OaDepartmentEntity extends BaseObject implements Serializable {
     private Collection<OaDepartmentEntity> oaDepartmentsById;
 
     @OneToMany(mappedBy = "oaDepartmentByParentId")
+    @JsonIgnore
     public Collection<OaDepartmentEntity> getOaDepartmentsById() {
         return oaDepartmentsById;
     }
@@ -130,6 +139,7 @@ public class OaDepartmentEntity extends BaseObject implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "education_id", referencedColumnName = "id")
+    @JsonIgnore
     public OaEducationEntity getOaEducationByEducationId() {
         return oaEducationByEducationId;
     }
@@ -141,6 +151,7 @@ public class OaDepartmentEntity extends BaseObject implements Serializable {
     private Collection<OaTeacherInfoEntity> oaTeacherInfosById;
 
     @OneToMany(mappedBy = "oaDepartmentByDepartmentId")
+    @JsonIgnore
     public Collection<OaTeacherInfoEntity> getOaTeacherInfosById() {
         return oaTeacherInfosById;
     }
